@@ -93,8 +93,9 @@ async function getUser(user_id) {
 async function playingStatus(user_id, song) {
   const db = await connect();
   try {
+    console.log(user_id, song);
     const { rows: users } = await db.query(SQL `UPDATE profile SET current_playing = ${song} WHERE user_id = ${user_id}` );
-    if (song != null){
+    if (song !== null){
         const { rows: history } = await db.query(SQL `INSERT INTO history_songs (user_id, song_name) VALUES (${user_id}, ${song})`);
     }
   } catch(error) {

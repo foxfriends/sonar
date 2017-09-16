@@ -52,6 +52,7 @@ app.put('/status', auth.check, headers, async (req, res) => {
   const { uid } = req.user;
   const { status, song } = req.body;
   try {
+    console.log(req.body);
     if(status === 'PLAY') {
       const spotlift = await spotify.identifySong(song);
       await db.playingStatus(uid, spotlift.id);
