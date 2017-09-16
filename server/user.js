@@ -44,7 +44,7 @@ app.put('/', auth.check, headers, (req, res) => {
 /**
  * Get your own profile
  * @requires Authorization
- * @returns { user_id: Number, first_name: String, last_name: String, likes: Number, email: String, current_playing: String, song: { title: String, artists: String[], album: String } }
+ * @returns { user_id: Number, first_name: String, last_name: String, likes: Number, email: String, current_playing: String, song: { title: String, artist: String, album: String } }
  */
 app.get('/', auth.check, headers, (req, res) => {
   const { uid } = req.user;
@@ -55,7 +55,7 @@ app.get('/', auth.check, headers, (req, res) => {
  * Get a user's profile
  * @requires Authorization
  * @param { Number } user_id
- * @returns { user_id: Number, first_name: String, last_name: String, likes: Number, email: String, current_playing: String, song: { title: String, artists: String[], album: String } }
+ * @returns { user_id: Number, first_name: String, last_name: String, likes: Number, email: String, current_playing: String, song: { title: String, artist: String, album: String } }
  */
 app.get('/:user_id', auth.check, headers, (req, res) => {
   const { user_id } = req.params;
@@ -69,7 +69,7 @@ async function getUserProfile(req, res, user_id) {
     user.song = {
       title: track.name,
       album: track.album.name,
-      artists: track.artists.map(_ => _.name),
+      artists: track.artists.map(_ => _.name).join(', '),
       id: track.id,
     };
     res.send(result.success(user));
