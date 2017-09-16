@@ -16,6 +16,7 @@ app.listen(process.env.PORT || 19786, () => console.log(`Server is listening on 
 app.use(bodyParser.json());
 
 app.use('/user', require('./user'));
+app.use('/follow', require('./follow'));
 
 /**
  * Sign in

@@ -5,6 +5,11 @@ GRANT ALL ON DATABASE music TO musicapp;
 SET DATABASE = music;
 
 GRANT ALL ON TABLE users TO musicapp;
+GRANT ALL ON TABLE history_songs TO musicapp;
+GRANT ALL ON TABLE following_users TO musicapp;
+GRANT ALL ON TABLE user_genre_interests TO musicapp;
+GRANT ALL ON TABLE genres TO musicapp;
+GRANT ALL ON TABLE user_devices TO musicapp;
 
 CREATE TABLE users (
   user_id         SERIAL PRIMARY KEY,
@@ -29,7 +34,8 @@ CREATE TABLE history_songs (
 
 CREATE TABLE following_users (
   user_id           INT NOT NULL REFERENCES users(user_id),
-  following_user_id INT NOT NULL REFERENCES users(user_id)
+  following_user_id INT NOT NULL REFERENCES users(user_id),
+  CONSTRAINT follow_only_once UNIQUE (user_id, following_user_id)
 );
 
 CREATE TABLE user_genre_interests (

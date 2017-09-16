@@ -140,36 +140,60 @@ async function findNearbyUsers(user_id, small, big, lat, long, db){
   return await db.query(SQL
     `SELECT first_name, last_name, avatar, likes, current_playing FROM users
      WHERE sqrt(pow(${lat} - latitude, 2.0) + pow(${long} - users.longitude, 2.0)) <= ${big}
-     AND  sqrt(pow(${lat} - latitude, 2.0) + pow(${long} - users.longitude, 2.0)) > ${small}
+     AND sqrt(pow(${lat} - latitude, 2.0) + pow(${long} - users.longitude, 2.0)) > ${small}
      AND users.user_id <> ${user_id} AND current_playing IS NOT NULL`
   );
 }
 
-async function getMyFollowingList(user_id){
+async function followUser(me, them) {
   const db = await connect();
   try {
-    const { rows: users } = await db.query(SQL
-      `SELECT first_name, last_name, avatar
-       FROM following_users
-       INNER JOIN users on following_users.following_user_id = users.user_id
-       AND following_users.user_id = ${user_id}`
-     );
-    return users;
+    // would be nice to do 'ON CONFLICT ON CONSTRAINT follow_only_once DO NOTHING'
+    // but it appears unimplemented by cockroach...
+    await db.query(SQL`
+      INSERT INTO following_users (user_id, following_user_id) VALUES (${me}, ${them})
+    `);
   } catch(error) {
     throw error;
   } finally {
     db.release();
   }
 }
-async function getNumFollowers(user_id){
+
+async function unfollowUser(me, them) {
   const db = await connect();
   try {
-    const { rows: users } = await db.query(SQL
-      `SELECT Count(1)
+    await db.query(SQL`DELETE FROM following_users WHERE user_id = ${me} AND following_user_id = ${them}`);
+  } catch(error) {
+    throw error;
+  } finally {
+    db.release();
+  }
+}
+
+async function getMyFollowingList(user_id){
+  const db = await connect();
+  try {
+    const { rows: following } = await db.query(SQL
+      `SELECT first_name, last_name, avatar
        FROM following_users
-       AND following_users.following_user_id = ${user_id}`
+       INNER JOIN users ON following_users.following_user_id = users.user_id
+       WHERE following_users.user_id = ${user_id}`
      );
-    return users;
+    return following;
+  } catch(error) {
+    throw error;
+  } finally {
+    db.release();
+  }
+}
+async function getNumFollowers(user_id) {
+  const db = await connect();
+  try {
+    const { rowCount } = await db.query(
+      SQL `SELECT 1 FROM following_users WHERE following_users.following_user_id = ${user_id}`
+    );
+    return rowCount;
   } catch(error) {
     throw error;
   } finally {
@@ -188,4 +212,15 @@ async function getDevices(user_id) {
     db.release();
   }
 }
-module.exports = { createAccount, getSecureUser, playingStatus, setLocation, findClose, getMyFollowingList, getNumFollowers, getDevices };
+module.exports = {
+  createAccount,
+  getSecureUser,
+  playingStatus,
+  setLocation,
+  findClose,
+  followUser,
+  unfollowUser,
+  getMyFollowingList,
+  getNumFollowers,
+  getDevices
+};
