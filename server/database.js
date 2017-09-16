@@ -37,8 +37,8 @@ async function createAccount(first, last, psw, email) {
     if (exists) {
       throw new Error('An account with that username has already been created');
     }
-    const { rows: [ { user_id } ] } = await db.query(SQL `INSERT INTO users (password, email) VALUES (${first},${last}, ${hashed}, ${email}) RETURNING user_id`);
-    await db.query(SQL `INSERT INTO profile (user_id, first_name, last_name) VALUES (${user_id}, ${first_name}, ${last_name})`);
+    const { rows: [ { user_id } ] } = await db.query(SQL `INSERT INTO users (password, email) VALUES (${hashed}, ${email}) RETURNING user_id`);
+    await db.query(SQL `INSERT INTO profile (user_id, first_name, last_name) VALUES (${user_id}, ${first}, ${last})`);
   } catch(error) {
     throw error;
   } finally {
