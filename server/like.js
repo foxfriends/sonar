@@ -26,12 +26,17 @@ app.get('/', auth.check, headers, async (req, res) => {
  * like a new song
  * @requires Authorization
  * @param { Number } user_id
+ * @body {
+ *    from_user: INT
+ * }
  */
 app.put('/:song_id', auth.check, headers, async (req, res) => {
   const { uid } = req.user;
   const { song_id } = req.params;
+  const { from_user } = req.body;
   try {
-    await db.likeSong(uid, song_id)
+    console.log(from_user);
+    await db.likeSong(uid, song_id, from_user);
     res.send(result.success());
   } catch(error) {
     res.send(result.failure(error.message));
@@ -42,7 +47,7 @@ app.delete('/:song_id', auth.check, headers, async (req, res) => {
   const { uid } = req.user;
   const { song_id } = req.params;
   try {
-    await db.unlikeSong(uid, song_id)
+    await db.unlikeSong(uid, song_id);
     res.send(result.success());
   } catch(error) {
     res.send(result.failure(error.message));
