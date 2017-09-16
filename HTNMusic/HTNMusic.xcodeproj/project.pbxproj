@@ -34,6 +34,7 @@
 		3216270C1F6DC120008C390C /* UserAPIRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321627071F6DC120008C390C /* UserAPIRouter.swift */; };
 		3216270E1F6DC787008C390C /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3216270D1F6DC787008C390C /* UserProfileViewController.swift */; };
 		321627101F6DCCF9008C390C /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3216270F1F6DCCF9008C390C /* UserProfileViewModel.swift */; };
+		321627121F6DD936008C390C /* ProximityInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321627111F6DD936008C390C /* ProximityInfo.swift */; };
 		72C3DCB44261BE8AA6779D8E /* Pods_HTNMusic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20074BE002CB37F9727F6F55 /* Pods_HTNMusic.framework */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +71,7 @@
 		321627071F6DC120008C390C /* UserAPIRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAPIRouter.swift; sourceTree = "<group>"; };
 		3216270D1F6DC787008C390C /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		3216270F1F6DCCF9008C390C /* UserProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
+		321627111F6DD936008C390C /* ProximityInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProximityInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +180,7 @@
 				321627031F6DC120008C390C /* FollowingAPIRouter.swift */,
 				321627041F6DC120008C390C /* LocationAPIRouter.swift */,
 				321627051F6DC120008C390C /* NearbyAPIRouter.swift */,
+				321627111F6DD936008C390C /* ProximityInfo.swift */,
 				321627061F6DC120008C390C /* StatusAPIRouter.swift */,
 				321627071F6DC120008C390C /* UserAPIRouter.swift */,
 				321626EF1F6D155A008C390C /* LoginAPIRouter.swift */,
@@ -345,6 +348,7 @@
 				321626E51F6CE583008C390C /* DiscoverViewModel.swift in Sources */,
 				321627091F6DC120008C390C /* LocationAPIRouter.swift in Sources */,
 				321626F21F6D23AD008C390C /* SongInfo.swift in Sources */,
+				321627121F6DD936008C390C /* ProximityInfo.swift in Sources */,
 				321626CB1F6CE4EF008C390C /* AppDelegate.swift in Sources */,
 				321626FE1F6D92BF008C390C /* Constants.swift in Sources */,
 				321626FC1F6D773E008C390C /* ScreenCoords.swift in Sources */,

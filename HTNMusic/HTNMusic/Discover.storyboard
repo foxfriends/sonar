@@ -119,25 +119,11 @@
                                     <constraint firstAttribute="width" constant="121" id="N4o-LB-FAQ"/>
                                 </constraints>
                                 <segments>
-                                    <segment title="Map"/>
+                                    <segment title="Radar"/>
                                     <segment title="List"/>
                                 </segments>
                                 <color key="tintColor" red="0.28692284226417542" green="0.16073864698410034" blue="0.87929099798202515" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </segmentedControl>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="settings_icon" translatesAutoresizingMaskIntoConstraints="NO" id="LKk-9x-stU">
-                                <rect key="frame" x="307" y="45" width="40" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="IuJ-Ro-DNR"/>
-                                    <constraint firstAttribute="width" constant="40" id="PjC-eb-yaC"/>
-                                </constraints>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_icon" translatesAutoresizingMaskIntoConstraints="NO" id="8a5-TF-HWw">
-                                <rect key="frame" x="28" y="45" width="40" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="AXp-Uf-rQE"/>
-                                    <constraint firstAttribute="height" constant="40" id="vX5-Yp-iGY"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -145,16 +131,12 @@
                             <constraint firstAttribute="trailing" secondItem="dQs-pb-LVD" secondAttribute="trailing" id="7j1-qd-PE9"/>
                             <constraint firstItem="AqM-Pf-KMG" firstAttribute="centerX" secondItem="mX4-67-jYt" secondAttribute="centerX" id="8xX-Jy-bDY"/>
                             <constraint firstItem="Cqj-sB-cPW" firstAttribute="top" secondItem="cSs-Xj-7sh" secondAttribute="bottom" constant="51" id="BNj-8d-hT0"/>
-                            <constraint firstItem="8a5-TF-HWw" firstAttribute="leading" secondItem="mX4-67-jYt" secondAttribute="leadingMargin" constant="12" id="ChI-Mc-Hhr"/>
                             <constraint firstItem="dQs-pb-LVD" firstAttribute="centerY" secondItem="mX4-67-jYt" secondAttribute="centerY" id="Pex-Va-VJi"/>
                             <constraint firstAttribute="trailing" secondItem="AqM-Pf-KMG" secondAttribute="trailing" id="S2k-7H-pcj"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="LKk-9x-stU" secondAttribute="trailing" constant="12" id="XOn-gv-fZ3"/>
                             <constraint firstItem="Cqj-sB-cPW" firstAttribute="centerX" secondItem="mX4-67-jYt" secondAttribute="centerX" id="aw0-aw-J82"/>
                             <constraint firstItem="AqM-Pf-KMG" firstAttribute="leading" secondItem="mX4-67-jYt" secondAttribute="leading" id="eIJ-CB-JOW"/>
-                            <constraint firstItem="LKk-9x-stU" firstAttribute="top" secondItem="cSs-Xj-7sh" secondAttribute="bottom" constant="25" id="hwf-Hx-SKI"/>
                             <constraint firstItem="a4h-8V-h62" firstAttribute="top" secondItem="AqM-Pf-KMG" secondAttribute="bottom" id="nYY-7p-8Ka"/>
                             <constraint firstItem="dQs-pb-LVD" firstAttribute="leading" secondItem="mX4-67-jYt" secondAttribute="leading" id="qUy-6a-anr"/>
-                            <constraint firstItem="8a5-TF-HWw" firstAttribute="top" secondItem="cSs-Xj-7sh" secondAttribute="bottom" constant="25" id="r66-zq-lza"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -165,8 +147,6 @@
     </scenes>
     <resources>
         <image name="circles" width="200" height="200"/>
-        <image name="profile_icon" width="36" height="36"/>
         <image name="right_chevron_icon" width="36" height="36"/>
-        <image name="settings_icon" width="36" height="36"/>
     </resources>
 </document>
