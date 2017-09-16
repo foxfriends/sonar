@@ -7,6 +7,7 @@ const auth = require('./auth');
 const headers = require('./headers');
 const db = require('./database');
 const result = require('./result');
+const spotify = require('./spotify');
 
 const app = express();
 
@@ -101,8 +102,14 @@ app.put('/location', auth.check, headers, async (req, res) => {
  *     {
  *        first_name: String,
  *        last_name: String,
- *        avatar: String,
- *        likes: Int
+ *        avatar: ?String,
+ *        likes: Int,
+ *        song: {
+ *          name: String
+ *          artists: String[]
+ *          album: String
+ *          uri: String
+ *        }
  *     }
  *  ]
  *   medium: [...]
@@ -112,13 +119,36 @@ app.put('/location', auth.check, headers, async (req, res) => {
 app.get('/nearby', auth.check, headers, async (req, res) => {
   const { uid } = req.user;
   try{
-    //var close = parseFloat(req.query.close);
-    //var medium = parseFloat(req.query.medium);
-    //var far = parseFloat(req.query.far);
-    var close = 1;
-    var medium = 5;
-    var far = 10;
-    res.send(result.success(await findCloseUsers(uid, close, medium, far)));
+    const distClose = 1;
+    const distMedium = 5;
+    const distFar = 10;
+
+    const { close, medium, far } = await findCloseUsers(uid, distClose, distMedium, distFar);
+    const rows = [].concat(close, medium, far);
+    const songs = await spotify.lookupSongs(rows.map(_ => _.current_playing));
+    const final = { close: [], medium: [], far: [] };
+    songs.forEach((row, i) => {
+      const song = {
+        name: row.name,
+        album: row.album.name,
+        artists: row.artists.map(_ => _.name),
+      };
+      let user;
+      if(i < close.length) {
+        user = close[i];
+        const { first_name, last_name, avatar, likes } = user;
+        final.close.push({ first_name, last_name, avatar, likes, song });
+      } else if(i < medium.length) {
+        user = medium[i - close.length];
+        const { first_name, last_name, avatar, likes } = user;
+        final.medium.push({ first_name, last_name, avatar, likes, song });
+      } else {
+        user = far[i - close.length - medium.length];
+        const { first_name, last_name, avatar, likes } = user;
+        final.far.push({ first_name, last_name, avatar, likes, song });
+      }
+    });
+    res.send(result.success(final));
   } catch(error) {
     res.send(error.message);
   }

@@ -15,10 +15,10 @@ CREATE TABLE users (
   join_date       TIMESTAMP           NOT NULL DEFAULT (NOW()::TIMESTAMP),
   avatar          VARCHAR(512),
   score           INT DEFAULT 0,
+  likes           INT DEFAULT 0,
   current_playing VARCHAR(512),
   latitude        DECIMAL,
-  longitude       DECIMAL,
-  likes           INT DEFAULT 0
+  longitude       DECIMAL
 );
 
 CREATE TABLE history_songs (
