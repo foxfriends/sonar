@@ -10,7 +10,7 @@ import Foundation
 import Gloss
 
 struct User: Decodable {
-    let id: Int
+    let id: String
     let firstName: String
     let lastName: String
     let email: String

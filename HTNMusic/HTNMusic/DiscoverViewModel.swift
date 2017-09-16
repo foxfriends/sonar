@@ -23,13 +23,34 @@ class DiscoverViewModel {
 
 extension DiscoverViewModel {
     func getNearbyUsers() {
-        
         Alamofire.request(NearbyAPIRouter.nearby())
+            .responseJSON { response in
+                if let result = response.result.value as? JSON {
+                    self.deserialize(result)
+                }
+            }
     }
 }
 
 extension DiscoverViewModel {
     func updateLocation(coords: Coordinate2D, completion: (Bool) -> Void) {
-        
+        Alamofire.request(LocationAPIRouter.location(coord.longitude, coords.latitude))
+            .responseJSON { response in
+                if let result = response.result.value as? JSON {
+                    self.deserialize(result)
+                }
+            }
+    }
+}
+
+extension DiscoverViewModel {
+    func deserialize(result: JSON) {
+        guard case APIResult<ProximityInfo>.success(let proximityInfo) = APIResult<ProximityInfo>(json: result)! else {
+            print("Cannot de-serialize ProximityInfo")
+            return
+        }
+        self.smallProximityUsers = proximityInfo.close
+        self.mediumProximityUsers = proximityInfo.medium
+        self.largeProximityUsers = proximityInfo.far
     }
 }

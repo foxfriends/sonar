@@ -27,8 +27,8 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController {
     func bindViewModel() {
-        // todo: FIX THIS LATER
-        viewModel.email.bidirectionalBind(to: emailTextField.reactive.text )
+        // TODO: FIX THIS LATER
+        viewModel.email.bidirectionalBind(to: emailTextField.reactive.text)
         viewModel.password.bidirectionalBind(to: passwordTextField.reactive.text)
         
     }
