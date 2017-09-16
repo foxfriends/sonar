@@ -179,7 +179,7 @@ async function getMyFollowingList(user_id){
   const db = await connect();
   try {
     const { rows: following } = await db.query(SQL
-      `SELECT first_name, last_name, avatar
+      `SELECT first_name, last_name, avatar, email
        FROM following_users
        INNER JOIN users ON following_users.following_user_id = users.user_id
        WHERE following_users.user_id = ${user_id}`
@@ -191,11 +191,14 @@ async function getMyFollowingList(user_id){
     db.release();
   }
 }
-async function getNumFollowers(user_id) {
+async function getFollowers(user_id) {
   const db = await connect();
   try {
     const { rowCount } = await db.query(
-      SQL `SELECT 1 FROM following_users WHERE following_users.following_user_id = ${user_id}`
+      SQL `SELECT first_name, last_name, avatar, email
+       FROM following_users
+       INNER JOIN users ON following_users.following_user_id = users.user_id
+       WHERE following_users.following_user_id = ${user_id}`
     );
     return rowCount;
   } catch(error) {
@@ -210,6 +213,49 @@ async function getDevices(user_id) {
   try {
     const { rows: devices } = await db.query(SQL `SELECT device_id FROM user_devices WHERE user_id = ${user_id}`);
     return devices;
+  } catch(error) {
+    throw error;
+  } finally {
+    db.release();
+  }
+}
+
+async function getMyLikes(user_id){
+  const db = await connect();
+  try {
+    const { rows: likes } = await db.query(SQL
+      `SELECT song_id
+       FROM song_likes
+       WHERE user_id = ${user_id}`
+     );
+    return likes;
+  } catch(error) {
+    throw error;
+  } finally {
+    db.release();
+  }
+}
+async function likeSong(user_id, song_id){
+  const db = await connect();
+  try {
+    const { rows: likes } = await db.query(SQL
+      `INSERT INTO song_likes (song_id, user_id)
+       VALUES (${song_id}, ${user_id})`
+     );
+    return likes;
+  } catch(error) {
+    throw error;
+  } finally {
+    db.release();
+  }
+}
+async function unlikeSong(user_id, song_id){
+  const db = await connect();
+  try {
+    const { rows: likes } = await db.query(SQL
+      `DELETE FROM song_likes WHERE user_id = ${user_id} AND song_id = ${song_id}`
+     );
+    return likes;
   } catch(error) {
     throw error;
   } finally {
