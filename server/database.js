@@ -115,7 +115,7 @@ async function findClose(user_id, close, medium, far) {
     const { rows: [self] } = await db.query(SQL
       `SELECT longitude, latitude FROM users WHERE user_id = ${user_id}`
     );
-    if (self.longitude !== null) {
+    if (self.longitude !== null && self.latitude !== null) {
       // close
       const { rows: usersClose } = await findNearbyUsers(user_id, 0, close, self.latitude, self.longitude, db);
       // medium

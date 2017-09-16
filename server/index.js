@@ -153,7 +153,7 @@ async function findCloseUsers(user_id, distClose, distMedium, distFar){
       user = close[i];
       const { first_name, last_name, avatar, likes } = user;
       final.close.push({ first_name, last_name, avatar, likes, song });
-    } else if(i < medium.length) {
+    } else if(i < close.length + medium.length) {
       user = medium[i - close.length];
       const { first_name, last_name, avatar, likes } = user;
       final.medium.push({ first_name, last_name, avatar, likes, song });
