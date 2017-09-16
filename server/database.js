@@ -48,7 +48,7 @@ async function createAccount(first, last, psw, email) {
 async function getSecureUser(email, psw) {
   const db = await connect();
   try {
-    const { rows: [ user ] } = await db.query(SQL `SELECT user_id, first_name, last_name, avatar, password FROM USERS WHERE email = ${email}`);
+    const { rows: [ user ] } = await db.query(SQL `SELECT user_id, first_name, last_name, avatar, password FROM users WHERE email = ${email}`);
     if (user) {
       const { user_id, password: pass } = user;
       if(await password.check(psw, pass)) {
@@ -59,6 +59,22 @@ async function getSecureUser(email, psw) {
       }
     } else {
       throw new Error('Non-existent user');
+    }
+  } catch(error) {
+    throw error;
+  } finally {
+    db.release();
+  }
+}
+
+async function getUser(user_id) {
+  const db = await connect();
+  try {
+    const { rows: [ user ] } = await db.query(SQL `SELECT user_id, first_name, last_name FROM users WHERE user_id = ${user_id}`);
+    if(user) {
+      return user;
+    } else {
+      throw new Error('No user with that user id exists!');
     }
   } catch(error) {
     throw error;
@@ -101,11 +117,11 @@ async function findClose(user_id, close, medium, far) {
     );
     if (self.longitude !== null) {
       // close
-      const { rows: usersClose } = await findUsers(user_id, 0, close, self.latitude, self.longitude, db);
+      const { rows: usersClose } = await findNearbyUsers(user_id, 0, close, self.latitude, self.longitude, db);
       // medium
-      const { rows: usersMedium } = await findUsers(user_id, close, medium, self.latitude, self.longitude, db);
+      const { rows: usersMedium } = await findNearbyUsers(user_id, close, medium, self.latitude, self.longitude, db);
       // far
-      const { rows: usersFar } = await findUsers(user_id, medium, far, self.latitude, self.longitude, db);
+      const { rows: usersFar } = await findNearbyUsers(user_id, medium, far, self.latitude, self.longitude, db);
       return {
         close: usersClose,
         medium: usersMedium,
@@ -120,7 +136,7 @@ async function findClose(user_id, close, medium, far) {
   }
 }
 
-async function findUsers(user_id, small, big, lat, long, db){
+async function findNearbyUsers(user_id, small, big, lat, long, db){
   return await db.query(SQL
     `SELECT first_name, last_name, avatar, likes, current_playing FROM users
      WHERE sqrt(pow(${lat} - latitude, 2.0) + pow(${long} - users.longitude, 2.0)) <= ${big}
@@ -146,4 +162,16 @@ async function getMyFollowingList(user_id){
   }
 }
 
-module.exports = { createAccount, getSecureUser, playingStatus, setLocation, findClose, getMyFollowingList };
+async function getDevices(user_id) {
+  const db = await connect();
+  try {
+    const { rows: devices } = await db.query(SQL `SELECT device_id FROM user_devices WHERE user_id = ${user_id}`);
+    return devices;
+  } catch(error) {
+    throw error;
+  } finally {
+    db.release();
+  }
+}
+
+module.exports = { createAccount, getSecureUser, getUser, playingStatus, setLocation, findClose, getMyFollowingList, getDevices };

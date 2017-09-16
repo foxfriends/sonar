@@ -42,7 +42,7 @@ async function signIn(email, psw) {
   const response = JSON.parse(await wait);
   console.log(response);
   if(response.status === 'SUCCESS') {
-    jwt = response.data;
+    jwt = response.data.authtoken;
     console.log("Signed in!");
   } else {
     alert('incorrect username/password');

@@ -42,3 +42,8 @@ CREATE TABLE genres (
   genre_id    SERIAL PRIMARY KEY,
   genre_name  VARCHAR(512) NOT NULL
 );
+
+CREATE TABLE user_devices (
+  user_id   INT NOT NULL REFERENCES users(user_id),
+  device_id CHAR(64) NOT NULL
+);

@@ -5,6 +5,8 @@ const auth = require('./auth');
 const headers = require('./headers');
 const db = require('./database');
 const result = require('./result');
+const push = require('./push');
+const spotify = require('./spotify');
 
 const app = express();
 
@@ -59,6 +61,8 @@ app.get('/:user_id', auth.check, headers, (req, res) => {
   return getUserProfile(req, res, uid, user_id);
 });
 
+function getUserProfile(req, res, me, them) {}
+
 /**
  * Get a list of people the user is following
  * @requires Authorization
@@ -76,9 +80,29 @@ app.get('/follow', auth.check, headers, async (req, res) => {
   } catch(error) {
     res.send(result.failure(error.message));
   }
-
 });
 
-function getUserProfile(req, res, me, them) {}
+/**
+ * Suggest a song to someone else
+ * @requires Authorization
+ * @body { song : { title: String, artist: ?String, album: ?String } }
+ */
+app.post('/:user_id/suggest', auth.check, headers, async (req, res) => {
+  const { uid } = req.user;
+  const { user_id } = req.params;
+  const { song } = req.body;
+  try {
+    const [devices, me, track] = await Promise.all([
+      db.getDevices(user_id),
+      db.getUser(uid),
+      spotify.identifySong(song),
+    ]);
+    push.suggestion(devices, me, track);
+    res.send(result.success());
+  } catch(error) {
+    res.send(result.failure(error.message));
+  }
+});
+
 
 module.exports = app;

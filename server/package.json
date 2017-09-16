@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/OinkIguana/hackthenorth#readme",
   "dependencies": {
+    "apn": "^2.1.5",
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.1",
     "express": "^4.15.4",

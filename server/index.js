@@ -130,6 +130,7 @@ app.get('/nearby', auth.check, headers, async (req, res) => {
     res.send(result.failure(error.message));
   }
 });
+
 async function findCloseUsers(user_id, distClose, distMedium, distFar){
   const { close, medium, far } = await db.findClose(user_id, distClose, distMedium, distFar);
   const rows = [].concat(close, medium, far);
@@ -158,4 +159,5 @@ async function findCloseUsers(user_id, distClose, distMedium, distFar){
   });
   return final;
 };
+
 app.use('/debug', express.static('../web-console'));
