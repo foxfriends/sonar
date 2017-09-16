@@ -29,10 +29,10 @@ app.use('/follow', require('./follow'));
 app.post('/auth', headers, async (req, res) => {
   const { email, psw } = req.body;
   try {
-    const { user_id, first_name, last_name, avatar } = await db.getSecureUser(email, psw);
+    const { user_id, first_name, last_name, avatar, email } = await db.getSecureUser(email, psw);
     res.send(result.success({
       authtoken: auth.create(user_id),
-      first_name, last_name, avatar,
+      user_id, first_name, last_name, avatar, email,
     }));
   } catch(error) {
     res.send(result.failure(error.message));
@@ -44,7 +44,7 @@ app.post('/auth', headers, async (req, res) => {
  * @requires Authorization
  * @body {
  *   status: 'PLAY' | 'STOP',
- *   song: { title: String, artist: ?String, album: ?String}
+ *   song: { title: String, artist: ?String, album: ?String }
  * }
  */
 app.put('/status', auth.check, headers, async (req, res) => {
@@ -117,7 +117,7 @@ app.put('/location', auth.check, headers, async (req, res) => {
  *          name: String
  *          artists: String[]
  *          album: String
- *          uri: String
+ *          id: String
  *        }
  *     }
  *  ]
@@ -147,6 +147,7 @@ async function findCloseUsers(user_id, distClose, distMedium, distFar){
       name: row.name,
       album: row.album.name,
       artists: row.artists.map(_ => _.name),
+      id: row.id,
     };
     let user;
     if(i < close.length) {

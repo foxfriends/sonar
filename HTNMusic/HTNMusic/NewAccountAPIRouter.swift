@@ -1,5 +1,5 @@
 //
-//  LoginAPIRouter.swift
+//  NewAccountAPIRouter.swift
 //  HTNMusic
 //
 //  Created by Cameron Eldridge on 2017-09-16.
@@ -10,8 +10,8 @@ import Foundation
 import Alamofire
 import Gloss
 
-enum LoginAPIRouter: URLRequestConvertible {
-    case email(String, String)
+enum NewAccountAPIRouter: URLRequestConvertible {
+    case email(String, String, String, String)
 
     var method: HTTPMethod {
         switch self {
@@ -22,16 +22,18 @@ enum LoginAPIRouter: URLRequestConvertible {
 
     var params: JSON {
         switch self {
-        case .email(let email, let password):
+        case .email(let firstName, let lastName, let email, let password):
             return [
-                "email" : email,
-                "psw"   : password
+                "first" : firstName,
+                "last" : lastName,
+                "psw" : password,
+                "email" : email
             ]
         }
     }
 
     func asURLRequest() throws -> URLRequest {
-        let url = URL(string: "auth")!
+        let url = URL(string: "user/new")!
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = method.rawValue
 

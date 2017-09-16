@@ -70,6 +70,7 @@ async function getUserProfile(req, res, user_id) {
       title: track.name,
       album: track.album.name,
       artists: track.artists.map(_ => _.name)
+      id: track.id,
     };
     res.send(result.success(user));
   } catch(error) {

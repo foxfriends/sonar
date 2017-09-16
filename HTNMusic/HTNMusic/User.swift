@@ -13,22 +13,25 @@ struct User: Decodable {
     let id: String
     let firstName: String
     let lastName: String
+    let email: String
     let avatarURL: String
     var currentListening: SongInfo? = nil
-    var authToken: String? = nil
-    
+    var authtoken: String? = nil
+
     init?(json: JSON) {
         guard let id: String = "user_id" <~~ json,
             let firstName: String = "first_name" <~~ json,
             let lastName: String = "last_name" <~~ json,
-            let avatarURL: String = "avatar_url" <~~ json
+            let avatarURL: String = "avatar" <~~ json
+            let email: String = "email" <~~ json
             else { return nil }
-        
+
         self.id = id
         self.firstName = firstName
         self.lastName = lastName
         self.avatarURL = avatarURL
-        self.currentListening = "song_info" <~~ json
-        self.authToken = "auth_token" <~~ json
+        self.email = email
+        self.currentListening = "song" <~~ json
+        self.authtoken = "authtoken" <~~ json
     }
 }
