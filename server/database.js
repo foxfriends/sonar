@@ -127,4 +127,20 @@ async function findUsers(user_id, small, big, lat, long, db){
      AND users.user_id <> ${user_id}`
   );
 };
-module.exports = { createAccount, getUserId, playingStatus, setLocation, findClose };
+async function getMyFollowingList(user_id){
+  const db = await connect();
+  try {
+    const { rows: users } = await db.query(SQL
+      `SELECT first_name, last_name, avatar
+       FROM following_users
+       INNER JOIN users on following_users.following_user_id = users.user_id
+       AND following_users.user_id = ${user_id}`
+     );
+    return users;
+  } catch(error) {
+    throw error;
+  } finally {
+    db.release();
+  }
+}
+module.exports = { createAccount, getUserId, playingStatus, setLocation, findClose, getMyFollowingList };

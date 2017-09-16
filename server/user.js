@@ -70,7 +70,12 @@ app.get('/:user_id', auth.check, headers, (req, res) => {
  */
 app.get('/follow', auth.check, headers, async (req, res) => {
   const { uid } = req.user;
-  
+  try {
+    await db.createAccount(first, last, psw, email);
+    res.send(result.success(await db.getMyFollowingList(uid)));
+  } catch(error) {
+    res.send(result.failure(error.message));
+  }
 
 });
 
