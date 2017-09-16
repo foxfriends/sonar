@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>HTN Web Console</title>
+    <script src="./index.js"></script>
+  </head>
+  <body>
+    <fieldset>
+      <p><label> USERNAME: <input type="text" id="username" value="GET"> </label></p>
+      <p><label> PASSWORD: <input type="text" id="password" value="GET"> </label></p>
+      <p><label> METHOD: <input type="text" id="method" value="GET"> </label></p>
+      <p><label> URL: <input type="text" id="api-url"> </label></p>
+      <p><label> BODY: <textarea id="body"></textarea> </label></p>
+      <button onclick="sendRequest()">Send request</button>
+    </fieldset>
+    <div>
+      <p>Result:</p>
+      <pre id="response"></pre>
+    </div>
+  </body>
+</html>
