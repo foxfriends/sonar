@@ -72,7 +72,7 @@ async function getUser(user_id) {
   const db = await connect();
   try {
     const { rows: [ user ] } = await db.query(SQL `
-      SELECT user_id, first_name, last_name, likes, current_playing, email
+      SELECT u.user_id, first_name, last_name, likes, current_playing, email
       FROM users as u
       INNER JOIN profile as p on u.user_id = p.user_id
       WHERE u.user_id = ${user_id}
