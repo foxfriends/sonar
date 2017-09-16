@@ -26,5 +26,14 @@ async function example() {
   }
 }
 */
-
-module.exports = {};
+async function playingStatus(user_id, song) {
+  const db = await connect();
+  try {
+    const { rows: users } = await db.query(SQL `UPDATE users SET current_playing = ${song} WHERE user_id = ${user_id}` );
+  } catch(error) {
+    throw error;
+  } finally {
+    db.release();
+  }
+}
+module.exports = {playingStatus};

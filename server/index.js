@@ -5,6 +5,7 @@ const path = require('path');
 
 const auth = require('./auth');
 const headers = require('./headers');
+const db = require('./database');
 
 const app = express();
 
@@ -37,6 +38,9 @@ app.post('/auth', headers, (req, res) => {
 app.put('/status', auth.check, headers, (req, res) => {
   const { uid } = req.user;
   const { status, song } = req.body;
+  db.playingStatus(uid, status === 'PLAY'
+                        ? song
+                        : null);
 });
 
 /**
