@@ -86,5 +86,44 @@ async function setLocation(user_id, lat, long) {
     db.release();
   }
 }
+async function findClose(user_id, close, medium, far) {
+  const db = await connect();
+  try {
+    // user_id's longitude & latitude
+    const { rows: [self] } = await db.query(SQL
+      `SELECT longitude, latitude FROM users WHERE user_id = ${user_id}`
+    );
 
-module.exports = { createAccount, getUserId, playingStatus, setLocation};
+    // close
+    const { rows: usersClose } = await db.query(SQL
+      `SELECT * FROM users
+       WHERE |/(pow(${self.latitude} - latitude, 2.0), pow(${self.longitude} - users.longitude, 2.0)) <= ${close}
+       AND users.user_id <> self.user_id`
+    );
+    // medium
+    const { rows: usersMedium } = await db.query(SQL
+      `SELECT * FROM users
+       WHERE |/(pow(${self.latitude} - latitude, 2.0), pow(${self.longitude} - users.longitude, 2.0)) <= ${medium}
+       AND  |/(pow(${self.latitude} - latitude, 2.0), pow(${self.longitude} - users.longitude, 2.0)) > ${close}
+       AND users.user_id <> self.user_id`
+    );
+    // far
+    const { rows: usersFar } = await db.query(SQL
+      `SELECT * FROM users
+       WHERE |/(pow(${self.latitude} - latitude, 2.0), pow(${self.longitude} - users.longitude, 2.0)) <= ${far}
+       AND  |/(pow(${self.latitude} - latitude, 2.0), pow(${self.longitude} - users.longitude, 2.0)) > ${medium}
+       AND users.user_id <> self.user_id`
+    );
+    return {
+      close: usersClose,
+      medium: usersMedium,
+      far: usersFar
+    }
+  } catch(error) {
+    throw error;
+  } finally {
+    db.release();
+  }
+}
+
+module.exports = { createAccount, getUserId, playingStatus, setLocation, findClose };
