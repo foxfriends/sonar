@@ -87,13 +87,13 @@ app.put('/location', auth.check, headers, async (req, res) => {
  *   }
  * }
  */
-app.get('/nearby', auth.check, headers, (req, res) => {
+app.get('/nearby', auth.check, headers, async (req, res) => {
   const { uid } = req.user;
   try{
     var close = parseFloat(req.query.close);
     var medium = parseFloat(req.query.medium);
     var far = parseFloat(req.query.far);
-
+    await db.findClose(uid, close, medium, far);
   }
   catch(error){
     res.send(error.message);
