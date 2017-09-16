@@ -63,12 +63,14 @@ app.get('/:user_id', auth.check, headers, (req, res) => {
  * Get a list of people the user is following
  * @requires Authorization
  * @returns {
+ *  list: [
  *
+ *  ]
  * }
  */
 app.get('/follow', auth.check, headers, async (req, res) => {
   const { uid } = req.user;
-
+  
 
 });
 

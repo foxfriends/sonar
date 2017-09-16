@@ -56,9 +56,24 @@ app.put('/status', auth.check, headers, async (req, res) => {
 /**
  * Send location
  * @requires Authorization
+ * @param {Double} close
+ * @param {Double} medium
+ * @param {Double} far
  * @body {
  *   lat: Double,
  *   lng: Double
+ * }
+ * @returns {
+ *   close: [
+ *     {
+ *        first_name: String,
+ *        last_name: String,
+ *        avatar: String,
+ *        likes: Int
+ *     }
+ *  ]
+ *   medium: [...]
+ *   far: [...]
  * }
  */
 app.put('/location', auth.check, headers, async (req, res) => {
@@ -66,7 +81,10 @@ app.put('/location', auth.check, headers, async (req, res) => {
   const { lat, lng } = req.body;
   try {
     await db.setLocation(uid, lat, lng);
-    res.send(result.success());
+    var close = 1;
+    var medium = 5;
+    var far = 10;
+    res.send(result.success(await findCloseUsers(uid, close, medium, far)));
   } catch(error) {
     res.send(result.failure(error.message));
   }
@@ -94,13 +112,18 @@ app.put('/location', auth.check, headers, async (req, res) => {
 app.get('/nearby', auth.check, headers, async (req, res) => {
   const { uid } = req.user;
   try{
-    var close = parseFloat(req.query.close);
-    var medium = parseFloat(req.query.medium);
-    var far = parseFloat(req.query.far);
-    res.send(result.success(await db.findClose(uid, close, medium, far)));
+    //var close = parseFloat(req.query.close);
+    //var medium = parseFloat(req.query.medium);
+    //var far = parseFloat(req.query.far);
+    var close = 1;
+    var medium = 5;
+    var far = 10;
+    res.send(result.success(await findCloseUsers(uid, close, medium, far)));
   } catch(error) {
     res.send(error.message);
   }
 });
-
+async function findCloseUsers(user_id, close, medium, far){
+  return(await db.findClose(user_id, close, medium, far));
+};
 app.use('/debug', express.static('../web-console'));

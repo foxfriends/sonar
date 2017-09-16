@@ -98,18 +98,21 @@ async function findClose(user_id, close, medium, far) {
     const { rows: [self] } = await db.query(SQL
       `SELECT longitude, latitude FROM users WHERE user_id = ${user_id}`
     );
+    if (self.longitude !== null){
+      // close
+      const { rows: usersClose } = await findUsers(user_id, 0, close, self.latitude, self.longitude, db);
+      // medium
+      const { rows: usersMedium } = await findUsers(user_id, close, medium, self.latitude, self.longitude, db);
+      // far
+      const { rows: usersFar } = await findUsers(user_id, medium, far, self.latitude, self.longitude, db);
+      return {
+        close: usersClose,
+        medium: usersMedium,
+        far: usersFar
+      };
+    }
+    throw new Error("User doesn't have a longitude/latitude set");
 
-    // close
-    const { rows: usersClose } = await findUsers(user_id, 0, close, self.latitude, self.longitude, db);
-    // medium
-    const { rows: usersMedium } = await findUsers(user_id, close, medium, self.latitude, self.longitude, db);
-    // far
-    const { rows: usersFar } = await findUsers(user_id, medium, far, self.latitude, self.longitude, db);
-    return {
-      close: usersClose,
-      medium: usersMedium,
-      far: usersFar
-    };
   } catch(error) {
     throw error;
   } finally {

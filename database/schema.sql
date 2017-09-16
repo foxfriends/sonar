@@ -8,11 +8,11 @@ GRANT ALL ON TABLE users TO musicapp;
 
 CREATE TABLE users (
   user_id         SERIAL PRIMARY KEY,
-  first_name      VARCHAR(512) NOT NULL,
-  last_name       VARCHAR(512) NOT NULL,
+  first_name      VARCHAR(512)        NOT NULL,
+  last_name       VARCHAR(512)        NOT NULL,
   email           VARCHAR(512) UNIQUE NOT NULL,
-  password        VARCHAR(512) NOT NULL,
-  join_date       TIMESTAMP NOT NULL DEFAULT (NOW()::TIMESTAMP),
+  password        VARCHAR(512)        NOT NULL,
+  join_date       TIMESTAMP           NOT NULL DEFAULT (NOW()::TIMESTAMP),
   avatar          VARCHAR(512),
   score           INT DEFAULT 0,
   current_playing VARCHAR(512),
@@ -22,6 +22,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE history_songs (
+  history_id SERIAL PRIMARY KEY,
   user_id   INT          NOT NULL REFERENCES users(user_id),
   song_name VARCHAR(512) NOT NULL
 );
