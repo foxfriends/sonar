@@ -235,7 +235,7 @@ async function getMyLikes(user_id){
     db.release();
   }
 }
-async function likeSong(user_id, song_id, fromUser){
+async function likeSong(user_id, song_id, from_user){
   const db = await connect();
   try {
     const { rows: likes } = await db.query(SQL
@@ -243,9 +243,9 @@ async function likeSong(user_id, song_id, fromUser){
        VALUES (${song_id}, ${user_id})`
      );
      const { rows: increaseLike } = await db.query(SQL
-     `UPDATE users SET likes = likes + 1
-     WHERE user_id = ${fromUser}`
-   )
+       `UPDATE users SET likes = likes + 1
+     WHERE user_id = ${from_user}`
+   );
     return likes;
   } catch(error) {
     throw error;
