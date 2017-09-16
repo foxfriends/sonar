@@ -42,7 +42,7 @@ app.delete('/:song_id', auth.check, headers, async (req, res) => {
   const { uid } = req.user;
   const { song_id } = req.params;
   try {
-    await db.unlikeUser(uid, song_id)
+    await db.unlikeSong(uid, song_id)
     res.send(result.success());
   } catch(error) {
     res.send(result.failure(error.message));
