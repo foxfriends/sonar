@@ -77,6 +77,7 @@ async function getUser(user_id) {
       INNER JOIN profile as p on u.user_id = p.user_id
       WHERE u.user_id = ${user_id}
     `);
+    console.log(user);
     if(user) {
       return user;
     } else {
