@@ -76,6 +76,7 @@ async function playingStatus(user_id, song) {
     db.release();
   }
 }
+
 async function setLocation(user_id, lat, long) {
   const db = await connect();
   try {

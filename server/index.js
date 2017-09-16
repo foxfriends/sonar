@@ -42,16 +42,13 @@ app.post('/auth', headers, async (req, res) => {
  *   song: ?String
  * }
  */
-app.put('/status', auth.check, headers, (req, res) => {
+app.put('/status', auth.check, headers, async (req, res) => {
   const { uid } = req.user;
   const { status, song } = req.body;
   try {
-    db.playingStatus(uid, status === 'PLAY'
-                          ? song
-                          : null);
+    await db.playingStatus(uid, status === 'PLAY' ? song : null);
     res.send(result.success());
-  }
-  catch(error){
+  } catch(error) {
     res.send(result.failure(error.message));
   }
 });
@@ -64,15 +61,14 @@ app.put('/status', auth.check, headers, (req, res) => {
  *   lng: Double
  * }
  */
-app.put('/location', auth.check, headers, (req, res) => {
+app.put('/location', auth.check, headers, async (req, res) => {
   const { uid } = req.user;
   const { lat, lng } = req.body;
   try {
-    db.setLocation(uid, lat, lng);
-    res.send("{}");
-  }
-  catch(error){
-    res.send(error.message);
+    await db.setLocation(uid, lat, lng);
+    res.send(result.success());
+  } catch(error) {
+    res.send(result.failure(error.message));
   }
 });
 
