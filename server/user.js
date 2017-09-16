@@ -12,8 +12,7 @@ const app = express();
  * Sign up
  * @body {
  *   usr: String,
- *   psw: String,
- *   email: String
+ *   psw: String
  * }
  */
 app.post('/new', headers, async (req, res) => {
@@ -31,8 +30,7 @@ app.post('/new', headers, async (req, res) => {
  * @requires Authorization
  * @body {
  *   usr: String,
- *   psw: String,
- *   email: String
+ *   psw: String
  * }
  */
 app.put('/', auth.check, headers, (req, res) => {
