@@ -7,15 +7,18 @@ SET DATABASE = music;
 GRANT ALL ON TABLE users TO musicapp;
 
 CREATE TABLE users (
-  user_id   SERIAL PRIMARY KEY,
-  username  VARCHAR(512) UNIQUE NOT NULL,
-  password  VARCHAR(512) NOT NULL,
-  join_date TIMESTAMP NOT NULL DEFAULT (NOW()::TIMESTAMP),
-  avatar    VARCHAR(512),
-  score     INT DEFAULT 0,
+  user_id         SERIAL PRIMARY KEY,
+  first_name      VARCHAR(512) NOT NULL,
+  last_name       VARCHAR(512) NOT NULL,
+  email           VARCHAR(512) UNIQUE NOT NULL,
+  password        VARCHAR(512) NOT NULL,
+  join_date       TIMESTAMP NOT NULL DEFAULT (NOW()::TIMESTAMP),
+  avatar          VARCHAR(512),
+  score           INT DEFAULT 0,
   current_playing VARCHAR(512),
-  latitude  DECIMAL,
-  longitude DECIMAL
+  latitude        DECIMAL,
+  longitude       DECIMAL,
+  likes           INT DEFAULT 0
 );
 
 CREATE TABLE history_songs (

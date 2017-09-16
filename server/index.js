@@ -19,15 +19,15 @@ app.use('/user', require('./user'));
 /**
  * Sign in
  * @body {
- *   usr: String
+ *   email: String
  *   psw: String
  * }
- * @return { { tok: String } }
+ * @return {  String  }
  */
 app.post('/auth', headers, async (req, res) => {
-  const { usr, psw } = req.body;
+  const { email, psw } = req.body;
   try {
-    const uid = await db.getUserId(usr, psw);
+    const uid = await db.getUserId(email, psw);
     res.send(result.success(auth.create(uid)));
   } catch(error) {
     res.send(result.failure(error.message));
@@ -79,12 +79,16 @@ app.put('/location', auth.check, headers, async (req, res) => {
  * @param {Double} medium
  * @param {Double} far
  * @returns {
- *   nearby: {
- *     username: String,
- *     score: Int,
- *     song: String,
- *     distance: Double
- *   }
+ *   close: [
+ *     {
+ *        first_name: String,
+ *        last_name: String,
+ *        avatar: String,
+ *        likes: Int
+ *     }
+ *  ]
+ *   medium: [...]
+ *   far: [...]
  * }
  */
 app.get('/nearby', auth.check, headers, async (req, res) => {

@@ -11,14 +11,16 @@ const app = express();
 /**
  * Sign up
  * @body {
- *   usr: String,
- *   psw: String
+ *   first: String,
+ *   last: String,
+ *   psw: String,
+ *   email: String
  * }
  */
 app.post('/new', headers, async (req, res) => {
-  const { usr, psw } = req.body;
+  const { first, last, psw, email } = req.body;
   try {
-    await db.createAccount(usr, psw);
+    await db.createAccount(first, last, psw, email);
     res.send(result.success());
   } catch(error) {
     res.send(result.failure(error.message));
@@ -55,6 +57,19 @@ app.get('/:user_id', auth.check, headers, (req, res) => {
   const { uid } = req.user;
   const { user_id } = req.params;
   return getUserProfile(req, res, uid, user_id);
+});
+
+/**
+ * Get a list of people the user is following
+ * @requires Authorization
+ * @returns {
+ *
+ * }
+ */
+app.get('/follow', auth.check, headers, async (req, res) => {
+  const { uid } = req.user;
+
+
 });
 
 function getUserProfile(req, res, me, them) {}

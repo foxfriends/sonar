@@ -29,7 +29,7 @@ async function example(user_id) {
 }
 */
 
-async function createAccount(usr, psw) {
+async function createAccount(first, last, psw, email) {
   const db = await connect();
   try {
     const hashed = await password.encrypt(psw);
@@ -37,7 +37,7 @@ async function createAccount(usr, psw) {
     if (exists) {
       throw new Error('An account with that username has already been created');
     }
-    await db.query(SQL `INSERT INTO users (username, password) VALUES (${usr}, ${hashed})`);
+    await db.query(SQL `INSERT INTO users (first_name, last_name, password, email) VALUES (${first},${last}, ${hashed},${email})`);
   } catch(error) {
     throw error;
   } finally {
@@ -45,10 +45,10 @@ async function createAccount(usr, psw) {
   }
 }
 
-async function getUserId(usr, psw) {
+async function getUserId(email, psw) {
   const db = await connect();
   try {
-    const { rows: [ user ] } = await db.query(SQL `SELECT user_id, password FROM USERS WHERE username = ${usr}`);
+    const { rows: [ user ] } = await db.query(SQL `SELECT user_id, password FROM USERS WHERE email = ${email}`);
     if (user) {
       const { user_id, password: pass } = user;
       if(await password.check(psw, pass)) {
@@ -70,6 +70,10 @@ async function playingStatus(user_id, song) {
   const db = await connect();
   try {
     const { rows: users } = await db.query(SQL `UPDATE users SET current_playing = ${song} WHERE user_id = ${user_id}` );
+    if (song != null){
+        const { rows: history } = await db.query(SQL `INSERT INTO history_songs (user_id, song_name) VALUES (${user_id}, ${song})`);
+    }
+
   } catch(error) {
     throw error;
   } finally {
@@ -114,7 +118,7 @@ async function findClose(user_id, close, medium, far) {
 }
 async function findUsers(user_id, small, big, lat, long, db){
   return await db.query(SQL
-    `SELECT * FROM users
+    `SELECT first_name,last_name, avatar, likes FROM users
      WHERE sqrt(pow(${lat} - latitude, 2.0) + pow(${long} - users.longitude, 2.0)) <= ${big}
      AND  sqrt(pow(${lat} - latitude, 2.0) + pow(${long} - users.longitude, 2.0)) > ${small}
      AND users.user_id <> ${user_id}`
