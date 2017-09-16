@@ -136,7 +136,7 @@ async function findClose(user_id, close, medium, far) {
   }
 }
 
-async function findNearbyUsers(user_id, small, big, lat, long, db){
+async function findNearbyUsers(user_id, small, big, lat, long, db) {
   return await db.query(SQL
     `SELECT first_name, last_name, avatar, likes, current_playing FROM users
      WHERE sqrt(pow(${lat} - latitude, 2.0) + pow(${long} - users.longitude, 2.0)) <= ${big}

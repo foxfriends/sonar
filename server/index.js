@@ -44,14 +44,19 @@ app.post('/auth', headers, async (req, res) => {
  * @requires Authorization
  * @body {
  *   status: 'PLAY' | 'STOP',
- *   song: ?String
+ *   song: { title: String, artist: ?String, album: ?String}
  * }
  */
 app.put('/status', auth.check, headers, async (req, res) => {
   const { uid } = req.user;
   const { status, song } = req.body;
   try {
-    await db.playingStatus(uid, status === 'PLAY' ? song : null);
+    if(status === 'PLAY') {
+      const spotlift = await spotify.identifySong(song);
+      await db.playingStatus(uid, spotlift.id);
+    } else {
+      await db.playingStatus(uid, null);
+    }
     res.send(result.success());
   } catch(error) {
     res.send(result.failure(error.message));
