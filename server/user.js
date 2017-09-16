@@ -1,6 +1,7 @@
 'use strict';
 const express = require('express');
 const auth = require('./auth');
+const headers = require('./headers');
 
 const app = express();
 
@@ -12,8 +13,8 @@ const app = express();
  *   email: String
  * }
  */
-app.post('/new', (req, res) => {
-  const { usr, psw, email } = req.body;
+app.post('/new', headers, (req, res) => {
+  const { usr, psw } = req.body;
 });
 
 /**
@@ -25,7 +26,7 @@ app.post('/new', (req, res) => {
  *   email: String
  * }
  */
-app.put('/', auth.check, (req, res) => {
+app.put('/', auth.check, headers, (req, res) => {
   const { uid } = req.user;
 });
 
@@ -33,7 +34,7 @@ app.put('/', auth.check, (req, res) => {
  * Get your own profile
  * @requires Authorization
  */
-app.get('/', auth.check, (req, res) => {
+app.get('/', auth.check, headers, (req, res) => {
   const { uid } = req.user;
   return getUserProfile(req, res, uid, uid);
 });
@@ -43,14 +44,12 @@ app.get('/', auth.check, (req, res) => {
  * @requires Authorization
  * @param { Number } user_id
  */
-app.get('/:user_id', auth.check, (req, res) => {
+app.get('/:user_id', auth.check, headers, (req, res) => {
   const { uid } = req.user;
   const { user_id } = req.params;
   return getUserProfile(req, res, uid, user_id);
 });
 
-function getUserProfile(req, res, me, them) {
-
-}
+function getUserProfile(req, res, me, them) {}
 
 module.exports = app;

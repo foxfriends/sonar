@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const auth = require('./auth');
+const headers = require('./headers');
 
 const app = express();
 
@@ -21,7 +22,7 @@ app.use('/user', require('./user'));
  * }
  * @return { { tok: String } }
  */
-app.post('/auth', (req, res) => {
+app.post('/auth', headers, (req, res) => {
   const { usr, psw } = req.body;
 });
 
@@ -33,7 +34,7 @@ app.post('/auth', (req, res) => {
  *   song: ?String
  * }
  */
-app.put('/status', auth.check, (req, res) => {
+app.put('/status', auth.check, headers, (req, res) => {
   const { uid } = req.user;
   const { status, song } = req.body;
 });
@@ -46,7 +47,7 @@ app.put('/status', auth.check, (req, res) => {
  *   lng: Double
  * }
  */
-app.put('/location', auth.check, (req, res) => {
+app.put('/location', auth.check, headers, (req, res) => {
   const { uid } = req.user;
   const { lat, lng } = req.body;
 });
@@ -61,6 +62,8 @@ app.put('/location', auth.check, (req, res) => {
  *   }
  * }
  */
-app.get('/nearby', auth.check, (req, res) => {
+app.get('/nearby', auth.check, headers, (req, res) => {
   const { uid } = req.user;
 });
+
+app.use('/debug', express.static('../web-console'));
