@@ -70,7 +70,11 @@ async function getSecureUser(email, psw) {
 async function getUser(user_id) {
   const db = await connect();
   try {
-    const { rows: [ user ] } = await db.query(SQL `SELECT user_id, first_name, last_name FROM users WHERE user_id = ${user_id}`);
+    const { rows: [ user ] } = await db.query(SQL `
+      SELECT user_id, first_name, last_name, likes, current_playing, email
+      FROM users
+      WHERE user_id = ${user_id}
+    `);
     if(user) {
       return user;
     } else {
@@ -215,6 +219,7 @@ async function getDevices(user_id) {
 module.exports = {
   createAccount,
   getSecureUser,
+  getUser,
   playingStatus,
   setLocation,
   findClose,

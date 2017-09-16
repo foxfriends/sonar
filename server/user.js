@@ -30,7 +30,7 @@ app.post('/new', headers, async (req, res) => {
 });
 
 /**
- * Edit profile
+ * Edit profile??
  * @requires Authorization
  * @body {
  *   usr: String,
@@ -44,24 +44,38 @@ app.put('/', auth.check, headers, (req, res) => {
 /**
  * Get your own profile
  * @requires Authorization
+ * @returns { user_id: Number, first_name: String, last_name: String, likes: Number, email: String, current_playing: String, song: { title: String, artists: String[], album: String } }
  */
 app.get('/', auth.check, headers, (req, res) => {
   const { uid } = req.user;
-  return getUserProfile(req, res, uid, uid);
+  return getUserProfile(req, res, uid);
 });
 
 /**
  * Get a user's profile
  * @requires Authorization
  * @param { Number } user_id
+ * @returns { user_id: Number, first_name: String, last_name: String, likes: Number, email: String, current_playing: String, song: { title: String, artists: String[], album: String } }
  */
 app.get('/:user_id', auth.check, headers, (req, res) => {
-  const { uid } = req.user;
   const { user_id } = req.params;
-  return getUserProfile(req, res, uid, user_id);
+  return getUserProfile(req, res, user_id);
 });
 
-function getUserProfile(req, res, me, them) {}
+async function getUserProfile(req, res, user_id) {
+  try {
+    const user = await db.getUser(user_id);
+    const [track] = user.current_playing ? await spotify.lookupSongs([user.current_playing]) : null;
+    user.song = {
+      title: track.name,
+      album: track.album.name,
+      artists: track.artists.map(_ => _.name)
+    };
+    res.send(result.success(user));
+  } catch(error) {
+    res.send(result.failure(error.message));
+  }
+}
 
 /**
  * Suggest a song to someone else
