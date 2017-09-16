@@ -37,7 +37,8 @@ async function createAccount(first, last, psw, email) {
     if (exists) {
       throw new Error('An account with that username has already been created');
     }
-    await db.query(SQL `INSERT INTO users (first_name, last_name, password, email) VALUES (${first},${last}, ${hashed}, ${email})`);
+    const { rows: [ { user_id } ] } = await db.query(SQL `INSERT INTO users (password, email) VALUES (${first},${last}, ${hashed}, ${email}) RETURNING user_id`);
+    await db.query(SQL `INSERT INTO profile (user_id, first_name, last_name) VALUES (${user_id}, ${first_name}, ${last_name})`);
   } catch(error) {
     throw error;
   } finally {
@@ -48,7 +49,7 @@ async function createAccount(first, last, psw, email) {
 async function getSecureUser(email, psw) {
   const db = await connect();
   try {
-    const { rows: [ user ] } = await db.query(SQL `SELECT user_id, first_name, last_name, email, avatar, password FROM users WHERE email = ${email}`);
+    const { rows: [ user ] } = await db.query(SQL `SELECT user_id, first_name, last_name, email, avatar, password FROM users INNER JOIN profile ON users.user_id = profile.user_id WHERE email = ${email}`);
     if (user) {
       const { user_id, password: pass } = user;
       if(await password.check(psw, pass)) {
