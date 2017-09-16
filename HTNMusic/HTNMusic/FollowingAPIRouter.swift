@@ -10,8 +10,11 @@ import Foundation
 import Alamofire
 import Gloss
 
-enum SuggestAPIRouter: URLRequestConvertible {
-    case suggest(Int, SongInfo)
+enum FollowingAPIRouter: URLRequestConvertible {
+case add(Int)
+case remove(Int)
+case list(Int)
+case listMine()
 
     var method: HTTPMethod {
         return .post

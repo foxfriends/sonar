@@ -29,10 +29,10 @@ app.use('/follow', require('./follow'));
 app.post('/auth', headers, async (req, res) => {
   const { email, psw } = req.body;
   try {
-    const { user_id, first_name, last_name, avatar, email } = await db.getSecureUser(email, psw);
+    const { user_id, first_name, last_name, avatar } = await db.getSecureUser(email, psw);
     res.send(result.success({
       authtoken: auth.create(user_id),
-      user_id, first_name, last_name, avatar, email,
+      user_id, first_name, last_name, avatar, email
     }));
   } catch(error) {
     res.send(result.failure(error.message));
