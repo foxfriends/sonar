@@ -65,7 +65,7 @@ app.get('/:user_id', auth.check, headers, (req, res) => {
 async function getUserProfile(req, res, user_id) {
   try {
     const user = await db.getUser(user_id);
-    const [track] = user.current_playing ? await spotify.lookupSongs([user.current_playing]) : null;
+    const [track] = user.current_playing ? await spotify.lookupSongs([user.current_playing]) : [null];
     if (track !== null){
       user.song = {
         title: track.name,
