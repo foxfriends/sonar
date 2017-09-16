@@ -73,7 +73,6 @@ async function playingStatus(user_id, song) {
     if (song != null){
         const { rows: history } = await db.query(SQL `INSERT INTO history_songs (user_id, song_name) VALUES (${user_id}, ${song})`);
     }
-
   } catch(error) {
     throw error;
   } finally {
@@ -91,6 +90,7 @@ async function setLocation(user_id, lat, long) {
     db.release();
   }
 }
+
 async function findClose(user_id, close, medium, far) {
   const db = await connect();
   try {
@@ -118,6 +118,7 @@ async function findClose(user_id, close, medium, far) {
     db.release();
   }
 }
+
 async function findUsers(user_id, small, big, lat, long, db){
   return await db.query(SQL
     `SELECT first_name, last_name, avatar, likes, current_playing FROM users
@@ -125,7 +126,8 @@ async function findUsers(user_id, small, big, lat, long, db){
      AND  sqrt(pow(${lat} - latitude, 2.0) + pow(${long} - users.longitude, 2.0)) > ${small}
      AND users.user_id <> ${user_id} AND current_playing IS NOT NULL`
   );
-};
+}
+
 async function getMyFollowingList(user_id){
   const db = await connect();
   try {
@@ -142,4 +144,5 @@ async function getMyFollowingList(user_id){
     db.release();
   }
 }
+
 module.exports = { createAccount, getUserId, playingStatus, setLocation, findClose, getMyFollowingList };
