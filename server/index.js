@@ -22,7 +22,7 @@ app.use('/like', require('./like'));
 /**
  * Sign in
  * @body {
- *   email: String
+ *   email: String,
  *   psw: String
  * }
  * @return { { authtoken: String, first_name: String, last_name: String, avatar: String } }
@@ -52,6 +52,7 @@ app.put('/status', auth.check, headers, async (req, res) => {
   const { uid } = req.user;
   const { status, song } = req.body;
   try {
+    console.log(req.body);
     if(status === 'PLAY') {
       const spotlift = await spotify.identifySong(song);
       await db.playingStatus(uid, spotlift.id);
