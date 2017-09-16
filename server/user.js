@@ -1,7 +1,10 @@
 'use strict';
 const express = require('express');
+
 const auth = require('./auth');
 const headers = require('./headers');
+const db = require('./database');
+const result = require('./result');
 
 const app = express();
 
@@ -13,8 +16,14 @@ const app = express();
  *   email: String
  * }
  */
-app.post('/new', headers, (req, res) => {
+app.post('/new', headers, async (req, res) => {
   const { usr, psw } = req.body;
+  try {
+    await db.createAccount(usr, psw);
+    res.send(result.success());
+  } catch(error) {
+    res.send(result.failure(error.message));
+  }
 });
 
 /**

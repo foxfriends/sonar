@@ -1,6 +1,7 @@
 'use strict';
 const pg = require('pg');
 const SQL = require('sql-template-strings');
+const hash = require('./hash');
 
 const config = {
   user: 'musicapp',
@@ -8,11 +9,12 @@ const config = {
   database: 'music',
   port: 26257,
 };
+
 const pool = new pg.Pool(config);
 
 function connect() { return pool.connect(); }
 
-/*
+/* NOTE: Don't forget to add it to module.exports list at the bottom!
 async function example() {
   const db = await connect();
   try {
@@ -27,4 +29,20 @@ async function example() {
 }
 */
 
-module.exports = {};
+async function createAccount(usr, psw) {
+  const db = await connect();
+  try {
+    const hashed = await hash(psw);
+    const { rowCount: exists } = await db.query(SQL `SELECT 1 FROM USERS WHERE username = ${usr}`);
+    if (exists) {
+      throw new Error('An account with that username has already been created');
+    }
+    await db.query(SQL `INSERT INTO users (username, password) VALUES (${usr}, ${hashed})`);
+  } catch(error) {
+    throw error;
+  } finally {
+    db.release();
+  }
+}
+
+module.exports = { createAccount };

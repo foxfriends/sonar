@@ -1,3 +1,4 @@
+'use strict';
 // TODO: authorization
 async function sendRequest() {
   const method = document.querySelector('#method').value;
