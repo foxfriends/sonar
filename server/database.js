@@ -9,6 +9,21 @@ const config = {
 };
 const pool = new pg.Pool(config);
 
+function connect() { return pool.connect(); }
 
+/*
+async function example() {
+  const db = await connect();
+  try {
+    const { rows: users } = await db.query(SQL `SELECT * FROM USERS`);
+    // do stuff
+    return users;
+  } catch(error) {
+    throw error;
+  } finally {
+    db.release();
+  }
+}
+*/
 
 module.exports = {};
