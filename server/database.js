@@ -1,7 +1,7 @@
 'use strict';
 const pg = require('pg');
 const SQL = require('sql-template-strings');
-const hash = require('./hash');
+const password = require('./password');
 
 const config = {
   user: 'musicapp',
@@ -32,12 +32,33 @@ async function example(user_id) {
 async function createAccount(usr, psw) {
   const db = await connect();
   try {
-    const hashed = await hash(psw);
+    const hashed = await password.encrypt(psw);
     const { rowCount: exists } = await db.query(SQL `SELECT 1 FROM USERS WHERE username = ${usr}`);
     if (exists) {
       throw new Error('An account with that username has already been created');
     }
     await db.query(SQL `INSERT INTO users (username, password) VALUES (${usr}, ${hashed})`);
+  } catch(error) {
+    throw error;
+  } finally {
+    db.release();
+  }
+}
+
+async function getUserId(usr, psw) {
+  const db = await connect();
+  try {
+    const { rows: [ user ] } = await db.query(SQL `SELECT user_id, password FROM USERS WHERE username = ${usr}`);
+    if (user) {
+      const { user_id, password: pass } = user;
+      if(await password.check(psw, pass)) {
+        return user_id;
+      } else {
+        throw new Error('Incorrect email or password');
+      }
+    } else {
+      throw new Error('Non-existent user');
+    }
   } catch(error) {
     throw error;
   } finally {
@@ -56,4 +77,4 @@ async function playingStatus(user_id, song) {
   }
 }
 
-module.exports = { createAccount, playingStatus };
+module.exports = { createAccount, getUserId, playingStatus };

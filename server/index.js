@@ -6,6 +6,7 @@ const path = require('path');
 const auth = require('./auth');
 const headers = require('./headers');
 const db = require('./database');
+const result = require('./result');
 
 const app = express();
 
@@ -23,8 +24,14 @@ app.use('/user', require('./user'));
  * }
  * @return { { tok: String } }
  */
-app.post('/auth', headers, (req, res) => {
+app.post('/auth', headers, async (req, res) => {
   const { usr, psw } = req.body;
+  try {
+    const uid = await db.getUserId(usr, psw);
+    res.send(result.success(auth.create(uid)));
+  } catch(error) {
+    res.send(result.failure(error.message));
+  }
 });
 
 /**
