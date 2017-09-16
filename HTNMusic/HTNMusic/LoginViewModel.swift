@@ -12,8 +12,8 @@ import Bond
 import Gloss
 
 class LoginViewModel {
-    let email = Observable<String>("")
-    let password = Observable<String>("")
+    let email = Observable<String?>("")
+    let password = Observable<String?>("")
     
     let hasRequestInProgress = Observable<Bool>(false)
     var user: User?
@@ -23,7 +23,11 @@ extension LoginViewModel {
     func login(success: ((Bool) -> Void)?, failure: @escaping ((String) -> Void)) {
         hasRequestInProgress.value = true
         
-        Alamofire.request(LoginAPIRouter.email(email.value, password.value))
+        guard let email = email.value,
+            let password = password.value
+            else { print("empty email/password"); return }
+        
+        Alamofire.request(LoginAPIRouter.email(email, password))
             .responseJSON { response in
                 if let result = response.result.value as? JSON {
                     guard case APIResult<User>.success(let user) = APIResult<User>(json: result)! else {
