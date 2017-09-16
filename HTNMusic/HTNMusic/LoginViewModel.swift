@@ -26,14 +26,14 @@ extension LoginViewModel {
         Alamofire.request(LoginAPIRouter.email(email.value, password.value))
             .responseJSON { response in
                 if let result = response.result.value as? JSON {
-                    guard let user = User(json: result) else {
-                        print("cannot serialize user")
+                    guard case APIResult<User>.success(let user) = APIResult<User>(json: result)! else {
+                        print("Cannot de-serialize User")
                         return
                     }
-                    
+
                     self.user = user
                     self.hasRequestInProgress.value = false
-                    
+
                     success?(true)
                 } else {
                     self.hasRequestInProgress.value = false

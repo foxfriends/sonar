@@ -26,12 +26,14 @@
 		321626FC1F6D773E008C390C /* ScreenCoords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321626FB1F6D773E008C390C /* ScreenCoords.swift */; };
 		321626FE1F6D92BF008C390C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321626FD1F6D92BF008C390C /* Constants.swift */; };
 		321627001F6D9F11008C390C /* UserProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 321626FF1F6D9F11008C390C /* UserProfile.storyboard */; };
-		321627021F6DC10B008C390C /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321627011F6DC10B008C390C /* Result.swift */; };
+		321627021F6DC10B008C390C /* APIResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321627011F6DC10B008C390C /* APIResult.swift */; };
 		321627081F6DC120008C390C /* FollowingAPIRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321627031F6DC120008C390C /* FollowingAPIRouter.swift */; };
 		321627091F6DC120008C390C /* LocationAPIRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321627041F6DC120008C390C /* LocationAPIRouter.swift */; };
 		3216270A1F6DC120008C390C /* NearbyAPIRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321627051F6DC120008C390C /* NearbyAPIRouter.swift */; };
 		3216270B1F6DC120008C390C /* StatusAPIRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321627061F6DC120008C390C /* StatusAPIRouter.swift */; };
 		3216270C1F6DC120008C390C /* UserAPIRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321627071F6DC120008C390C /* UserAPIRouter.swift */; };
+		3216270E1F6DC787008C390C /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3216270D1F6DC787008C390C /* UserProfileViewController.swift */; };
+		321627101F6DCCF9008C390C /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3216270F1F6DCCF9008C390C /* UserProfileViewModel.swift */; };
 		72C3DCB44261BE8AA6779D8E /* Pods_HTNMusic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20074BE002CB37F9727F6F55 /* Pods_HTNMusic.framework */; };
 /* End PBXBuildFile section */
 
@@ -60,12 +62,14 @@
 		321626FB1F6D773E008C390C /* ScreenCoords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenCoords.swift; sourceTree = "<group>"; };
 		321626FD1F6D92BF008C390C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		321626FF1F6D9F11008C390C /* UserProfile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserProfile.storyboard; sourceTree = "<group>"; };
-		321627011F6DC10B008C390C /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		321627011F6DC10B008C390C /* APIResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIResult.swift; sourceTree = "<group>"; };
 		321627031F6DC120008C390C /* FollowingAPIRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingAPIRouter.swift; sourceTree = "<group>"; };
 		321627041F6DC120008C390C /* LocationAPIRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationAPIRouter.swift; sourceTree = "<group>"; };
 		321627051F6DC120008C390C /* NearbyAPIRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyAPIRouter.swift; sourceTree = "<group>"; };
 		321627061F6DC120008C390C /* StatusAPIRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusAPIRouter.swift; sourceTree = "<group>"; };
 		321627071F6DC120008C390C /* UserAPIRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAPIRouter.swift; sourceTree = "<group>"; };
+		3216270D1F6DC787008C390C /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		3216270F1F6DCCF9008C390C /* UserProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				321626CC1F6CE4EF008C390C /* LoginViewController.swift */,
+				3216270D1F6DC787008C390C /* UserProfileViewController.swift */,
 				321626F91F6D6BBC008C390C /* DiscoverTableViewCell.swift */,
 				321626CE1F6CE4EF008C390C /* DiscoverViewController.swift */,
 			);
@@ -139,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				321626E21F6CE57B008C390C /* LoginViewModel.swift */,
+				3216270F1F6DCCF9008C390C /* UserProfileViewModel.swift */,
 				321626E41F6CE583008C390C /* DiscoverViewModel.swift */,
 			);
 			name = "View Models";
@@ -157,7 +163,7 @@
 		321626E11F6CE51E008C390C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				321627011F6DC10B008C390C /* Result.swift */,
+				321627011F6DC10B008C390C /* APIResult.swift */,
 				321626EC1F6D05E2008C390C /* User.swift */,
 				321626F51F6D3560008C390C /* Coordinate2D.swift */,
 				321626FB1F6D773E008C390C /* ScreenCoords.swift */,
@@ -329,12 +335,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				321626E31F6CE57B008C390C /* LoginViewModel.swift in Sources */,
+				3216270E1F6DC787008C390C /* UserProfileViewController.swift in Sources */,
 				3216270B1F6DC120008C390C /* StatusAPIRouter.swift in Sources */,
 				321626F61F6D3560008C390C /* Coordinate2D.swift in Sources */,
 				321626CF1F6CE4EF008C390C /* DiscoverViewController.swift in Sources */,
 				3216270A1F6DC120008C390C /* NearbyAPIRouter.swift in Sources */,
 				321626F01F6D155A008C390C /* LoginAPIRouter.swift in Sources */,
-				321627021F6DC10B008C390C /* Result.swift in Sources */,
+				321627021F6DC10B008C390C /* APIResult.swift in Sources */,
 				321626E51F6CE583008C390C /* DiscoverViewModel.swift in Sources */,
 				321627091F6DC120008C390C /* LocationAPIRouter.swift in Sources */,
 				321626F21F6D23AD008C390C /* SongInfo.swift in Sources */,
@@ -344,6 +351,7 @@
 				321626CD1F6CE4EF008C390C /* LoginViewController.swift in Sources */,
 				321626FA1F6D6BBC008C390C /* DiscoverTableViewCell.swift in Sources */,
 				321626F81F6D4F6A008C390C /* RoundedImageView.swift in Sources */,
+				321627101F6DCCF9008C390C /* UserProfileViewModel.swift in Sources */,
 				321627081F6DC120008C390C /* FollowingAPIRouter.swift in Sources */,
 				321626ED1F6D05E2008C390C /* User.swift in Sources */,
 				3216270C1F6DC120008C390C /* UserAPIRouter.swift in Sources */,

@@ -18,7 +18,7 @@ case suggest(Int, SongInfo)
 
     var method: HTTPMethod {
         switch self {
-            case .email, .suggest:
+            case .create, .suggest:
                 return .post
             case .profile, .getSelf:
                 return .get
@@ -34,30 +34,30 @@ case suggest(Int, SongInfo)
                     "psw" : password,
                     "email" : email
                 ]
-            case .suggest(user_id, song):
+            case .suggest(_, let song):
                 return [
                     "song": song.toJson()
                 ]
             case .profile, .getSelf:
-                return []
+                return [:]
         }
     }
 
     func asURLRequest() throws -> URLRequest {
         switch self {
-            case create():
+            case .create:
                 let url = URL(string: "\(Constants.loginBaseURL)user/new")!
                 var urlRequest = URLRequest(url: url)
                 urlRequest.httpMethod = method.rawValue
 
                 return try JSONEncoding.default.encode(urlRequest, withJSONObject: params)
-            case suggest(userId, _):
+            case .suggest(let userId, _):
                 let url = URL(string: "\(Constants.loginBaseURL)user/\(userId)/suggest")!
                 var urlRequest = URLRequest(url: url)
                 urlRequest.httpMethod = method.rawValue
 
                 return try JSONEncoding.default.encode(urlRequest, withJSONObject: params)
-            case .profile(userId):
+            case .profile(let userId):
                 let url = URL(string: "\(Constants.loginBaseURL)user/\(userId)")!
                 var urlRequest = URLRequest(url: url)
                 urlRequest.httpMethod = method.rawValue

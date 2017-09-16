@@ -90,7 +90,7 @@ extension DiscoverViewController: UITableViewDelegate {
             user = viewModel.largeProximityUsers[indexPath.row - viewModel.smallProximityUsers.count - viewModel.mediumProximityUsers.count]
         }
         
-        if let userProfileViewController = UIStoryboard(name: "UserProfile", bundile: nil).instantiateInitialViewController() as? UserProfileViewController {
+        if let userProfileViewController = UIStoryboard(name: "UserProfile", bundle: nil).instantiateInitialViewController() as? UserProfileViewController {
             userProfileViewController.inject(user: user, isSelf: false)
             self.present(userProfileViewController, animated: true, completion: nil)
         }
@@ -165,8 +165,8 @@ extension DiscoverViewController {
         for user in viewModel.mediumProximityUsers {
             let radius = 45.0
             let mediumCount = Double(viewModel.mediumProximityUsers.count)
-            let x = floor(Double(origin.x) + radius*cos(Double(counter*2+Double.pi/2)*Double.pi/mediumCount))
-            let y = floor(Double(origin.y) + radius*sin(Double(counter*2+Double.pi/2)*Double.pi/mediumCount))
+            let x = floor(Double(origin.x) + radius*cos(Double(Double(counter)*2.0+Double.pi/2.0)*Double.pi/mediumCount))
+            let y = floor(Double(origin.y) + radius*sin(Double(Double(counter)*2.0+Double.pi/2.0)*Double.pi/mediumCount))
             
             let circlePath = UIBezierPath(arcCenter: CGPoint(x: x,y: y), radius: CGFloat(radius), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
             
@@ -188,9 +188,9 @@ extension DiscoverViewController {
         
         for user in viewModel.largeProximityUsers {
             let radius = 65.0
-            let largeCount = viewModel.largeProximityUsers.count
-            let x = floor(Double(origin.x) + radius*cos(Double(counter*2)*Double.pi/largeCount))
-            let y = floor(Double(origin.y) + radius*sin(Double(counter*2)*Double.pi/largeCount))
+            let largeCount = Double(viewModel.largeProximityUsers.count)
+            let x = floor(Double(origin.x) + radius*cos(Double(Double(counter)*2.0)*Double.pi/largeCount))
+            let y = floor(Double(origin.y) + radius*sin(Double(Double(counter)*2.0)*Double.pi/largeCount))
             
             let circlePath = UIBezierPath(arcCenter: CGPoint(x: x,y: y), radius: CGFloat(radius), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
             

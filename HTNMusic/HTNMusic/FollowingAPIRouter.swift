@@ -29,11 +29,11 @@ enum FollowingAPIRouter: URLRequestConvertible {
       }
     }
 
-    var params: JSON { return [] }
+    var params: JSON { return [:] }
 
     func asURLRequest() throws -> URLRequest {
         switch self {
-            case .add(userId), .remove(userId), .follows(userId):
+            case .add(let userId), .remove(let userId), .follows(let userId):
                 let url = URL(string: "\(Constants.loginBaseURL)follow/\(userId)")!
                 var urlRequest = URLRequest(url: url)
                 urlRequest.httpMethod = method.rawValue
@@ -51,7 +51,7 @@ enum FollowingAPIRouter: URLRequestConvertible {
                 urlRequest.httpMethod = method.rawValue
 
                 return try JSONEncoding.default.encode(urlRequest, withJSONObject: params)
-            case .followers(userId):
+            case .followers(let userId):
                 let url = URL(string: "\(Constants.loginBaseURL)follow/followers/\(userId)")!
                 var urlRequest = URLRequest(url: url)
                 urlRequest.httpMethod = method.rawValue

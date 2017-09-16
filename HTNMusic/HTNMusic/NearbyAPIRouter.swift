@@ -20,7 +20,7 @@ enum NearbyAPIRouter: URLRequestConvertible {
     var params: JSON {
         switch self {
         case .nearby():
-            return []
+            return [:]
         }
     }
 
