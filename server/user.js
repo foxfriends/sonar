@@ -74,7 +74,10 @@ async function getUserProfile(req, res, user_id) {
         id: track.id,
       };
     }
-    user.song = null;
+    else {
+        user.song = null;
+    }
+
     delete user.current_playing;
     res.send(result.success(user));
   } catch(error) {
