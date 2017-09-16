@@ -66,12 +66,15 @@ async function getUserProfile(req, res, user_id) {
   try {
     const user = await db.getUser(user_id);
     const [track] = user.current_playing ? await spotify.lookupSongs([user.current_playing]) : null;
-    user.song = {
-      title: track.name,
-      album: track.album.name,
-      artists: track.artists.map(_ => _.name).join(', '),
-      id: track.id,
-    };
+    if (track !== null){
+      user.song = {
+        title: track.name,
+        album: track.album.name,
+        artists: track.artists.map(_ => _.name).join(', '),
+        id: track.id,
+      };
+    }
+    user.song = null;
     res.send(result.success(user));
   } catch(error) {
     res.send(result.failure(error.message));
