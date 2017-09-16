@@ -2,6 +2,7 @@
 const pg = require('pg');
 const SQL = require('sql-template-strings');
 const password = require('./password');
+const uuidv4 = require('uuid/v4');
 
 const config = {
   user: 'musicapp',
@@ -37,7 +38,7 @@ async function createAccount(first, last, psw, email) {
     if (exists) {
       throw new Error('An account with that username has already been created');
     }
-    const { rows: [ { user_id } ] } = await db.query(SQL `INSERT INTO users (password, email) VALUES (${hashed}, ${email}) RETURNING user_id`);
+    const { rows: [ { user_id } ] } = await db.query(SQL `INSERT INTO users (user_id, password, email) VALUES (${uuidv4()},${hashed}, ${email}) RETURNING user_id`);
     await db.query(SQL `INSERT INTO profile (user_id, first_name, last_name) VALUES (${user_id}, ${first}, ${last})`);
   } catch(error) {
     throw error;
@@ -268,6 +269,7 @@ async function unlikeSong(user_id, song_id){
     db.release();
   }
 }
+
 module.exports = {
   createAccount,
   getSecureUser,
