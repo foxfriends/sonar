@@ -1,0 +1,3 @@
+CREATE DATABASE music;
+
+SET DATABASE = music;
