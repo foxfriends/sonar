@@ -145,7 +145,7 @@ extension DiscoverViewController {
             view.layer.addSublayer(shapeLayer)
             
             counter += 1
-            viewModel.userMapCoordinates[ScreenCoords(x: x, y: y)] = viewModel.smallProximityUsers[counter - 1] // TODO: make this 0!!!
+            viewModel.userMapCoordinates["\(x) \(y)"] = viewModel.smallProximityUsers[counter - 1] // TODO: make this 0!!!
             // do something add to dictionary
         }
         
@@ -170,14 +170,31 @@ extension DiscoverViewController {
             view.layer.addSublayer(shapeLayer)
             
             counter += 1
-            viewModel.userMapCoordinates[ScreenCoords(x: x, y: y)] = viewModel.mediumProximityUsers[counter - viewModel.smallProximityUsers.count - 1] // TODO: make this 0!!!
-
-            // do something add to dictionary
-
+            viewModel.userMapCoordinates["\(x) \(y)"] = viewModel.mediumProximityUsers[counter - viewModel.smallProximityUsers.count - 1]
         }
         
         for user in viewModel.largeProximityUsers {
-            // do something
+            let radius = 65.0
+            let mediumCount = Double(viewModel.mediumProximityUsers.count)
+            let x = floor(Double(origin.x) + radius*cos(Double(counter*2)*Double.pi/mediumCount))
+            let y = floor(Double(origin.y) + radius*sin(Double(counter*2)*Double.pi/mediumCount))
+            
+            let circlePath = UIBezierPath(arcCenter: CGPoint(x: x,y: y), radius: CGFloat(5), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
+            
+            let shapeLayer = CAShapeLayer()
+            shapeLayer.path = circlePath.cgPath
+            
+            //change the fill color
+            shapeLayer.fillColor = UIColor.purple.cgColor
+            //you can change the stroke color
+            shapeLayer.strokeColor = UIColor.purple.cgColor
+            //you can change the line width
+            shapeLayer.lineWidth = 3.0
+            
+            view.layer.addSublayer(shapeLayer)
+            
+            counter += 1
+            viewModel.userMapCoordinates["\(x) \(y)"] = viewModel.mediumProximityUsers[counter - viewModel.mediumProximityUsers.count - viewModel.smallProximityUsers.count - 1]
         }
     }
 }

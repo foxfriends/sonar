@@ -24,6 +24,7 @@
 		321626F81F6D4F6A008C390C /* RoundedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321626F71F6D4F6A008C390C /* RoundedImageView.swift */; };
 		321626FA1F6D6BBC008C390C /* DiscoverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321626F91F6D6BBC008C390C /* DiscoverTableViewCell.swift */; };
 		321626FC1F6D773E008C390C /* ScreenCoords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321626FB1F6D773E008C390C /* ScreenCoords.swift */; };
+		321626FE1F6D92BF008C390C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321626FD1F6D92BF008C390C /* Constants.swift */; };
 		72C3DCB44261BE8AA6779D8E /* Pods_HTNMusic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20074BE002CB37F9727F6F55 /* Pods_HTNMusic.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +51,7 @@
 		321626F71F6D4F6A008C390C /* RoundedImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedImageView.swift; sourceTree = "<group>"; };
 		321626F91F6D6BBC008C390C /* DiscoverTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverTableViewCell.swift; sourceTree = "<group>"; };
 		321626FB1F6D773E008C390C /* ScreenCoords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenCoords.swift; sourceTree = "<group>"; };
+		321626FD1F6D92BF008C390C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 				321626DE1F6CE501008C390C /* Controllers */,
 				321626D01F6CE4EF008C390C /* Main.storyboard */,
 				321626F71F6D4F6A008C390C /* RoundedImageView.swift */,
+				321626FD1F6D92BF008C390C /* Constants.swift */,
 				321626D31F6CE4EF008C390C /* Assets.xcassets */,
 				321626D51F6CE4EF008C390C /* LaunchScreen.storyboard */,
 				321626D81F6CE4EF008C390C /* Info.plist */,
@@ -310,6 +313,7 @@
 				321626E51F6CE583008C390C /* DiscoverViewModel.swift in Sources */,
 				321626F21F6D23AD008C390C /* SongInfo.swift in Sources */,
 				321626CB1F6CE4EF008C390C /* AppDelegate.swift in Sources */,
+				321626FE1F6D92BF008C390C /* Constants.swift in Sources */,
 				321626FC1F6D773E008C390C /* ScreenCoords.swift in Sources */,
 				321626CD1F6CE4EF008C390C /* LoginViewController.swift in Sources */,
 				321626FA1F6D6BBC008C390C /* DiscoverTableViewCell.swift in Sources */,

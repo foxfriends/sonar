@@ -31,7 +31,7 @@ enum LoginAPIRouter: URLRequestConvertible {
     }
     
     func asURLRequest() throws -> URLRequest {
-        let url = URL(string: "loginapiurl")!
+        let url = URL(string: Constants.loginBaseURL)!
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = method.rawValue
         
