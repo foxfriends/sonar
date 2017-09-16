@@ -19,7 +19,7 @@ enum Result: Decodable {
         guard let status = "status" <~~ json else { return failure("Could not parse response") }
         if status == "SUCCESS" {
             return success("data" <~~ json)
-        } else {
+        } else if status == "FAILURE" {
             return failure("reason" <~~ json)
         } else {
             return nil

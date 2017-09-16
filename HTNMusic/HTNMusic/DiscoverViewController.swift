@@ -80,7 +80,21 @@ extension DiscoverViewController: CLLocationManagerDelegate {
 }
 
 extension DiscoverViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let user: User
+        if indexPath.row < viewModel.smallProximityUsers.count {
+            user = viewModel.smallProximityUsers[indexPath.row]
+        } else if indexPath.row < viewModel.mediumProximityUsers.count + viewModel.smallProximityUsers.count {
+            user = viewModel.mediumProximityUsers[indexPath.row - viewModel.smallProximityUsers.count]
+        } else {
+            user = viewModel.largeProximityUsers[indexPath.row - viewModel.smallProximityUsers.count - viewModel.mediumProximityUsers.count]
+        }
+        
+        if let userProfileViewController = UIStoryboard(name: "UserProfile", bundile: nil).instantiateInitialViewController() as? UserProfileViewController {
+            userProfileViewController.inject(user: user, isSelf: false)
+            self.present(userProfileViewController, animated: true, completion: nil)
+        }
+    }
 }
 
 extension DiscoverViewController: UITableViewDataSource {
@@ -124,13 +138,13 @@ extension DiscoverViewController {
     func redrawUsersOnMap() {
         let origin = CGPoint(x: UIScreen.main.bounds.size.width*0.5,y: UIScreen.main.bounds.size.height*0.5)
         var counter = 1
-        for _ in viewModel.smallProximityUsers {
+        for user in viewModel.smallProximityUsers {
             let radius = 25.0
             let smallCount = Double(viewModel.smallProximityUsers.count)
             let x = Int(floor(Double(origin.x) + radius*cos(Double(counter*2)*Double.pi/smallCount)))
             let y = Int(floor(Double(origin.y) + radius*sin(Double(counter*2)*Double.pi/smallCount)))
             
-            let circlePath = UIBezierPath(arcCenter: CGPoint(x: x,y: y), radius: CGFloat(5), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
+            let circlePath = UIBezierPath(arcCenter: CGPoint(x: x,y: y), radius: CGFloat(radius), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
             
             let shapeLayer = CAShapeLayer()
             shapeLayer.path = circlePath.cgPath
@@ -145,17 +159,16 @@ extension DiscoverViewController {
             view.layer.addSublayer(shapeLayer)
             
             counter += 1
-            viewModel.userMapCoordinates["\(x) \(y)"] = viewModel.smallProximityUsers[counter - 1] // TODO: make this 0!!!
-            // do something add to dictionary
+            viewModel.userMapCoordinates["\(x) \(y)"] = user
         }
         
         for user in viewModel.mediumProximityUsers {
             let radius = 45.0
             let mediumCount = Double(viewModel.mediumProximityUsers.count)
-            let x = floor(Double(origin.x) + radius*cos(Double(counter*2)*Double.pi/mediumCount))
-            let y = floor(Double(origin.y) + radius*sin(Double(counter*2)*Double.pi/mediumCount))
+            let x = floor(Double(origin.x) + radius*cos(Double(counter*2+Double.pi/2)*Double.pi/mediumCount))
+            let y = floor(Double(origin.y) + radius*sin(Double(counter*2+Double.pi/2)*Double.pi/mediumCount))
             
-            let circlePath = UIBezierPath(arcCenter: CGPoint(x: x,y: y), radius: CGFloat(5), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
+            let circlePath = UIBezierPath(arcCenter: CGPoint(x: x,y: y), radius: CGFloat(radius), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
             
             let shapeLayer = CAShapeLayer()
             shapeLayer.path = circlePath.cgPath
@@ -170,16 +183,16 @@ extension DiscoverViewController {
             view.layer.addSublayer(shapeLayer)
             
             counter += 1
-            viewModel.userMapCoordinates["\(x) \(y)"] = viewModel.mediumProximityUsers[counter - viewModel.smallProximityUsers.count - 1]
+            viewModel.userMapCoordinates["\(x) \(y)"] = user
         }
         
         for user in viewModel.largeProximityUsers {
             let radius = 65.0
-            let mediumCount = Double(viewModel.mediumProximityUsers.count)
-            let x = floor(Double(origin.x) + radius*cos(Double(counter*2)*Double.pi/mediumCount))
-            let y = floor(Double(origin.y) + radius*sin(Double(counter*2)*Double.pi/mediumCount))
+            let largeCount = viewModel.largeProximityUsers.count
+            let x = floor(Double(origin.x) + radius*cos(Double(counter*2)*Double.pi/largeCount))
+            let y = floor(Double(origin.y) + radius*sin(Double(counter*2)*Double.pi/largeCount))
             
-            let circlePath = UIBezierPath(arcCenter: CGPoint(x: x,y: y), radius: CGFloat(5), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
+            let circlePath = UIBezierPath(arcCenter: CGPoint(x: x,y: y), radius: CGFloat(radius), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
             
             let shapeLayer = CAShapeLayer()
             shapeLayer.path = circlePath.cgPath
@@ -194,7 +207,7 @@ extension DiscoverViewController {
             view.layer.addSublayer(shapeLayer)
             
             counter += 1
-            viewModel.userMapCoordinates["\(x) \(y)"] = viewModel.mediumProximityUsers[counter - viewModel.mediumProximityUsers.count - viewModel.smallProximityUsers.count - 1]
+            viewModel.userMapCoordinates["\(x) \(y)"] = user
         }
     }
 }

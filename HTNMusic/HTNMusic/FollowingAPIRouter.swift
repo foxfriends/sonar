@@ -39,25 +39,24 @@ enum FollowingAPIRouter: URLRequestConvertible {
                 urlRequest.httpMethod = method.rawValue
 
                 return try JSONEncoding.default.encode(urlRequest, withJSONObject: params)
-            }
-          case .myFollows():
-              let url = URL(string: "\(Constants.loginBaseURL)follow")!
-              var urlRequest = URLRequest(url: url)
-              urlRequest.httpMethod = method.rawValue
+            case .myFollows():
+                let url = URL(string: "\(Constants.loginBaseURL)follow")!
+                var urlRequest = URLRequest(url: url)
+                urlRequest.httpMethod = method.rawValue
 
-              return try JSONEncoding.default.encode(urlRequest, withJSONObject: params)
-          case .myFollowers():
-              let url = URL(string: "\(Constants.loginBaseURL)follow/followers")!
-              var urlRequest = URLRequest(url: url)
-              urlRequest.httpMethod = method.rawValue
+                return try JSONEncoding.default.encode(urlRequest, withJSONObject: params)
+            case .myFollowers():
+                let url = URL(string: "\(Constants.loginBaseURL)follow/followers")!
+                var urlRequest = URLRequest(url: url)
+                urlRequest.httpMethod = method.rawValue
 
-              return try JSONEncoding.default.encode(urlRequest, withJSONObject: params)
-          case .followers(userId):
-              let url = URL(string: "\(Constants.loginBaseURL)follow/followers/\(userId)")!
-              var urlRequest = URLRequest(url: url)
-              urlRequest.httpMethod = method.rawValue
+                return try JSONEncoding.default.encode(urlRequest, withJSONObject: params)
+            case .followers(userId):
+                let url = URL(string: "\(Constants.loginBaseURL)follow/followers/\(userId)")!
+                var urlRequest = URLRequest(url: url)
+                urlRequest.httpMethod = method.rawValue
 
-              return try JSONEncoding.default.encode(urlRequest, withJSONObject: params)
+                return try JSONEncoding.default.encode(urlRequest, withJSONObject: params)
         }
     }
 }

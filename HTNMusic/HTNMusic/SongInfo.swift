@@ -28,7 +28,7 @@ struct SongInfo: Decodable {
         }
     }
 
-    func toJson(): JSON {
+    func toJson() -> JSON {
         return [
             "title": self.title,
             "artist": self.artist,
