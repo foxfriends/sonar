@@ -1,5 +1,7 @@
 CREATE DATABASE music;
 
+GRANT ALL ON DATABASE music TO musicapp;
+
 SET DATABASE = music;
 
 CREATE TABLE users (
