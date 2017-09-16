@@ -235,13 +235,17 @@ async function getMyLikes(user_id){
     db.release();
   }
 }
-async function likeSong(user_id, song_id){
+async function likeSong(user_id, song_id, fromUser){
   const db = await connect();
   try {
     const { rows: likes } = await db.query(SQL
       `INSERT INTO song_likes (song_id, user_id)
        VALUES (${song_id}, ${user_id})`
      );
+     const { rows: increaseLike } = await db.query(SQL
+     `UPDATE users SET likes = likes + 1
+     WHERE user_id = ${fromUser}`
+   )
     return likes;
   } catch(error) {
     throw error;
