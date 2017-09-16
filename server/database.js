@@ -96,11 +96,11 @@ async function findClose(user_id, close, medium, far) {
     );
 
     // close
-    const { rows: usersClose } = await findUsers(user_id, 0, close, self.latitude, self.longitude);
+    const { rows: usersClose } = await findUsers(user_id, 0, close, self.latitude, self.longitude, db);
     // medium
-    const { rows: usersMedium } = await findUsers(user_id, close, medium, self.latitude, self.longitude);
+    const { rows: usersMedium } = await findUsers(user_id, close, medium, self.latitude, self.longitude, db);
     // far
-    const { rows: usersFar } = await findUsers(user_id, medium, far, self.latitude, self.longitude);
+    const { rows: usersFar } = await findUsers(user_id, medium, far, self.latitude, self.longitude, db);
     return {
       close: usersClose,
       medium: usersMedium,
@@ -112,7 +112,7 @@ async function findClose(user_id, close, medium, far) {
     db.release();
   }
 }
-async function findUsers(user_id, small, big, lat, long){
+async function findUsers(user_id, small, big, lat, long, db){
   return await db.query(SQL
     `SELECT * FROM users
      WHERE sqrt(pow(${lat} - latitude, 2.0) + pow(${long} - users.longitude, 2.0)) <= ${big}
