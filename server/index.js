@@ -35,7 +35,7 @@ app.post('/auth', headers, (req, res) => {
  *   song: ?String
  * }
  */
-app.put('/status', auth.check, headers, (req, res) => {
+app.put('/status', /*auth.check,*/ headers, (req, res) => {
   const { uid } = req.user;
   const { status, song } = req.body;
   try {
