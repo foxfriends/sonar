@@ -161,6 +161,21 @@ async function getMyFollowingList(user_id){
     db.release();
   }
 }
+async function getNumFollowers(user_id){
+  const db = await connect();
+  try {
+    const { rows: users } = await db.query(SQL
+      `SELECT Count(1)
+       FROM following_users
+       AND following_users.following_user_id = ${user_id}`
+     );
+    return users;
+  } catch(error) {
+    throw error;
+  } finally {
+    db.release();
+  }
+}
 
 async function getDevices(user_id) {
   const db = await connect();
@@ -173,5 +188,4 @@ async function getDevices(user_id) {
     db.release();
   }
 }
-
-module.exports = { createAccount, getSecureUser, getUser, playingStatus, setLocation, findClose, getMyFollowingList, getDevices };
+module.exports = { createAccount, getSecureUser, playingStatus, setLocation, findClose, getMyFollowingList, getNumFollowers, getDevices };

@@ -75,7 +75,6 @@ function getUserProfile(req, res, me, them) {}
 app.get('/follow', auth.check, headers, async (req, res) => {
   const { uid } = req.user;
   try {
-    await db.createAccount(first, last, psw, email);
     res.send(result.success(await db.getMyFollowingList(uid)));
   } catch(error) {
     res.send(result.failure(error.message));
@@ -103,6 +102,22 @@ app.post('/:user_id/suggest', auth.check, headers, async (req, res) => {
     res.send(result.failure(error.message));
   }
 });
+/**
+ * Get a list of people the user is following
+ * @requires Authorization
+ * @returns {
+ *  list: [
+ *
+ *  ]
+ * }
+ */
+app.put('/follow', auth.check, headers, async (req, res) => {
+  const { uid } = req.user;
+  try {
+    res.send(result.success(await db.getNumFollowers(uid)));
+  } catch(error) {
+    res.send(result.failure(error.message));
+  }
 
 
 module.exports = app;
