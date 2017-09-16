@@ -116,7 +116,7 @@ async function findUsers(user_id, small, big, lat, long, db){
   return await db.query(SQL
     `SELECT * FROM users
      WHERE sqrt(pow(${lat} - latitude, 2.0) + pow(${long} - users.longitude, 2.0)) <= ${big}
-     AND  sqrt(pow(${lat} - latitude, 2.0), pow(${long} - users.longitude, 2.0)) > ${small}
+     AND  sqrt(pow(${lat} - latitude, 2.0) + pow(${long} - users.longitude, 2.0)) > ${small}
      AND users.user_id <> ${user_id}`
   );
 };
