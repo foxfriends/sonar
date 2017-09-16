@@ -10,3 +10,9 @@ app.listen(process.env.PORT || 19786, () => {
 });
 
 app.use(bodyParser.json());
+
+// Sign up
+// Sign in
+// Edit profile
+// Send location
+// Get location
