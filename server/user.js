@@ -22,7 +22,6 @@ const app = express();
 app.post('/new', headers, async (req, res) => {
   const { first, last, psw, email } = req.body;
   try {
-    console.log(first + last + psw + email);
     await db.createAccount(first, last, psw, email);
     res.send(result.success());
   } catch(error) {
@@ -65,16 +64,21 @@ app.get('/:user_id', auth.check, headers, (req, res) => {
 
 async function getUserProfile(req, res, user_id) {
   try {
-    console.log(user_id);
     const user = await db.getUser(user_id);
-    console.log(user);
-    const [track] = user.current_playing ? await spotify.lookupSongs([user.current_playing]) : null;
-    user.song = {
-      title: track.name,
-      album: track.album.name,
-      artists: track.artists.map(_ => _.name).join(', '),
-      id: track.id,
-    };
+    const [track] = user.current_playing ? await spotify.lookupSongs([user.current_playing]) : [null];
+    if (track !== null){
+      user.song = {
+        title: track.name,
+        album: track.album.name,
+        artists: track.artists.map(_ => _.name).join(', '),
+        id: track.id,
+      };
+    }
+    else {
+        user.song = null;
+    }
+
+    delete user.current_playing;
     res.send(result.success(user));
   } catch(error) {
     res.send(result.failure(error.message));
