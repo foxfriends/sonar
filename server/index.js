@@ -22,7 +22,7 @@ app.use('/like', require('./like'));
 /**
  * Sign in
  * @body {
- *   email: String
+ *   email: String,
  *   psw: String
  * }
  * @return { { authtoken: String, first_name: String, last_name: String, avatar: String } }
