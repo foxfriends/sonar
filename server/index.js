@@ -82,9 +82,9 @@ app.put('/location', auth.check, headers, async (req, res) => {
   const { lat, lng } = req.body;
   try {
     await db.setLocation(uid, lat, lng);
-    var close = 1;
-    var medium = 5;
-    var far = 10;
+    const close = 1;
+    const medium = 5;
+    const far = 10;
     res.send(result.success(await findCloseUsers(uid, close, medium, far)));
   } catch(error) {
     res.send(result.failure(error.message));
@@ -119,41 +119,40 @@ app.put('/location', auth.check, headers, async (req, res) => {
 app.get('/nearby', auth.check, headers, async (req, res) => {
   const { uid } = req.user;
   try{
-    const distClose = 1;
-    const distMedium = 5;
-    const distFar = 10;
-
-    const { close, medium, far } = await findCloseUsers(uid, distClose, distMedium, distFar);
-    const rows = [].concat(close, medium, far);
-    const songs = await spotify.lookupSongs(rows.map(_ => _.current_playing));
-    const final = { close: [], medium: [], far: [] };
-    songs.forEach((row, i) => {
-      const song = {
-        name: row.name,
-        album: row.album.name,
-        artists: row.artists.map(_ => _.name),
-      };
-      let user;
-      if(i < close.length) {
-        user = close[i];
-        const { first_name, last_name, avatar, likes } = user;
-        final.close.push({ first_name, last_name, avatar, likes, song });
-      } else if(i < medium.length) {
-        user = medium[i - close.length];
-        const { first_name, last_name, avatar, likes } = user;
-        final.medium.push({ first_name, last_name, avatar, likes, song });
-      } else {
-        user = far[i - close.length - medium.length];
-        const { first_name, last_name, avatar, likes } = user;
-        final.far.push({ first_name, last_name, avatar, likes, song });
-      }
-    });
-    res.send(result.success(final));
+    const close = 1;
+    const medium = 5;
+    const far = 10;
+    res.send(result.success(await findCloseUsers(uid, close, medium, far)));
   } catch(error) {
     res.send(result.failure(error.message));
   }
 });
-async function findCloseUsers(user_id, close, medium, far){
-  return(await db.findClose(user_id, close, medium, far));
+async function findCloseUsers(user_id, distClose, distMedium, distFar){
+  const { close, medium, far } = await db.findClose(user_id, distClose, distMedium, distFar);
+  const rows = [].concat(close, medium, far);
+  const songs = await spotify.lookupSongs(rows.map(_ => _.current_playing));
+  const final = { close: [], medium: [], far: [] };
+  songs.forEach((row, i) => {
+    const song = {
+      name: row.name,
+      album: row.album.name,
+      artists: row.artists.map(_ => _.name),
+    };
+    let user;
+    if(i < close.length) {
+      user = close[i];
+      const { first_name, last_name, avatar, likes } = user;
+      final.close.push({ first_name, last_name, avatar, likes, song });
+    } else if(i < medium.length) {
+      user = medium[i - close.length];
+      const { first_name, last_name, avatar, likes } = user;
+      final.medium.push({ first_name, last_name, avatar, likes, song });
+    } else {
+      user = far[i - close.length - medium.length];
+      const { first_name, last_name, avatar, likes } = user;
+      final.far.push({ first_name, last_name, avatar, likes, song });
+    }
+  });
+  return final;
 };
 app.use('/debug', express.static('../web-console'));
