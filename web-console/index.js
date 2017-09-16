@@ -5,7 +5,7 @@ let jwt;
 async function sendRequest() {
   const method = document.querySelector('#method').value;
   const url = document.querySelector('#api-url').value;
-  const usr = document.querySelector('#username').value;
+  const email = document.querySelector('#username').value;
   const psw = document.querySelector('#password').value;
   const body = document.querySelector('#body').value || '{}';
   try {
@@ -14,8 +14,8 @@ async function sendRequest() {
     xhr.open(method, '/' + url, true);
     xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
 
-    if(!jwt && usr && psw) {
-      await signIn(usr, psw);
+    if(!jwt && email && psw) {
+      await signIn(email, psw);
     }
 
     if(jwt) {
@@ -33,12 +33,12 @@ async function sendRequest() {
   }
 }
 
-async function signIn(usr, psw) {
+async function signIn(email, psw) {
   const xhr = new XMLHttpRequest();
   xhr.open('POST', '/auth', true);
   xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
   const wait = new Promise(resolve => xhr.addEventListener('load', () => resolve(xhr.responseText)));
-  xhr.send(JSON.stringify({ usr, psw }));
+  xhr.send(JSON.stringify({ email, psw }));
   const response = JSON.parse(await wait);
   console.log(response);
   if(response.status === 'SUCCESS') {
