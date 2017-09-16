@@ -15,10 +15,10 @@ const pool = new pg.Pool(config);
 function connect() { return pool.connect(); }
 
 /* NOTE: Don't forget to add it to module.exports list at the bottom!
-async function example() {
+async function example(user_id) {
   const db = await connect();
   try {
-    const { rows: users } = await db.query(SQL `SELECT * FROM USERS`);
+    const { rows: users } = await db.query(SQL `SELECT * FROM users WHERE user_id = ${user_id}`);
     // do stuff
     return users;
   } catch(error) {
