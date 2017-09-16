@@ -49,7 +49,7 @@ async function createAccount(first, last, psw, email) {
 async function getSecureUser(email, psw) {
   const db = await connect();
   try {
-    const { rows: [ user ] } = await db.query(SQL `SELECT user_id, first_name, last_name, email, avatar, password FROM users INNER JOIN profile ON users.user_id = profile.user_id WHERE email = ${email}`);
+    const { rows: [ user ] } = await db.query(SQL `SELECT profile.user_id, first_name, last_name, email, avatar, password FROM users INNER JOIN profile ON users.user_id = profile.user_id WHERE email = ${email}`);
     if (user) {
       const { user_id, password: pass } = user;
       if(await password.check(psw, pass)) {
