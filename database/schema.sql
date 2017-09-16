@@ -12,7 +12,7 @@ GRANT ALL ON TABLE genres TO musicapp;
 GRANT ALL ON TABLE user_devices TO musicapp;
 
 CREATE TABLE users (
-  user_id         CHAR(32) UNIQUE PRIMARY KEY NOT NULL,
+  user_id         BYTES(36) UNIQUE PRIMARY KEY NOT NULL DEFAULT (uuid_v4()),
   email           VARCHAR(512) UNIQUE NOT NULL,
   password        VARCHAR(512)        NOT NULL,
   join_date       TIMESTAMP           NOT NULL DEFAULT (NOW()::TIMESTAMP),
