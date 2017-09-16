@@ -42,10 +42,10 @@ app.put('/status', /*auth.check,*/ headers, (req, res) => {
     db.playingStatus(uid, status === 'PLAY'
                           ? song
                           : null);
-    res.send("{}");
+    res.send(result.success());
   }
   catch(error){
-    res.send(error.message);
+    res.send(result.failure(error.message));
   }
 });
 
