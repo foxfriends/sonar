@@ -48,3 +48,4 @@ app.delete('/:song_id', auth.check, headers, async (req, res) => {
     res.send(result.failure(error.message));
   }
 });
+module.exports = app;

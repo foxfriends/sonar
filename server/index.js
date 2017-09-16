@@ -17,6 +17,7 @@ app.use(bodyParser.json());
 
 app.use('/user', require('./user'));
 app.use('/follow', require('./follow'));
+app.use('/like', require('./like'));
 
 /**
  * Sign in
