@@ -96,35 +96,28 @@ async function findClose(user_id, close, medium, far) {
     );
 
     // close
-    const { rows: usersClose } = await db.query(SQL
-      `SELECT * FROM users
-       WHERE sqrt(pow(${self.latitude} - latitude, 2.0), pow(${self.longitude} - users.longitude, 2.0)) <= ${close}
-       AND users.user_id <> ${user_id}`
-    );
+    const { rows: usersClose } = await findUsers(user_id, 0, close, self.latitude, self.longitude);
     // medium
-    const { rows: usersMedium } = await db.query(SQL
-      `SELECT * FROM users
-       WHERE sqrt(pow(${self.latitude} - latitude, 2.0), pow(${self.longitude} - users.longitude, 2.0)) <= ${medium}
-       AND  sqrt(pow(${self.latitude} - latitude, 2.0), pow(${self.longitude} - users.longitude, 2.0)) > ${close}
-       AND users.user_id <> ${user_id}`
-    );
+    const { rows: usersMedium } = await findUsers(user_id, close, medium, self.latitude, self.longitude);
     // far
-    const { rows: usersFar } = await db.query(SQL
-      `SELECT * FROM users
-       WHERE sqrt(pow(${self.latitude} - latitude, 2.0), pow(${self.longitude} - users.longitude, 2.0)) <= ${far}
-       AND  sqrt(pow(${self.latitude} - latitude, 2.0), pow(${self.longitude} - users.longitude, 2.0)) > ${medium}
-       AND users.user_id <> ${user_id}`
-    );
+    const { rows: usersFar } = await findUsers(user_id, medium, far, self.latitude, self.longitude);
     return {
       close: usersClose,
       medium: usersMedium,
       far: usersFar
-    }
+    };
   } catch(error) {
     throw error;
   } finally {
     db.release();
   }
 }
-
+async function findUsers(user_id, small, big, lat, long){
+  return await db.query(SQL
+    `SELECT * FROM users
+     WHERE sqrt(pow(${lat} - latitude, 2.0) + pow(${long} - users.longitude, 2.0)) <= ${big}
+     AND  sqrt(pow(${lat} - latitude, 2.0), pow(${long} - users.longitude, 2.0)) > ${small}
+     AND users.user_id <> ${user_id}`
+  );
+};
 module.exports = { createAccount, getUserId, playingStatus, setLocation, findClose };
