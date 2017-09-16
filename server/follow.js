@@ -22,14 +22,14 @@ app.get('/followers/:user_id', auth.check, headers, async (req, res) => {
 });
 
 /**
- * Get how many people are following you
+ * Get list of people are following you
  * @requires Authorization
  * @returns Number
  */
 app.get('/followers', auth.check, headers, async (req, res) => {
   const { uid } = req.user;
   try {
-    res.send(result.success(await db.getNumFollowers(uid)));
+    res.send(result.success(await db.getFollowers(uid)));
   } catch(error) {
     res.send(result.failure(error.message));
   }

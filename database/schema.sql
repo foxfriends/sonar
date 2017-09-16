@@ -53,3 +53,8 @@ CREATE TABLE user_devices (
   user_id   INT NOT NULL REFERENCES users(user_id),
   device_id CHAR(64) NOT NULL
 );
+
+CREATE TABLE song_likes (
+  song_id VARCHAR(512) NOT NULL,
+  user_id INT NOT NULL REFERENCES users(user_id)
+);
