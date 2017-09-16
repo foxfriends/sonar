@@ -150,7 +150,7 @@ app.get('/nearby', auth.check, headers, async (req, res) => {
     });
     res.send(result.success(final));
   } catch(error) {
-    res.send(error.message);
+    res.send(result.failure(error.message));
   }
 });
 async function findCloseUsers(user_id, close, medium, far){
