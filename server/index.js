@@ -7,11 +7,11 @@ const auth = require('./auth');
 
 const app = express();
 
-app.listen(process.env.PORT || 19786, () => console.log('Server is listening on port 19786'));
+app.listen(process.env.PORT || 19786, () => console.log(`Server is listening on port ${process.env.PORT || 19786}`));
 
 app.use(bodyParser.json());
 
-// TODO: modularize below
+app.use('/user', require('./user'));
 
 /**
  * Sign in
@@ -26,40 +26,8 @@ app.post('/auth', (req, res) => {
 });
 
 /**
- * Sign up
- * @body {
- *   usr: String,
- *   psw: String,
- *   email: String
- * }
- */
-app.post('/user/new', (req, res) => {
-  const { usr, psw, email } = req.body;
-});
-/**
- * Edit profile
- * @requires Authorization
- * @body {
- *   usr: String,
- *   psw: String,
- *   email: String
- * }
- */
-app.put('/user', auth.check, (req, res) => {
-  const { uid } = req.user;
-});
-/**
- * Read profile
- * @requires Authorization
- * @param { Number } user_id
- */
-app.get('/user/:user_id', auth.check, (req, res) => {
-  const { uid } = req.user;
-  const { user_id } = req.params;
-});
-
-/**
  * Status change
+ * @requires Authorization
  * @body {
  *   status: 'PLAY' | 'STOP',
  *   song: ?String

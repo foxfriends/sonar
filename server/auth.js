@@ -1,3 +1,4 @@
+'use strict';
 const JWT = require('jsonwebtoken');
 const expressJWT = require('express-jwt');
 
