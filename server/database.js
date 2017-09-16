@@ -33,11 +33,11 @@ async function createAccount(first, last, psw, email) {
   const db = await connect();
   try {
     const hashed = await password.encrypt(psw);
-    const { rowCount: exists } = await db.query(SQL `SELECT 1 FROM USERS WHERE username = ${usr}`);
+    const { rowCount: exists } = await db.query(SQL `SELECT 1 FROM USERS WHERE email = ${email}`);
     if (exists) {
       throw new Error('An account with that username has already been created');
     }
-    await db.query(SQL `INSERT INTO users (first_name, last_name, password, email) VALUES (${first},${last}, ${hashed},${email})`);
+    await db.query(SQL `INSERT INTO users (first_name, last_name, password, email) VALUES (${first},${last}, ${hashed}, ${email})`);
   } catch(error) {
     throw error;
   } finally {
@@ -45,14 +45,15 @@ async function createAccount(first, last, psw, email) {
   }
 }
 
-async function getUserId(email, psw) {
+async function getSecureUser(email, psw) {
   const db = await connect();
   try {
-    const { rows: [ user ] } = await db.query(SQL `SELECT user_id, password FROM USERS WHERE email = ${email}`);
+    const { rows: [ user ] } = await db.query(SQL `SELECT user_id, first_name, last_name, avatar, password FROM USERS WHERE email = ${email}`);
     if (user) {
       const { user_id, password: pass } = user;
       if(await password.check(psw, pass)) {
-        return user_id;
+        delete user.password;
+        return user;
       } else {
         throw new Error('Incorrect email or password');
       }
@@ -145,4 +146,4 @@ async function getMyFollowingList(user_id){
   }
 }
 
-module.exports = { createAccount, getUserId, playingStatus, setLocation, findClose, getMyFollowingList };
+module.exports = { createAccount, getSecureUser, playingStatus, setLocation, findClose, getMyFollowingList };

@@ -23,13 +23,16 @@ app.use('/user', require('./user'));
  *   email: String
  *   psw: String
  * }
- * @return {  String  }
+ * @return { { authtoken: String, first_name: String, last_name: String, avatar: String } }
  */
 app.post('/auth', headers, async (req, res) => {
   const { email, psw } = req.body;
   try {
-    const uid = await db.getUserId(email, psw);
-    res.send(result.success(auth.create(uid)));
+    const { user_id, first_name, last_name, avatar } = await db.getSecureUser(email, psw);
+    res.send(result.success({
+      authtoken: auth.create(user_id),
+      first_name, last_name, avatar,
+    }));
   } catch(error) {
     res.send(result.failure(error.message));
   }
