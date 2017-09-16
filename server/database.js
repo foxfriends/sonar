@@ -98,21 +98,21 @@ async function findClose(user_id, close, medium, far) {
     // close
     const { rows: usersClose } = await db.query(SQL
       `SELECT * FROM users
-       WHERE |/(pow(${self.latitude} - latitude, 2.0), pow(${self.longitude} - users.longitude, 2.0)) <= ${close}
+       WHERE sqrt(pow(${self.latitude} - latitude, 2.0), pow(${self.longitude} - users.longitude, 2.0)) <= ${close}
        AND users.user_id <> self.user_id`
     );
     // medium
     const { rows: usersMedium } = await db.query(SQL
       `SELECT * FROM users
-       WHERE |/(pow(${self.latitude} - latitude, 2.0), pow(${self.longitude} - users.longitude, 2.0)) <= ${medium}
-       AND  |/(pow(${self.latitude} - latitude, 2.0), pow(${self.longitude} - users.longitude, 2.0)) > ${close}
+       WHERE sqrt(pow(${self.latitude} - latitude, 2.0), pow(${self.longitude} - users.longitude, 2.0)) <= ${medium}
+       AND  sqrt(pow(${self.latitude} - latitude, 2.0), pow(${self.longitude} - users.longitude, 2.0)) > ${close}
        AND users.user_id <> self.user_id`
     );
     // far
     const { rows: usersFar } = await db.query(SQL
       `SELECT * FROM users
-       WHERE |/(pow(${self.latitude} - latitude, 2.0), pow(${self.longitude} - users.longitude, 2.0)) <= ${far}
-       AND  |/(pow(${self.latitude} - latitude, 2.0), pow(${self.longitude} - users.longitude, 2.0)) > ${medium}
+       WHERE sqrt(pow(${self.latitude} - latitude, 2.0), pow(${self.longitude} - users.longitude, 2.0)) <= ${far}
+       AND  sqrt(pow(${self.latitude} - latitude, 2.0), pow(${self.longitude} - users.longitude, 2.0)) > ${medium}
        AND users.user_id <> self.user_id`
     );
     return {
