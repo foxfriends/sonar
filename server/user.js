@@ -75,6 +75,7 @@ async function getUserProfile(req, res, user_id) {
       };
     }
     user.song = null;
+    delete user.current_playing;
     res.send(result.success(user));
   } catch(error) {
     res.send(result.failure(error.message));
