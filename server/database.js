@@ -272,6 +272,9 @@ module.exports = {
   followUser,
   unfollowUser,
   getMyFollowingList,
-  getNumFollowers,
-  getDevices
+  getFollowers,
+  getDevices,
+  getMyLikes,
+  unlikeSong,
+  likeSong
 };
