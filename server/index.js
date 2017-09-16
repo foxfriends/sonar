@@ -93,13 +93,10 @@ app.get('/nearby', auth.check, headers, async (req, res) => {
     var close = parseFloat(req.query.close);
     var medium = parseFloat(req.query.medium);
     var far = parseFloat(req.query.far);
-
     res.send(result.success(await db.findClose(uid, close, medium, far)));
-  }
-  catch(error){
+  } catch(error) {
     res.send(error.message);
   }
-
 });
 
 app.use('/debug', express.static('../web-console'));
