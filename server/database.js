@@ -93,7 +93,6 @@ async function getUser(user_id) {
 async function playingStatus(user_id, song) {
   const db = await connect();
   try {
-    console.log(user_id, song);
     const { rows: users } = await db.query(SQL `UPDATE profile SET current_playing = ${song} WHERE user_id = ${user_id}` );
     if (song !== null){
         const { rows: history } = await db.query(SQL `INSERT INTO history_songs (user_id, song_name) VALUES (${user_id}, ${song})`);
@@ -121,7 +120,7 @@ async function findClose(user_id, close, medium, far) {
   try {
     // user_id's longitude & latitude
     const { rows: [self] } = await db.query(SQL
-      `SELECT longitude, latitude FROM users WHERE user_id = ${user_id}`
+      `SELECT longitude, latitude FROM profile WHERE user_id = ${user_id}`
     );
     if (self.longitude !== null && self.latitude !== null) {
       // close
@@ -145,11 +144,12 @@ async function findClose(user_id, close, medium, far) {
 }
 
 async function findNearbyUsers(user_id, small, big, lat, long, db) {
+  console.log("hi");
   return await db.query(SQL
-    `SELECT first_name, last_name, avatar, likes, current_playing FROM users
-     WHERE sqrt(pow(${lat} - latitude, 2.0) + pow(${long} - users.longitude, 2.0)) <= ${big}
-     AND sqrt(pow(${lat} - latitude, 2.0) + pow(${long} - users.longitude, 2.0)) > ${small}
-     AND users.user_id <> ${user_id} AND current_playing IS NOT NULL`
+    `SELECT first_name, last_name, avatar, likes, current_playing FROM profile
+     WHERE sqrt(pow(${lat} - latitude, 2.0) + pow(${long} - longitude, 2.0)) <= ${big}
+     AND sqrt(pow(${lat} - latitude, 2.0) + pow(${long} - longitude, 2.0)) > ${small}
+     AND user_id <> ${user_id} AND current_playing IS NOT NULL`
   );
 }
 
