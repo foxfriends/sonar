@@ -33,7 +33,7 @@ enum StatusAPIRouter: URLRequestConvertible {
     }
 
     func asURLRequest() throws -> URLRequest {
-        let url = URL(string: "user/new")!
+        let url = URL(string: "status")!
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = method.rawValue
 
