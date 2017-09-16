@@ -120,7 +120,7 @@ app.get('/nearby', auth.check, headers, async (req, res) => {
     var far = 10;
     res.send(result.success(await findCloseUsers(uid, close, medium, far)));
   } catch(error) {
-    res.send(error.message);
+    res.send(result.failure(error.message));
   }
 });
 async function findCloseUsers(user_id, close, medium, far){
