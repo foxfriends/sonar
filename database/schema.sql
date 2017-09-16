@@ -12,14 +12,14 @@ GRANT ALL ON TABLE genres TO musicapp;
 GRANT ALL ON TABLE user_devices TO musicapp;
 
 CREATE TABLE users (
-  user_id         BYTES(36) UNIQUE PRIMARY KEY NOT NULL DEFAULT (uuid_v4()),
+  user_id         BYTES UNIQUE PRIMARY KEY NOT NULL DEFAULT (uuid_v4()),
   email           VARCHAR(512) UNIQUE NOT NULL,
   password        VARCHAR(512)        NOT NULL,
-  join_date       TIMESTAMP           NOT NULL DEFAULT (NOW()::TIMESTAMP),
+  join_date       TIMESTAMP           NOT NULL DEFAULT (NOW()::TIMESTAMP)
 );
 
 CREATE TABLE profile (
-  user_id         CHAR(32) NOT NULL REFERENCES users (user_id),
+  user_id         BYTES NOT NULL REFERENCES users (user_id),
   first_name      VARCHAR(512)        NOT NULL,
   last_name       VARCHAR(512)        NOT NULL,
   avatar          VARCHAR(512),
@@ -33,22 +33,22 @@ CREATE TABLE profile (
 
 CREATE TABLE history_songs (
   played_at_time  TIMESTAMP   NOT NULL DEFAULT (NOW()::TIMESTAMP),
-  user_id         INT          NOT NULL REFERENCES users(user_id),
+  user_id         BYTES          NOT NULL REFERENCES users(user_id),
   song_name       VARCHAR(512) NOT NULL
 );
 
 CREATE TABLE following_users (
-  user_id           CHAR(32) NOT NULL REFERENCES users(user_id),
-  following_user_id INT NOT NULL REFERENCES users(user_id),
+  user_id           BYTES NOT NULL REFERENCES users(user_id),
+  following_user_id BYTES NOT NULL REFERENCES users(user_id),
   CONSTRAINT follow_only_once UNIQUE (user_id, following_user_id)
 );
 
 CREATE TABLE user_devices (
-  user_id   CHAR(32) NOT NULL REFERENCES users(user_id),
+  user_id   BYTES NOT NULL REFERENCES users(user_id),
   device_id CHAR(64) NOT NULL
 );
 
 CREATE TABLE song_likes (
-  user_id CHAR(32) NOT NULL REFERENCES users(user_id),
+  user_id BYTES NOT NULL REFERENCES users(user_id),
   song_id VARCHAR(512) NOT NULL
 );
