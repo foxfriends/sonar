@@ -35,7 +35,7 @@ app.post('/auth', headers, (req, res) => {
  *   song: ?String
  * }
  */
-app.put('/status', /*auth.check,*/ headers, (req, res) => {
+app.put('/status', auth.check, headers, (req, res) => {
   const { uid } = req.user;
   const { status, song } = req.body;
   try {
@@ -60,13 +60,25 @@ app.put('/status', /*auth.check,*/ headers, (req, res) => {
 app.put('/location', auth.check, headers, (req, res) => {
   const { uid } = req.user;
   const { lat, lng } = req.body;
+  try {
+    db.setLocation(uid, lat, lng);
+    res.send("{}");
+  }
+  catch(error){
+    res.send(error.message);
+  }
 });
 
 /**
  * Get people listening nearby
  * @requires Authorization
+ * @param {Double} close
+ * @param {Double} medium
+ * @param {Double} far
  * @returns {
  *   nearby: {
+ *     username: String,
+ *     score: Int,
  *     song: String,
  *     distance: Double
  *   }
@@ -74,6 +86,16 @@ app.put('/location', auth.check, headers, (req, res) => {
  */
 app.get('/nearby', auth.check, headers, (req, res) => {
   const { uid } = req.user;
+  try{
+    var close = parseFloat(req.query.close);
+    var medium = parseFloat(req.query.medium);
+    var far = parseFloat(req.query.far);
+
+  }
+  catch(error){
+    res.send(error.message);
+  }
+
 });
 
 app.use('/debug', express.static('../web-console'));
