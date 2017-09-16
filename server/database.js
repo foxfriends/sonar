@@ -51,7 +51,7 @@ async function getSecureUser(email, psw) {
   try {
     const { rows: [ user ] } = await db.query(SQL `SELECT profile.user_id, first_name, last_name, email, avatar, password FROM users INNER JOIN profile ON users.user_id = profile.user_id WHERE email = ${email}`);
     if (user) {
-      const { user_id, password: pass } = user;
+      const { password: pass } = user;
       if(await password.check(psw, pass)) {
         delete user.password;
         return user;
@@ -77,7 +77,6 @@ async function getUser(user_id) {
       INNER JOIN profile as p on u.user_id = p.user_id
       WHERE u.user_id = ${user_id}
     `);
-    console.log(user);
     if(user) {
       return user;
     } else {

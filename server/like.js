@@ -35,7 +35,6 @@ app.put('/:song_id', auth.check, headers, async (req, res) => {
   const { song_id } = req.params;
   const { from_user } = req.body;
   try {
-    console.log(from_user);
     await db.likeSong(uid, song_id, from_user);
     res.send(result.success());
   } catch(error) {
