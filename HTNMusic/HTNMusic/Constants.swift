@@ -9,5 +9,5 @@
 import Foundation
 
 struct Constants {
-    static let loginBaseURL = "somehoststringthing"
+    static let loginBaseURL = "http://10.21.233.132:19786/"
 }

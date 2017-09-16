@@ -1,5 +1,5 @@
 //
-//  StatusAPIRouter.swift
+//  NearbyAPIRouter.swift
 //  HTNMusic
 //
 //  Created by Cameron Eldridge on 2017-09-16.
@@ -10,30 +10,22 @@ import Foundation
 import Alamofire
 import Gloss
 
-enum StatusAPIRouter: URLRequestConvertible {
-    case stop()
-    case play(SongInfo)
+enum NearbyAPIRouter: URLRequestConvertible {
+    case nearby()
 
     var method: HTTPMethod {
-        return .put
+        return .get
     }
 
     var params: JSON {
         switch self {
-        case .stop():
-            return [
-                "status": "STOP"
-            ]
-        case .play(let song):
-            return [
-                "status": "PLAY",
-                "song": song.toJson()
-            ]
+        case .nearby():
+            return []
         }
     }
 
     func asURLRequest() throws -> URLRequest {
-        let url = URL(string: "user/new")!
+        let url = URL(string: "\(Constants.loginBaseURL)nearby")!
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = method.rawValue
 

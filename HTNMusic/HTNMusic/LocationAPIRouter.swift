@@ -1,5 +1,5 @@
 //
-//  StatusAPIRouter.swift
+//  LocationAPIRouter.swift
 //  HTNMusic
 //
 //  Created by Cameron Eldridge on 2017-09-16.
@@ -10,9 +10,8 @@ import Foundation
 import Alamofire
 import Gloss
 
-enum StatusAPIRouter: URLRequestConvertible {
-    case stop()
-    case play(SongInfo)
+enum LocationAPIRouter: URLRequestConvertible {
+    case location(Float, Float)
 
     var method: HTTPMethod {
         return .put
@@ -20,20 +19,16 @@ enum StatusAPIRouter: URLRequestConvertible {
 
     var params: JSON {
         switch self {
-        case .stop():
+        case .location(let longitude, let latitude):
             return [
-                "status": "STOP"
-            ]
-        case .play(let song):
-            return [
-                "status": "PLAY",
-                "song": song.toJson()
+                "lng" : longitude,
+                "lat" : latitude
             ]
         }
     }
 
     func asURLRequest() throws -> URLRequest {
-        let url = URL(string: "user/new")!
+        let url = URL(string: "\(Constants.loginBaseURL)location")!
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = method.rawValue
 
