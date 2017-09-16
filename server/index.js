@@ -116,7 +116,7 @@ app.put('/location', auth.check, headers, async (req, res) => {
  *        likes: Int,
  *        song: {
  *          name: String
- *          artists: String[]
+ *          artist: String
  *          album: String
  *          id: String
  *        }
@@ -147,7 +147,7 @@ async function findCloseUsers(user_id, distClose, distMedium, distFar){
     const song = {
       name: row.name,
       album: row.album.name,
-      artists: row.artists.map(_ => _.name),
+      artist: row.artists.map(_ => _.name).join(', '),
       id: row.id,
     };
     let user;

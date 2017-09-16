@@ -22,7 +22,7 @@ struct User: Decodable {
         guard let id: String = "user_id" <~~ json,
             let firstName: String = "first_name" <~~ json,
             let lastName: String = "last_name" <~~ json,
-            let avatarURL: String = "avatar" <~~ json
+            let avatarURL: String = "avatar" <~~ json,
             let email: String = "email" <~~ json
             else { return nil }
 

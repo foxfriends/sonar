@@ -24,7 +24,7 @@ class DiscoverViewModel {
 extension DiscoverViewModel {
     func getNearbyUsers() {
         
-        Alamofire.request(DiscoverAPIRouter.nearby()
+        Alamofire.request(NearbyAPIRouter.nearby())
     }
 }
 
