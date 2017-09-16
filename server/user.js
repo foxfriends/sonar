@@ -22,6 +22,7 @@ const app = express();
 app.post('/new', headers, async (req, res) => {
   const { first, last, psw, email } = req.body;
   try {
+    console.log(first + last + psw + email);
     await db.createAccount(first, last, psw, email);
     res.send(result.success());
   } catch(error) {
