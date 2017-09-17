@@ -37,12 +37,12 @@
 		32BE72BE1F6E01730065F6D6 /* RecentlyPlayedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BE72BD1F6E01730065F6D6 /* RecentlyPlayedTableViewCell.swift */; };
 		32BE72C01F6E16C10065F6D6 /* LikeAPIRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BE72BF1F6E16C10065F6D6 /* LikeAPIRouter.swift */; };
 		32BE72C41F6E3EB60065F6D6 /* AuthRequestAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BE72C31F6E3EB60065F6D6 /* AuthRequestAdapter.swift */; };
-		5FB3C1E91F6E267900684712 /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FB3C1E81F6E267900684712 /* Notifications.storyboard */; };
 		5FB3C1E91F6E267900684712 /* Recommendations.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FB3C1E81F6E267900684712 /* Recommendations.storyboard */; };
 		5FB3C1EB1F6E283900684712 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FB3C1EA1F6E283900684712 /* Settings.storyboard */; };
 		5FB3C1ED1F6E389D00684712 /* RecommendationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB3C1EC1F6E389D00684712 /* RecommendationsViewController.swift */; };
 		5FB3C1EF1F6E38BC00684712 /* RecommendationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB3C1EE1F6E38BC00684712 /* RecommendationsViewModel.swift */; };
 		5FB3C1F11F6E3DBD00684712 /* RecommendationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB3C1F01F6E3DBD00684712 /* RecommendationTableViewCell.swift */; };
+		5FB3C1F31F6E51FF00684712 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB3C1F21F6E51FF00684712 /* Session.swift */; };
 		72C3DCB44261BE8AA6779D8E /* Pods_HTNMusic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20074BE002CB37F9727F6F55 /* Pods_HTNMusic.framework */; };
 /* End PBXBuildFile section */
 
@@ -82,12 +82,12 @@
 		32BE72BD1F6E01730065F6D6 /* RecentlyPlayedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentlyPlayedTableViewCell.swift; sourceTree = "<group>"; };
 		32BE72BF1F6E16C10065F6D6 /* LikeAPIRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeAPIRouter.swift; sourceTree = "<group>"; };
 		32BE72C31F6E3EB60065F6D6 /* AuthRequestAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthRequestAdapter.swift; sourceTree = "<group>"; };
-		5FB3C1E81F6E267900684712 /* Notifications.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Notifications.storyboard; sourceTree = "<group>"; };
 		5FB3C1E81F6E267900684712 /* Recommendations.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Recommendations.storyboard; sourceTree = "<group>"; };
 		5FB3C1EA1F6E283900684712 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		5FB3C1EC1F6E389D00684712 /* RecommendationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendationsViewController.swift; sourceTree = "<group>"; };
 		5FB3C1EE1F6E38BC00684712 /* RecommendationsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendationsViewModel.swift; sourceTree = "<group>"; };
 		5FB3C1F01F6E3DBD00684712 /* RecommendationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendationTableViewCell.swift; sourceTree = "<group>"; };
+		5FB3C1F21F6E51FF00684712 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +139,7 @@
 				321626DE1F6CE501008C390C /* Controllers */,
 				321626F71F6D4F6A008C390C /* RoundedImageView.swift */,
 				321626FD1F6D92BF008C390C /* Constants.swift */,
+				5FB3C1F21F6E51FF00684712 /* Session.swift */,
 				321626D31F6CE4EF008C390C /* Assets.xcassets */,
 				321626D51F6CE4EF008C390C /* LaunchScreen.storyboard */,
 				321626D81F6CE4EF008C390C /* Info.plist */,
@@ -378,6 +379,7 @@
 				321627121F6DD936008C390C /* ProximityInfo.swift in Sources */,
 				321626CB1F6CE4EF008C390C /* AppDelegate.swift in Sources */,
 				32BE72C41F6E3EB60065F6D6 /* AuthRequestAdapter.swift in Sources */,
+				5FB3C1F31F6E51FF00684712 /* Session.swift in Sources */,
 				32BE72C01F6E16C10065F6D6 /* LikeAPIRouter.swift in Sources */,
 				321626FE1F6D92BF008C390C /* Constants.swift in Sources */,
 				321626FC1F6D773E008C390C /* ScreenCoords.swift in Sources */,

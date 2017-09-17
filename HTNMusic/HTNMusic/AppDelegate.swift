@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     fileprivate let musicPlayer = MPMusicPlayerController.systemMusicPlayer()
+    fileprivate let sessionManager = SessionManager()
 
     func nowPlayingItemDidChange(notification: NSNotification) {
         var request = StatusAPIRouter.stop()
@@ -25,13 +26,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let title = item.title
             request = StatusAPIRouter.play(SongInfo(title: title, artist: artist, album: album))
         }
-        Alamofire.request(request)
-            .responseJSON { response in
-                if let result = response.result.value as? JSON {
-                    if String(describing: result["status"]) == "SUCCESS" {
-                        print("k we're ok")
+        
+        if let authToken = Session.sharedInstance.authToken {
+            sessionManager.adapter = AuthRequestAdapter(authToken: authToken)
+
+            sessionManager.request(request)
+                .responseJSON { response in
+                    if let result = response.result.value as? JSON {
+                        if String(describing: result["status"]) == "SUCCESS" {
+                            print("k we're ok")
+                        }
                     }
-                }
+            }
         }
     }
 

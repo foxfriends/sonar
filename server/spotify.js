@@ -13,7 +13,9 @@ const authenticated = spotify.clientCredentialsGrant()
 
 async function identifySong(query) {
   await authenticated;
-  const queries = Object.entries(query).map(([key, value]) => `${key}:${value}`);
+  const queries = Object.entries(query)
+    .filter(([key,value]) => value && ['album', 'artist', 'title'].indexOf(key) !== -1)
+    .map(([key, value]) => `${key}:${value}`);
   const result = await spotify.searchTracks(queries.join(' '));
   if(result.body.tracks.items.length === 1) {
     return result.body.tracks.items[0];

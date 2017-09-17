@@ -36,6 +36,9 @@ extension LoginViewModel {
                     }
 
                     self.user = user
+                    Session.sharedInstance.user = user
+                    Session.sharedInstance.authToken = user.authToken!
+                    
                     let sessionManager = SessionManager()
                     sessionManager.adapter = AuthRequestAdapter(authToken: user.authToken!)
                     
