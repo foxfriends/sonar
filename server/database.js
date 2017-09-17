@@ -93,7 +93,7 @@ async function getUser(user_id) {
 async function getHistory(user_id) {
   const db = await connect();
   try {
-    const { rows: songs } = await db.query(SQL `SELECT song_name FROM history_songs WHERE user_id = ${user_id} ORDER BY played_at_time DESC LIMIT 5`);
+    const { rows: songs } = await db.query(SQL `SELECT song_id FROM history_songs WHERE user_id = ${user_id} ORDER BY played_at_time DESC LIMIT 5`);
     return songs;
   } catch(error) {
     throw error;
@@ -107,7 +107,7 @@ async function playingStatus(user_id, song) {
   try {
     const { rows: users } = await db.query(SQL `UPDATE profile SET current_playing = ${song} WHERE user_id = ${user_id}` );
     if (song !== null){
-        const { rows: history } = await db.query(SQL `INSERT INTO history_songs (user_id, song_name) VALUES (${user_id}, ${song})`);
+        const { rows: history } = await db.query(SQL `INSERT INTO history_songs (user_id, song_id) VALUES (${user_id}, ${song})`);
     }
   } catch(error) {
     throw error;
