@@ -18,6 +18,7 @@ struct SongInfo: Decodable {
     var artist: String = noArtist
     var album: String = noAlbum
     var spotifyId: String?
+    var spotifyUrl: String?
 
     init(title: String?, artist: String?, album: String?) {
         self.title = title ?? noTitle
@@ -27,6 +28,7 @@ struct SongInfo: Decodable {
 
     init?(json: JSON) {
         self.spotifyId = "id" <~~ json
+        self.spotifyUrl = "url" <~~ json
         if let title: String = "title" <~~ json {
           self.title = title
         }
@@ -43,7 +45,8 @@ struct SongInfo: Decodable {
             "title": self.title == noTitle ? nil : self.title,
             "artist": self.artist == noArtist ? nil : self.artist,
             "album": self.album == noAlbum ? nil : self.album,
-            "id": self.spotifyId as Any
+            "id": self.spotifyId as Any,
+            "url": self.spotifyUrl as Any
         ]
     }
 }

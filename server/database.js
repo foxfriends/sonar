@@ -300,7 +300,11 @@ async function getRecommendations(to){
   const db = await connect();
   try{
     const {rows:list} = await db.query(SQL
-    `SELECT to_user_id, song_id FROM recommendations WHERE to_user_id = ${to}`);
+    `SELECT users.user_id, song_id, email, first_name, last_name, likes, avatar FROM recommendations
+     INNER JOIN profile ON profile.user_id = recommendations.to_user_id
+     INNER JOIN users ON users.user_id = recommendations.to_user_id
+     WHERE to_user_id = ${to}
+     `);
     return list;
   } catch(error){
     throw error;

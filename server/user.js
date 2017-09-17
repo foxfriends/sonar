@@ -135,7 +135,12 @@ app.get('/:user_id/suggest', auth.check, headers, async (req, res) => {
   try {
     const recommendations = await db.getRecommendations(uid);
     const spotlift = await spotify.lookupSongs(recommendations.map(_ => _.song_id));
-    res.send(result.success(spotlift.map(_ => ({ title: _.name, album: _.album.name, artist: _.artists.map(_ => _.name).join(', '), id: _.id }))));
+    const songs = spotlift.map(_ => ({ title: _.name, album: _.album.name, artist: _.artists.map(_ => _.name).join(', '), id: _.id, url: _.external_urls.spotify }));
+    const final = recommendations.map((rec, i) => {
+      rec.song = songs[i];
+      return rec;
+    });
+    res.send(result.success(final));
   } catch(error) {
     res.send(result.failure(error.message));
   }
