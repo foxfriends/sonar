@@ -186,6 +186,7 @@ async function getMyFollowingList(user_id){
       `SELECT following_users.following_user_id, first_name, last_name, avatar, email, current_playing, likes
        FROM following_users
        INNER JOIN users ON following_users.following_user_id = users.user_id
+       INNER JOIN profile ON profile.user_id = users.user_id
        WHERE following_users.user_id = ${user_id}`
      );
     return following;
