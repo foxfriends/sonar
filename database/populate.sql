@@ -9,3 +9,9 @@ INSERT INTO profile (user_id, first_name, last_name, latitude, longitude, curren
   ( (SELECT user_id FROM users WHERE email = 'a'),'andre','h', 2, 5, '1rbieHTuGFWstwVk9o7Fgr' ),
   ( (SELECT user_id FROM users WHERE email = 'y'),'yeva','y', 1, 1, NULL ),
   ( (SELECT user_id FROM users WHERE email = 'j'),'jacky', 'j', 14, 0, '1rbieHTuGFWstwVk9o7Fgr' );
+
+INSERT INTO following_users (user_id, following_user_id) VALUES
+('7342aa9e-0066-4308-befd-c0599594fbf5','fd234032-ae2e-42e6-b01a-34edf8ac1f11'),
+('d3812606-735b-472a-9b51-d7c04ec6e09d','7342aa9e-0066-4308-befd-c0599594fbf5'),
+('1b5f5430-29cb-4383-a797-807ab79fb3a4','d3812606-735b-472a-9b51-d7c04ec6e09d'),
+('fd234032-ae2e-42e6-b01a-34edf8ac1f11','1b5f5430-29cb-4383-a797-807ab79fb3a4');
