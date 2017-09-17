@@ -24,6 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let artist = item.artist
             let album = item.albumTitle
             let title = item.title
+            Session.sharedInstance.user?.currentListening?.title = title ?? "Unknown Title"
+            Session.sharedInstance.user?.currentListening?.album = album ?? "Unknown Album"
+            Session.sharedInstance.user?.currentListening?.artist = artist ?? "Unknown Artist"
             request = StatusAPIRouter.play(SongInfo(title: title, artist: artist, album: album))
         }
         

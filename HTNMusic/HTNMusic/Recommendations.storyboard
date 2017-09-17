@@ -134,6 +134,14 @@
                                     <constraint firstAttribute="height" constant="30" id="WFZ-Yf-sNt"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aq4-eA-tq6">
+                                <rect key="frame" x="265" y="16" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="mystery" destination="76Y-oG-2vs" eventType="touchUpInside" id="6pa-J0-fcq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -154,10 +162,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="listView" destination="AqM-Pf-KMG" id="nhF-1H-3fK"/>
-                        <outlet property="mapView" destination="dQs-pb-LVD" id="3wb-J3-wKk"/>
-                        <outlet property="nearbyTableView" destination="Fkv-HV-db6" id="cSF-NG-gRG"/>
-                        <outlet property="userImageView" destination="cMd-LW-4gV" id="t38-vI-sZ3"/>
+                        <outlet property="tableView" destination="Fkv-HV-db6" id="Wlj-oJ-oc2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fKA-4S-Ul1" userLabel="First Responder" sceneMemberID="firstResponder"/>
