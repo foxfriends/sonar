@@ -117,6 +117,7 @@ app.post('/:user_id/suggest', auth.check, headers, async (req, res) => {
       db.getUser(uid),
       spotify.identifySong(song),
     ]);
+    db.saveSuggestion(uid, user_id, track.id);
     push.suggestion(devices, me, track);
     res.send(result.success());
   } catch(error) {

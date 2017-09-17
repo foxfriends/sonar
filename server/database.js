@@ -283,6 +283,8 @@ async function unlikeSong(user_id, song_id){
   }
 }
 
+async function saveSuggestion(from, to, song_id) {}
+
 module.exports = {
   createAccount,
   getSecureUser,
@@ -298,5 +300,6 @@ module.exports = {
   getDevices,
   getMyLikes,
   unlikeSong,
-  likeSong
+  likeSong,
+  saveSuggestion,
 };
