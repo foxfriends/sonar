@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="76Y-oG-2vs">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="76Y-oG-2vs">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -87,37 +87,6 @@
                                     <constraint firstItem="Fkv-HV-db6" firstAttribute="leading" secondItem="AqM-Pf-KMG" secondAttribute="leading" constant="8" id="nz8-qd-rP6"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dQs-pb-LVD" userLabel="MapView">
-                                <rect key="frame" x="0.0" y="134" width="375" height="400"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k4W-K5-6Il">
-                                        <rect key="frame" x="4" y="134" width="367" height="132"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circles" translatesAutoresizingMaskIntoConstraints="NO" id="gUg-fU-KCV">
-                                        <rect key="frame" x="-0.5" y="99.5" width="375.5" height="200"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cMd-LW-4gV" userLabel="CurrentUserImageView">
-                                        <rect key="frame" x="162" y="175" width="50" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="EAe-8Y-d9S"/>
-                                            <constraint firstAttribute="height" constant="50" id="Ivd-Vh-Ie5"/>
-                                        </constraints>
-                                    </imageView>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstItem="gUg-fU-KCV" firstAttribute="leading" secondItem="dQs-pb-LVD" secondAttribute="leading" id="0Xb-qy-yTc"/>
-                                    <constraint firstItem="gUg-fU-KCV" firstAttribute="centerX" secondItem="dQs-pb-LVD" secondAttribute="centerX" id="BgF-D4-WsQ"/>
-                                    <constraint firstAttribute="height" constant="400" id="CQr-Vq-zHc"/>
-                                    <constraint firstItem="cMd-LW-4gV" firstAttribute="centerX" secondItem="dQs-pb-LVD" secondAttribute="centerX" id="OjS-I6-jsW"/>
-                                    <constraint firstAttribute="trailing" secondItem="gUg-fU-KCV" secondAttribute="trailing" id="cG6-nd-HXM"/>
-                                    <constraint firstItem="gUg-fU-KCV" firstAttribute="centerY" secondItem="dQs-pb-LVD" secondAttribute="centerY" id="mMk-CL-ML3"/>
-                                    <constraint firstItem="cMd-LW-4gV" firstAttribute="centerY" secondItem="dQs-pb-LVD" secondAttribute="centerY" id="sdw-c4-GLA"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SuY-1A-LFY" userLabel="RadarDetailView">
                                 <rect key="frame" x="0.0" y="568.5" width="375" height="98.5"/>
                                 <subviews>
@@ -182,7 +151,38 @@
                                     <constraint firstItem="CKX-Xf-FLN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="F2L-qn-2BW" secondAttribute="trailing" constant="5" id="pDq-o0-dFV"/>
                                 </constraints>
                             </view>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" momentary="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cqj-sB-cPW">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dQs-pb-LVD" userLabel="MapView">
+                                <rect key="frame" x="0.0" y="134" width="375" height="400"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k4W-K5-6Il">
+                                        <rect key="frame" x="4" y="134" width="367" height="132"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circles" translatesAutoresizingMaskIntoConstraints="NO" id="gUg-fU-KCV">
+                                        <rect key="frame" x="-0.5" y="99.5" width="375.5" height="200"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cMd-LW-4gV" userLabel="CurrentUserImageView">
+                                        <rect key="frame" x="162" y="175" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="EAe-8Y-d9S"/>
+                                            <constraint firstAttribute="height" constant="50" id="Ivd-Vh-Ie5"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstItem="gUg-fU-KCV" firstAttribute="leading" secondItem="dQs-pb-LVD" secondAttribute="leading" id="0Xb-qy-yTc"/>
+                                    <constraint firstItem="gUg-fU-KCV" firstAttribute="centerX" secondItem="dQs-pb-LVD" secondAttribute="centerX" id="BgF-D4-WsQ"/>
+                                    <constraint firstAttribute="height" constant="400" id="CQr-Vq-zHc"/>
+                                    <constraint firstItem="cMd-LW-4gV" firstAttribute="centerX" secondItem="dQs-pb-LVD" secondAttribute="centerX" id="OjS-I6-jsW"/>
+                                    <constraint firstAttribute="trailing" secondItem="gUg-fU-KCV" secondAttribute="trailing" id="cG6-nd-HXM"/>
+                                    <constraint firstItem="gUg-fU-KCV" firstAttribute="centerY" secondItem="dQs-pb-LVD" secondAttribute="centerY" id="mMk-CL-ML3"/>
+                                    <constraint firstItem="cMd-LW-4gV" firstAttribute="centerY" secondItem="dQs-pb-LVD" secondAttribute="centerY" id="sdw-c4-GLA"/>
+                                </constraints>
+                            </view>
+                            <segmentedControl opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Cqj-sB-cPW">
                                 <rect key="frame" x="127" y="101" width="121" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="27" id="4nm-Lg-qjB"/>
@@ -261,7 +261,7 @@
                         <outlet property="radarPlayButton" destination="CKX-Xf-FLN" id="bKT-CM-a8x"/>
                         <outlet property="radarProfileButton" destination="gup-pg-ybk" id="v7H-sK-oTR"/>
                         <outlet property="radarTitleLabel" destination="F2L-qn-2BW" id="BkG-fD-jZp"/>
-                        <outlet property="segmentedControl" destination="Cqj-sB-cPW" id="oVO-j3-hPv"/>
+                        <outlet property="segmentedControl" destination="Cqj-sB-cPW" id="Es5-9R-zeG"/>
                         <outlet property="userImageView" destination="cMd-LW-4gV" id="t38-vI-sZ3"/>
                     </connections>
                 </viewController>
