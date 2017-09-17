@@ -36,6 +36,9 @@ extension LoginViewModel {
                     }
 
                     self.user = user
+                    let sessionManager = SessionManager()
+                    sessionManager.adapter = AuthRequestAdapter(authToken: user.authToken!)
+                    
                     self.hasRequestInProgress.value = false
                     print("did this work what")
                     success?(true)
