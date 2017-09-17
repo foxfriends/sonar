@@ -7,15 +7,48 @@
 //
 
 import UIKit
+import Alamofire
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    fileprivate let musicPlayer = MPMusicPlayerController.systemMusicPlayer()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        musicPlayer.beginGeneratingPlaybackNotifications()
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "nowPlayingItemDidChange",
+            name: MPMusicPlayerControllerNowPlayingItemDidChangeNotification,
+            object: nil
+        )
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "nowPlayingItemDidChange",
+            name: MPMusicPlayerControllerPlaybackStateDidChange,
+            object: nil
+        )
+        func nowPlayingItemDidChange(notification: NSNotification) {
+            var request = StatusAPIRouter = StatusAPIRouter.stop()
+            if let item = musicPlayer.nowPlayingItem {
+                let artist = item.artist
+                let album = item.albumTitle
+                let song = item.title
+                request = StatusAPIRouter.play(song, artist, album)
+            }
+            Alamofire.request(request)
+                .responseJSON { response in
+                    if let result = response.result.value as? JSON {
+                        switch APIResult<Void>(result) {
+                        case .success: break
+                        case .failure(let reason):
+                            print("oo we fucked up: \(reason)")
+                        }
+                    }
+                }
+        }
         return true
     }
 
@@ -39,8 +72,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        musicPlayer.endGeneratingPlaybackNotifications()
     }
-
-
 }
-

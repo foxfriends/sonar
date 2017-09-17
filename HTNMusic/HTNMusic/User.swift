@@ -15,6 +15,7 @@ struct User: Decodable {
     let lastName: String
     let email: String
     let avatarURL: String
+    let likes: String
     var currentListening: SongInfo? = nil
     var authtoken: String? = nil
 
@@ -23,7 +24,8 @@ struct User: Decodable {
             let firstName: String = "first_name" <~~ json,
             let lastName: String = "last_name" <~~ json,
             let avatarURL: String = "avatar" <~~ json,
-            let email: String = "email" <~~ json
+            let email: String = "email" <~~ json,
+            let likes: Int = "likes" <~~ json
             else { return nil }
 
         self.id = id
@@ -31,6 +33,7 @@ struct User: Decodable {
         self.lastName = lastName
         self.avatarURL = avatarURL
         self.email = email
+        self.likes = likes
         self.currentListening = "song" <~~ json
         self.authtoken = "authtoken" <~~ json
     }
