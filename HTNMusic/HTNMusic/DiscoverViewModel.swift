@@ -21,6 +21,9 @@ class DiscoverViewModel {
     var largeProximityUsers = Array<User>()
     var userMapCoordinates = Array<ScreenCoords>()
     
+    var radarSelectedUser: User? = nil
+    var radarPlayId: String? = nil
+    
     let sessionManager = SessionManager()
 }
 
@@ -50,7 +53,7 @@ extension DiscoverViewModel {
 extension DiscoverViewModel {
     func getUserNearLocation(x: Float, y: Float) -> User? {
         for coord in userMapCoordinates { // Have tolerance of 3px when tapping
-            if abs(Float(coord.x) - x) <= 3 && abs(Float(coord.y) - y) <= 3 {
+            if abs(Float(coord.x) - x) <= 6 && abs(Float(coord.y) - y) <= 6 {
                 return coord.user
             }
         }

@@ -26,8 +26,6 @@ extension RecommendationsViewController {
 }
 
 extension RecommendationsViewController : UITableViewDataSource {
-    @available(iOS 2.0, *)
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.recommendations.count
     }

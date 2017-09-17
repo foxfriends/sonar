@@ -21,8 +21,13 @@ class DiscoverViewController: UIViewController {
     @IBOutlet fileprivate weak var listView: UIView!
     @IBOutlet fileprivate weak var nearbyTableView: UITableView!
     
-//    fileprivate let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.tapUserOnMap))
-
+    @IBOutlet fileprivate weak var radarDetailView: UIView!
+    @IBOutlet fileprivate weak var radarTitleLabel: UILabel!
+    @IBOutlet fileprivate weak var radarArtistLabel: UILabel!
+    @IBOutlet fileprivate weak var radarPlayButton: UIButton!
+    @IBOutlet fileprivate weak var radarProfileButton: UIButton!
+    
+    
     lazy var locationManager: CLLocationManager = {
         return CLLocationManager()
     }()
@@ -73,8 +78,6 @@ fileprivate extension DiscoverViewController {
     }
 }
 
-// MARK: - IBActions
-
 extension DiscoverViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first!
@@ -82,8 +85,14 @@ extension DiscoverViewController {
 
         if let user = viewModel.getUserNearLocation(x: Float(location.x), y: Float(location.y)) {
             print("user is listening to: \(String(describing: user.currentListening?.title)))")
+            radarDetailView.isHidden = false
+            radarPlayButton.isEnabled = true
+            radarProfileButton.isEnabled = true
+            radarTitleLabel.text = user.currentListening?.title ?? "Unknown Title"
+            radarArtistLabel.text = user.currentListening?.artist ?? "Unknown Artist"
+            viewModel.radarSelectedUser = user
+            viewModel.radarPlayId = user.currentListening?.spotifyUrl ?? nil
         }
-        
     }
 }
 
@@ -115,6 +124,12 @@ extension DiscoverViewController {
             
             self.present(recommendationsViewController, animated: true)
         }
+    }
+    
+    @IBAction func didTapRadarPlayButton(_ sender: AnyObject?) {
+        guard let spotifyURI = viewModel.radarPlayId else { return }
+        
+        UIApplication.shared.open(URL("spotify://\(spotifyURI)"))
     }
 }
 
