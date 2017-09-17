@@ -10,23 +10,34 @@ import UIKit
 
 class RecommendationsViewController : UIViewController {
     @IBOutlet fileprivate weak var tableView: UITableView!
-
     
+    fileprivate let viewModel = RecommendationsViewModel()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
     }
 }
 
+extension RecommendationsViewController {
+    func inject(user: User) {
+        viewModel.user = user
+    }
+}
+
 extension RecommendationsViewController : UITableViewDataSource {
+    @available(iOS 2.0, *)
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.recommendations.count
+    }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recommendationCell") as! RecommendationTableViewCell
-        let songInfo: SongInfo
+        let user: User = viewModel.recommendations[indexPath.row]
         
-        
-        
-        cell.mediaTitleLabel.text = songInfo?.title
-        cell.mediaArtistLabel.text = songInfo?.artist
+        cell.mediaTitleLabel.text = user.currentListening?.title
+        cell.mediaArtistLabel.text = user.currentListening?.artist
         cell.userImageView.image = UIImage(named: "profile_ic")
         
         return cell

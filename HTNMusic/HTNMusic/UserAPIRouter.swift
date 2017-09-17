@@ -15,13 +15,14 @@ enum UserAPIRouter: URLRequestConvertible {
     case profile(String)
     case getSelf()
     case suggest(String, SongInfo)
+    case suggestions(String)
     case history(String)
 
     var method: HTTPMethod {
         switch self {
             case .create, .suggest:
                 return .post
-            case .profile, .getSelf, .history:
+            case .profile, .getSelf, .history, .suggestions:
                 return .get
         }
     }
@@ -77,6 +78,12 @@ enum UserAPIRouter: URLRequestConvertible {
                 var urlRequest = URLRequest(url: url)
                 urlRequest.httpMethod = method.rawValue
 
+                return try JSONEncoding.default.encode(urlRequest, withJSONObject: params)
+            case .suggestions(let userId):
+                let url = URL(string: "\(Constants.loginBaseURL)user/\(userId)/suggest")!
+                var urlRequest = URLRequest(url: url)
+                urlRequest.httpMethod = method.rawValue
+                
                 return try JSONEncoding.default.encode(urlRequest, withJSONObject: params)
         }
     }
