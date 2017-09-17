@@ -31,13 +31,30 @@ extension RecommendationsViewController : UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "recommendationCell") as! RecommendationTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "recommendationCell") as! DiscoverTableViewCell
         let user: User = viewModel.recommendations[indexPath.row]
         
         cell.mediaTitleLabel.text = user.currentListening?.title
         cell.mediaArtistLabel.text = user.currentListening?.artist
-        cell.userImageView.image = UIImage(named: "profile_ic")
         
+        if user.avatarURL == "avatar1" {
+            cell.userImageView.image = UIImage(named: "blond_hair_guy")!
+        } else if user.avatarURL == "avatar2" {
+            cell.userImageView.image = UIImage(named: "black_hair_guy")!
+        } else if user.avatarURL == "avatar3" {
+            cell.userImageView.image = UIImage(named: "black_hair_girl")!
+        } else {
+            cell.userImageView.image = UIImage(named: "brown_hair_girl")!
+        }
+        
+        cell.delegate = self
+
         return cell
+    }
+}
+
+extension RecommendationsViewController: DiscoverTableViewCellDelegate {
+    func discoverTableViewCell(_: DiscoverTableViewCell, playButtonTappedWith id: String) {
+        UIApplication.shared.open(URL(string: "spotify:track:\(id)")!, options: [:], completionHandler: nil)
     }
 }

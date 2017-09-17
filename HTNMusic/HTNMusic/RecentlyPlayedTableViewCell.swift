@@ -9,7 +9,7 @@
 import UIKit
 
 protocol RecentlyPlayedTableViewCellDelegate {
-    func recentlyPlayedCell(_: RecentlyPlayedTableViewCell, didTapPlayButtonWithID: String)
+    func recentlyPlayedCell(_: RecentlyPlayedTableViewCell, didTapPlayButtonWithURL: String)
 }
 
 class RecentlyPlayedTableViewCell: UITableViewCell {
@@ -21,7 +21,8 @@ class RecentlyPlayedTableViewCell: UITableViewCell {
     
     @IBAction func didTapPlayButton(_ sender: AnyObject?) {
         if self.spotifyID != nil {
-            delegate?.recentlyPlayedCell(self, didTapPlayButtonWithID: self.spotifyID!)
+            delegate?.recentlyPlayedCell(self, didTapPlayButtonWithURL: self.spotifyID!)
+//            delegate?.recentlyPlayedCell(self, didTapPlayButtonWithURL url: self.spotifyID!)
         } else {
             print("ERROR: No spotify ID. cri")
         }
