@@ -107,7 +107,7 @@ async function playingStatus(user_id, song) {
 async function setLocation(user_id, lat, long) {
   const db = await connect();
   try {
-    const { rows: users } = await db.query(SQL `UPDATE users SET latitude = ${lat}, longitude = ${long} WHERE user_id = ${user_id}` );
+    const { rows: users } = await db.query(SQL `UPDATE profile SET latitude = ${lat}, longitude = ${long} WHERE user_id = ${user_id}` );
   } catch(error) {
     throw error;
   } finally {
