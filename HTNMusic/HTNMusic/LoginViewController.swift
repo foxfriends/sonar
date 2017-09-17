@@ -21,6 +21,7 @@ class LoginViewController: UIViewController {
         
         emailTextField.delegate = self
         passwordTextField.delegate = self
+
         bindViewModel()
         // Do any additional setup after loading the view, typically from a nib.
     }

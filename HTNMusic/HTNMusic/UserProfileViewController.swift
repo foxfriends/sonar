@@ -24,7 +24,7 @@ class UserProfileViewController: UIViewController {
         super.viewDidLoad()
         
         if let user = viewModel.user {
-            userNameLabel.text = "\(user.firstName) \(user.lastName[user.lastName.startIndex]).)"
+            userNameLabel.text = "\(user.firstName) \(user.lastName[user.lastName.startIndex])."
             heartsCountLabel.text = "\(user.likes ?? 0)"
             if user.avatarURL == "avatar1" {
                 userImageView.image = UIImage(named: "blond_hair_guy")!
@@ -56,7 +56,7 @@ extension UserProfileViewController {
 
 extension UserProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return viewModel.recentlyPlayed.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -72,11 +72,16 @@ extension UserProfileViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - IBActions 
+
+extension UserProfileViewController {
+    @IBAction func close(_ sender: AnyObject?) {
+        self.dismiss(animated: true, completion: nil)
+    }
+}
+
 extension UserProfileViewController: RecentlyPlayedTableViewCellDelegate {
     func recentlyPlayedCell(_: RecentlyPlayedTableViewCell, didTapPlayButtonWithURL: String) {
         UIApplication.shared.open(URL(string: didTapPlayButtonWithURL)!, options: [:], completionHandler: nil)
     }
-   // func recentlyPlayedCell(_: RecentlyPlayedTableViewCell, didTapPlayButtonWithURL url: String) {
-   //     UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
-    //}
 }

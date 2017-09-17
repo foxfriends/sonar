@@ -12,7 +12,7 @@ import Bond
 import Gloss
 
 class RecommendationsViewModel {
-    var recommendations = Array<User>()
+    lazy var recommendations = Array<User>()
     var user: User?
     let sessionManager = SessionManager()
 }
@@ -34,18 +34,25 @@ extension RecommendationsViewModel {
 }
 
 extension RecommendationsViewModel {
-    func getRecommendations() {
+    func getRecommendations(completion: @escaping (Bool) -> Void) {
+        sessionManager.adapter = AuthRequestAdapter(authToken: (Session.sharedInstance.user?.authToken)!)
         guard let id = user?.id else { print("no id"); return }
-        Alamofire.request(UserAPIRouter.suggestions(id))
+        sessionManager.request(UserAPIRouter.suggestions(id))
             .responseJSON { response in
                 if let result = response.result.value as? JSON {
+                    print("gotresult")
                     if let status: String = "status" <~~ result {
+                        print("gotstatus")
                         if status == "SUCCESS" {
+                            print("got success")
                             if let users: [User] = "data" <~~ result {
                                 self.recommendations = users
+                                completion(true)
                             }
                         }
                     }
+                } else {
+                    print("nope")
                 }
             }
     }

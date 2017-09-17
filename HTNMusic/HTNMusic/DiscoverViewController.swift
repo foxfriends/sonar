@@ -42,6 +42,7 @@ class DiscoverViewController: UIViewController {
         
         radarDetailView.isHidden = true
         userImageView.image = UIImage(named: "black_hair_guy")!
+        viewModel.sessionManager.adapter = AuthRequestAdapter(authToken: (Session.sharedInstance.authToken)!)
         
         bindViewModel()
 

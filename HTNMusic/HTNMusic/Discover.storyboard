@@ -182,18 +182,6 @@
                                     <constraint firstItem="CKX-Xf-FLN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="F2L-qn-2BW" secondAttribute="trailing" constant="5" id="pDq-o0-dFV"/>
                                 </constraints>
                             </view>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" momentary="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cqj-sB-cPW">
-                                <rect key="frame" x="127" y="101" width="121" height="28"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="27" id="4nm-Lg-qjB"/>
-                                    <constraint firstAttribute="width" constant="121" id="N4o-LB-FAQ"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="Radar"/>
-                                    <segment title="List"/>
-                                </segments>
-                                <color key="tintColor" red="0.28692284226417542" green="0.16073864698410034" blue="0.87929099798202515" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discover" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q0e-qJ-eGm">
                                 <rect key="frame" x="27" y="35" width="125" height="36"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
@@ -209,7 +197,7 @@
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_icon" translatesAutoresizingMaskIntoConstraints="NO" id="t1W-dr-mFv">
-                                <rect key="frame" x="316" y="35.5" width="35" height="35"/>
+                                <rect key="frame" x="319" y="35.5" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="35" id="HEZ-Yo-uAX"/>
                                     <constraint firstAttribute="height" constant="35" id="WFZ-Yf-sNt"/>
@@ -234,12 +222,11 @@
                             <constraint firstItem="SuY-1A-LFY" firstAttribute="leading" secondItem="mX4-67-jYt" secondAttribute="leading" id="5yG-Iv-HR5"/>
                             <constraint firstAttribute="trailing" secondItem="dQs-pb-LVD" secondAttribute="trailing" id="7j1-qd-PE9"/>
                             <constraint firstItem="AqM-Pf-KMG" firstAttribute="centerX" secondItem="mX4-67-jYt" secondAttribute="centerX" id="8xX-Jy-bDY"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="t1W-dr-mFv" secondAttribute="trailing" constant="8" id="94S-qj-xy7"/>
-                            <constraint firstItem="t1W-dr-mFv" firstAttribute="leading" secondItem="OZN-Y9-m1I" secondAttribute="trailing" id="CTf-j4-SKo"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="t1W-dr-mFv" secondAttribute="trailing" constant="5" id="94S-qj-xy7"/>
+                            <constraint firstItem="t1W-dr-mFv" firstAttribute="leading" secondItem="OZN-Y9-m1I" secondAttribute="trailing" constant="3" id="CTf-j4-SKo"/>
                             <constraint firstItem="dQs-pb-LVD" firstAttribute="centerY" secondItem="mX4-67-jYt" secondAttribute="centerY" id="Pex-Va-VJi"/>
                             <constraint firstAttribute="trailing" secondItem="AqM-Pf-KMG" secondAttribute="trailing" id="S2k-7H-pcj"/>
                             <constraint firstItem="q0e-qJ-eGm" firstAttribute="top" secondItem="cSs-Xj-7sh" secondAttribute="bottom" constant="15" id="any-iH-GMa"/>
-                            <constraint firstItem="Cqj-sB-cPW" firstAttribute="centerX" secondItem="mX4-67-jYt" secondAttribute="centerX" id="aw0-aw-J82"/>
                             <constraint firstAttribute="trailing" secondItem="SuY-1A-LFY" secondAttribute="trailing" id="brk-ym-uDS"/>
                             <constraint firstItem="AqM-Pf-KMG" firstAttribute="leading" secondItem="mX4-67-jYt" secondAttribute="leading" id="eIJ-CB-JOW"/>
                             <constraint firstItem="q0e-qJ-eGm" firstAttribute="leading" secondItem="mX4-67-jYt" secondAttribute="leadingMargin" constant="11" id="ebd-pL-aq4"/>
@@ -249,7 +236,6 @@
                             <constraint firstItem="dQs-pb-LVD" firstAttribute="leading" secondItem="mX4-67-jYt" secondAttribute="leading" id="qUy-6a-anr"/>
                             <constraint firstItem="a4h-8V-h62" firstAttribute="top" secondItem="SuY-1A-LFY" secondAttribute="bottom" id="sPh-Ej-bg7"/>
                             <constraint firstItem="lhc-TM-B3h" firstAttribute="leading" secondItem="mX4-67-jYt" secondAttribute="leading" constant="20" id="uPA-Sf-aV9"/>
-                            <constraint firstItem="Cqj-sB-cPW" firstAttribute="top" secondItem="lhc-TM-B3h" secondAttribute="bottom" constant="20" id="ul9-eX-rEO"/>
                         </constraints>
                     </view>
                     <connections>
@@ -261,7 +247,6 @@
                         <outlet property="radarPlayButton" destination="CKX-Xf-FLN" id="bKT-CM-a8x"/>
                         <outlet property="radarProfileButton" destination="gup-pg-ybk" id="v7H-sK-oTR"/>
                         <outlet property="radarTitleLabel" destination="F2L-qn-2BW" id="BkG-fD-jZp"/>
-                        <outlet property="segmentedControl" destination="Cqj-sB-cPW" id="oVO-j3-hPv"/>
                         <outlet property="userImageView" destination="cMd-LW-4gV" id="t38-vI-sZ3"/>
                     </connections>
                 </viewController>
