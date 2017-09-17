@@ -90,6 +90,18 @@ async function getUser(user_id) {
   }
 }
 
+async function getHistory(user_id) {
+  const db = await connect();
+  try {
+    const { rows: songs } = await db.query(SQL `SELECT song_name FROM history_songs WHERE user_id = ${user_id} ORDER BY played_at_time DESC LIMIT 5`);
+    return songs;
+  } catch(error) {
+    throw error;
+  } finally {
+    db.release();
+  }
+}
+
 async function playingStatus(user_id, song) {
   const db = await connect();
   try {
@@ -276,6 +288,7 @@ module.exports = {
   createAccount,
   getSecureUser,
   getUser,
+  getHistory,
   playingStatus,
   setLocation,
   findClose,

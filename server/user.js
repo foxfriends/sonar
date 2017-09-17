@@ -62,6 +62,23 @@ app.get('/:user_id', auth.check, headers, (req, res) => {
   return getUserProfile(req, res, user_id);
 });
 
+/**
+ * Get the user's listening history
+ * @requires Authorization
+ * @param { String } user_id
+ * @return { { title: String, artist: String, album: String, id: String }[] }
+ */
+app.get('/:user_id/history', auth.check, headers, async (req, res) => {
+  const { user_id } = req.params;
+  try {
+    const history = await db.getHistory(user_id);
+    const spotlift = await spotify.lookupSongs(history.map(_ => _.song_name));
+    res.send(result.success(spotlift.map(_ => ({ title: _.name, album: _.album.name, artist: _.artists.map(_ => _.name).join(', '), id: _.id }))));
+  } catch(error) {
+    res.send(result.failure(error.message));
+  }
+});
+
 async function getUserProfile(req, res, user_id) {
   try {
     const user = await db.getUser(user_id);
