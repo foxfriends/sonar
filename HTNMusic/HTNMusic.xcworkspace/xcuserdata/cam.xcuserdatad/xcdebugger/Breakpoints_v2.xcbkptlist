@@ -49,6 +49,38 @@
             endingLineNumber = "176"
             landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "HTNMusic.DiscoverViewController.tableView (__ObjC.UITableView, didSelectRowAt : Foundation.IndexPath) -&gt; ()"
+                  moduleName = "HTNMusic"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cam/Desktop/hackthenorth/HTNMusic/HTNMusic/DiscoverViewController.swift"
+                  timestampString = "527344438.966634"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "176"
+                  endingLineNumber = "176"
+                  offsetFromSymbolStart = "2644">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "HTNMusic.DiscoverViewController.tableView (__ObjC.UITableView, didSelectRowAt : Foundation.IndexPath) -&gt; ()"
+                  moduleName = "HTNMusic"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cam/Desktop/hackthenorth/HTNMusic/HTNMusic/DiscoverViewController.swift"
+                  timestampString = "527344438.968702"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "176"
+                  endingLineNumber = "176"
+                  offsetFromSymbolStart = "2888">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -95,7 +127,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "145"
             endingLineNumber = "145"
-            landmarkName = "didTapRadarPlayButton(_:)"
+            landmarkName = "didTapRadarUserButton(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -113,38 +145,6 @@
             endingLineNumber = "151"
             landmarkName = "didTapRadarUserButton(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HTNMusic.DiscoverViewController.didTapRadarUserButton (Swift.Optional&lt;Swift.AnyObject&gt;) -&gt; ()"
-                  moduleName = "HTNMusic"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cam/Desktop/hackthenorth/HTNMusic/HTNMusic/DiscoverViewController.swift"
-                  timestampString = "527343090.519068"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "151"
-                  endingLineNumber = "151"
-                  offsetFromSymbolStart = "1276">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HTNMusic.DiscoverViewController.didTapRadarUserButton (Swift.Optional&lt;Swift.AnyObject&gt;) -&gt; ()"
-                  moduleName = "HTNMusic"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cam/Desktop/hackthenorth/HTNMusic/HTNMusic/DiscoverViewController.swift"
-                  timestampString = "527343090.521158"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "151"
-                  endingLineNumber = "151"
-                  offsetFromSymbolStart = "1632">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -170,7 +170,7 @@
                   moduleName = "HTNMusic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/cam/Desktop/hackthenorth/HTNMusic/HTNMusic/DiscoverViewController.swift"
-                  timestampString = "527343090.526189"
+                  timestampString = "527344439.000718"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "107"
@@ -185,7 +185,7 @@
                   moduleName = "HTNMusic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/cam/Desktop/hackthenorth/HTNMusic/HTNMusic/DiscoverViewController.swift"
-                  timestampString = "527343090.528299"
+                  timestampString = "527344439.002767"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "107"
@@ -266,7 +266,7 @@
                   moduleName = "HTNMusic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/cam/Desktop/hackthenorth/HTNMusic/HTNMusic/DiscoverViewController.swift"
-                  timestampString = "527343090.545644"
+                  timestampString = "527344439.021796"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "131"
@@ -281,7 +281,7 @@
                   moduleName = "HTNMusic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/cam/Desktop/hackthenorth/HTNMusic/HTNMusic/DiscoverViewController.swift"
-                  timestampString = "527343090.547725"
+                  timestampString = "527344439.023885"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "131"
@@ -330,7 +330,7 @@
                   moduleName = "HTNMusic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/cam/Desktop/hackthenorth/HTNMusic/HTNMusic/RecommendationsViewController.swift"
-                  timestampString = "527343090.558917"
+                  timestampString = "527344439.289442"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "20"
@@ -345,7 +345,7 @@
                   moduleName = "HTNMusic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/cam/Desktop/hackthenorth/HTNMusic/HTNMusic/RecommendationsViewController.swift"
-                  timestampString = "527343090.565471"
+                  timestampString = "527344439.291566"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "21"

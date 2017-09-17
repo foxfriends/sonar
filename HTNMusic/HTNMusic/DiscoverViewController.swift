@@ -129,9 +129,6 @@ extension DiscoverViewController {
     
     @IBAction func recommendationsTapped(_ sender: AnyObject?) {
         if let recommendationsViewController = UIStoryboard(name: "Recommendations", bundle: nil).instantiateInitialViewController() as? RecommendationsViewController {
-        
-            recommendationsViewController.modalPresentationStyle = .popover
-             // might need to do some popover source rect stuff
             
             recommendationsViewController.inject(user: viewModel.user!)
             
