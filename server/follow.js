@@ -22,7 +22,7 @@ app.get('/followers/:user_id', auth.check, headers, async (req, res) => {
 });
 
 /**
- * Get list of people are following you
+ * Get list of people who are following you
  * @requires Authorization
  * @returns Number
  */

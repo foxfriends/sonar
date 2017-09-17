@@ -198,6 +198,7 @@ async function getMyFollowingList(user_id){
       `SELECT following_users.following_user_id, first_name, last_name, avatar, email, current_playing, likes
        FROM following_users
        INNER JOIN users ON following_users.following_user_id = users.user_id
+       INNER JOIN profile ON profile.user_id = users.user_id
        WHERE following_users.user_id = ${user_id}`
      );
     return following;
@@ -210,14 +211,14 @@ async function getMyFollowingList(user_id){
 async function getFollowers(user_id) {
   const db = await connect();
   try {
-    const { rowCount } = await db.query(
-      SQL `SELECT following_users.following_user_id, first_name, last_name, avatar, email, current_playing, likes
+    const { rows: followers } = await db.query(
+      SQL `SELECT following_users.user_id, first_name, last_name, avatar, email, current_playing, likes
        FROM following_users
-       INNER JOIN profile ON following_users.following_user_id = profile.user_id
+       INNER JOIN profile ON following_users.user_id = profile.user_id
        INNER JOIN users as u ON u.user_id = profile.user_id
        WHERE following_users.following_user_id = ${user_id}`
     );
-    return rowCount;
+    return followers;
   } catch(error) {
     throw error;
   } finally {
