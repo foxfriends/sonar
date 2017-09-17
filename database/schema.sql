@@ -34,7 +34,7 @@ CREATE TABLE profile (
 CREATE TABLE history_songs (
   played_at_time  TIMESTAMP   NOT NULL DEFAULT (NOW()::TIMESTAMP),
   user_id         CHAR(36)          NOT NULL REFERENCES users(user_id),
-  song_name       VARCHAR(512) NOT NULL
+  song_id       VARCHAR(512) NOT NULL
 );
 
 CREATE TABLE following_users (
