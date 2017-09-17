@@ -19,10 +19,9 @@ class RecentlyPlayedTableViewCell: UITableViewCell {
     var spotifyID: String?
     var delegate: RecentlyPlayedTableViewCellDelegate?
     
-    @IBAction func didTapPlayButton(_ sender: AnyObject?) {
+    @IBAction func didTapPlayButton(_ sender: Any) {
         if self.spotifyID != nil {
             delegate?.recentlyPlayedCell(self, didTapPlayButtonWithURL: self.spotifyID!)
-//            delegate?.recentlyPlayedCell(self, didTapPlayButtonWithURL url: self.spotifyID!)
         } else {
             print("ERROR: No spotify ID. cri")
         }

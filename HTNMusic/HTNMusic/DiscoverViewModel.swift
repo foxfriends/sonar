@@ -53,7 +53,7 @@ extension DiscoverViewModel {
 extension DiscoverViewModel {
     func getUserNearLocation(x: Float, y: Float) -> User? {
         for coord in userMapCoordinates { // Have tolerance of 3px when tapping
-            if abs(Float(coord.x) - x) <= 6 && abs(Float(coord.y) - y) <= 6 {
+            if abs(Float(coord.x) - x) <= 8 && abs(Float(coord.y) - y) <= 8 {
                 return coord.user
             }
         }

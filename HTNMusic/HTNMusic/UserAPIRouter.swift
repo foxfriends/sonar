@@ -84,7 +84,7 @@ enum UserAPIRouter: URLRequestConvertible {
                 var urlRequest = URLRequest(url: url)
                 urlRequest.httpMethod = method.rawValue
                 
-                return try JSONEncoding.default.encode(urlRequest, withJSONObject: params)
+                return try URLEncoding.default.encode(urlRequest, with: params)
         }
     }
 }
