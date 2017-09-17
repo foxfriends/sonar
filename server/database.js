@@ -256,15 +256,14 @@ async function getMyLikes(user_id){
 async function likeSong(user_id, song_id, from_user){
   const db = await connect();
   try {
-    const { rows: likes } = await db.query(SQL
+    await db.query(SQL
       `INSERT INTO song_likes (song_id, user_id)
        VALUES (${song_id}, ${user_id})`
-     );
-     const { rows: increaseLike } = await db.query(SQL
-       `UPDATE profile SET likes = likes + 1
-     WHERE user_id = ${from_user}`
-   );
-    return likes;
+    );
+    await db.query(SQL
+      `UPDATE profile SET likes = likes + 1
+       WHERE user_id = ${from_user}`
+    );
   } catch(error) {
     throw error;
   } finally {
@@ -274,10 +273,9 @@ async function likeSong(user_id, song_id, from_user){
 async function unlikeSong(user_id, song_id){
   const db = await connect();
   try {
-    const { rows: likes } = await db.query(SQL
+    await db.query(SQL
       `DELETE FROM song_likes WHERE user_id = ${user_id} AND song_id = ${song_id}`
-     );
-    return likes;
+    );
   } catch(error) {
     throw error;
   } finally {

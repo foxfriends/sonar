@@ -90,12 +90,12 @@ async function getUserProfile(req, res, user_id) {
         artist: track.artists.map(_ => _.name).join(', '),
         id: track.id,
       };
-    }
-    else {
-        user.song = null;
+    } else {
+      user.song = null;
     }
 
     delete user.current_playing;
+    user.likes = +user.likes;
     res.send(result.success(user));
   } catch(error) {
     res.send(result.failure(error.message));

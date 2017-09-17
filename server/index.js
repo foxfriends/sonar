@@ -154,15 +154,15 @@ async function findCloseUsers(user_id, distClose, distMedium, distFar){
     if(i < close.length) {
       user = close[i];
       const { first_name, last_name, avatar, likes, user_id, email } = user;
-      final.close.push({ first_name, last_name, avatar, likes, song, user_id, email });
+      final.close.push({ first_name, last_name, avatar, likes: +likes, song, user_id, email });
     } else if(i < close.length + medium.length) {
       user = medium[i - close.length];
       const { first_name, last_name, avatar, likes, user_id, email } = user;
-      final.medium.push({ first_name, last_name, avatar, likes, song, user_id, email });
+      final.medium.push({ first_name, last_name, avatar, likes: +likes, song, user_id, email });
     } else {
       user = far[i - close.length - medium.length];
       const { first_name, last_name, avatar, likes, user_id, email } = user;
-      final.far.push({ first_name, last_name, avatar, likes, song, user_id, email });
+      final.far.push({ first_name, last_name, avatar, likes: +likes, song, user_id, email });
     }
   });
   return final;
