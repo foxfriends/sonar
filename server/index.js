@@ -58,7 +58,7 @@ app.put('/status', auth.check, headers, async (req, res) => {
     } else {
       await db.playingStatus(uid, null);
     }
-    res.send(result.success());
+    res.send(result.success(true));
   } catch(error) {
     res.send(result.failure(error.message));
   }
