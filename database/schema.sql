@@ -52,3 +52,10 @@ CREATE TABLE song_likes (
   user_id CHAR(36) NOT NULL REFERENCES users(user_id),
   song_id VARCHAR(512) NOT NULL
 );
+
+CREATE TABLE recommendations (
+  to_user_id CHAR(36) NOT NULL REFERENCES users(user_id),
+  from_user_id CHAR(36) NOT NULL REFERENCES users(user_id),
+  song_id VARCHAR(512) NOT NULL,
+  liked BOOLEAN DEFAULT FALSE
+);

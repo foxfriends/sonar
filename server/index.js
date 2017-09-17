@@ -145,7 +145,7 @@ async function findCloseUsers(user_id, distClose, distMedium, distFar){
   const final = { close: [], medium: [], far: [] };
   songs.forEach((row, i) => {
     const song = {
-      name: row.name,
+      title: row.name,
       album: row.album.name,
       artist: row.artists.map(_ => _.name).join(', '),
       id: row.id,
