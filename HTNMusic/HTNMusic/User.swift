@@ -15,7 +15,7 @@ struct User: Decodable {
     let lastName: String
     let email: String
     let avatarURL: String
-    let likes: String
+    let likes: Int
     var currentListening: SongInfo? = nil
     var authtoken: String? = nil
 
