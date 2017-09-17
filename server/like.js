@@ -5,6 +5,7 @@ const auth = require('./auth');
 const headers = require('./headers');
 const result = require('./result');
 const db = require('./database');
+const spotify = require('./spotify')
 
 /**
  * Get a list of songs I like
