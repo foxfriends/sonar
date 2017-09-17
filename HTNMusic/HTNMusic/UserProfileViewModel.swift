@@ -14,4 +14,11 @@ import Gloss
 class UserProfileViewModel {
     var user: User?
     var isSelf: Bool?
+    lazy var recentlyPlayed: [SongInfo] = {
+        if let recent = self.user?.recentlyPlayed {
+            return recent
+        } else {
+            return []
+        }
+    }()
 }

@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--User Profile View Controller-->
         <scene sceneID="taE-Se-lqr">
             <objects>
-                <viewController id="B08-Rp-kQt" sceneMemberID="viewController">
+                <viewController id="B08-Rp-kQt" customClass="UserProfileViewController" customModule="HTNMusic" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4hV-14-GQD"/>
                         <viewControllerLayoutGuide type="bottom" id="bnd-7C-fa2"/>
@@ -110,7 +110,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="sectionIndexBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="51" id="hTB-VV-kzZ" customClass="RecentlyPlayedTableViewCell" customModule="HTNMusic" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="recentPlayCell" rowHeight="51" id="hTB-VV-kzZ" customClass="RecentlyPlayedTableViewCell" customModule="HTNMusic" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="375" height="51"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hTB-VV-kzZ" id="Xzj-Cp-fg4">
@@ -224,6 +224,13 @@
                             <constraint firstAttribute="trailing" secondItem="OUr-qS-Bby" secondAttribute="trailing" id="vy6-2m-Bbv"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="bannerView" destination="xwM-H3-waE" id="g9M-jy-Kjl"/>
+                        <outlet property="heartsCountLabel" destination="S2i-EF-f5S" id="iVC-qU-nqw"/>
+                        <outlet property="recentlyPlayedTableView" destination="PKK-ii-jjN" id="rW5-Pv-bId"/>
+                        <outlet property="userImageView" destination="ttH-o9-7HF" id="7ky-eu-8jl"/>
+                        <outlet property="userNameLabel" destination="1zL-Z5-gnF" id="fix-vU-CAh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tjx-ng-o5s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

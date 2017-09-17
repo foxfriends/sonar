@@ -88,12 +88,22 @@ extension DiscoverViewController {
         if let user = viewModel.getUserNearLocation(x: Float(location.x), y: Float(location.y)) {
             print("user is listening to: \(String(describing: user.currentListening?.title)))")
             radarDetailView.isHidden = false
+            if user.avatarURL == "avatar1" {
+                radarProfileButton.imageView?.image = UIImage(named: "blond_hair_guy")!
+            } else if user.avatarURL == "avatar2" {
+                radarProfileButton.imageView?.image = UIImage(named: "black_hair_guy")!
+            } else if user.avatarURL == "avatar3" {
+                radarProfileButton.imageView?.image = UIImage(named: "black_hair_girl")!
+            } else {
+                radarProfileButton.imageView?.image = UIImage(named: "brown_hair_girl")!
+            }
+            
             radarPlayButton.isEnabled = true
             radarProfileButton.isEnabled = true
             radarTitleLabel.text = user.currentListening?.title ?? "Unknown Title"
             radarArtistLabel.text = user.currentListening?.artist ?? "Unknown Artist"
             viewModel.radarSelectedUser = user
-            viewModel.radarPlayId = user.currentListening?.spotifyUrl ?? nil
+            viewModel.radarPlayId = user.currentListening?.spotifyId ?? nil
         }
     }
 }
@@ -118,9 +128,6 @@ extension DiscoverViewController {
     
     @IBAction func recommendationsTapped(_ sender: AnyObject?) {
         if let recommendationsViewController = UIStoryboard(name: "Recommendations", bundle: nil).instantiateInitialViewController() as? RecommendationsViewController {
-        
-            recommendationsViewController.modalPresentationStyle = .popover
-             // might need to do some popover source rect stuff
             
             recommendationsViewController.inject(user: viewModel.user!)
             
@@ -129,9 +136,9 @@ extension DiscoverViewController {
     }
     
     @IBAction func didTapRadarPlayButton(_ sender: AnyObject?) {
-        guard let spotifyURI = viewModel.radarPlayId else { return }
-
-        UIApplication.shared.open(URL(string: "spotify://\(spotifyURI)")!, options: [:], completionHandler: nil)
+        guard let songId = viewModel.radarPlayId else { return }
+        
+        UIApplication.shared.open(URL(string: "spotify:track:\(songId)")!, options: [:], completionHandler: nil)
     }
     
     @IBAction func didTapRadarUserButton(_ sender: AnyObject?) {

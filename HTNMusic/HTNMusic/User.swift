@@ -18,6 +18,7 @@ struct User: Decodable {
     var likes: Int?
     var currentListening: SongInfo? = nil
     var authToken: String? = nil
+    var recentlyPlayed: [SongInfo]?
 
     init?(json: JSON) {
         guard let id: String = "user_id" <~~ json,
@@ -34,5 +35,6 @@ struct User: Decodable {
         self.email = email
         self.currentListening = "song" <~~ json
         self.authToken = "authtoken" <~~ json
+        self.recentlyPlayed = "history" <~~ json
     }
 }

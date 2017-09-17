@@ -8,8 +8,21 @@
 
 import UIKit
 
+protocol DiscoverTableViewCellDelegate {
+    func discoverTableViewCell(_: DiscoverTableViewCell, playButtonTappedWith id: String)
+}
+
 class DiscoverTableViewCell: UITableViewCell {
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var mediaTitleLabel: UILabel!
     @IBOutlet weak var mediaArtistLabel: UILabel!
+    
+    var delegate: DiscoverTableViewCellDelegate?
+    var spotifyId: String? = nil
+    
+    @IBAction func playButtonTapped(_ sender: AnyObject?) {
+        guard let id = spotifyId else { return }
+        
+        delegate?.discoverTableViewCell(self, playButtonTappedWith: id)
+    }
 }
