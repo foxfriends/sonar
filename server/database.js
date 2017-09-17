@@ -145,10 +145,11 @@ async function findClose(user_id, close, medium, far) {
 
 async function findNearbyUsers(user_id, small, big, lat, long, db) {
   return await db.query(SQL
-    `SELECT first_name, last_name, avatar, likes, current_playing FROM profile
+    `SELECT p.user_id, first_name, last_name, avatar, likes, current_playing, email FROM profile as p
+     INNER JOIN users as u on u.user_id = p.user_id
      WHERE sqrt(pow(${lat} - latitude, 2.0) + pow(${long} - longitude, 2.0)) <= ${big}
      AND sqrt(pow(${lat} - latitude, 2.0) + pow(${long} - longitude, 2.0)) > ${small}
-     AND user_id <> ${user_id} AND current_playing IS NOT NULL`
+     AND p.user_id <> ${user_id} AND current_playing IS NOT NULL`
   );
 }
 
@@ -182,7 +183,7 @@ async function getMyFollowingList(user_id){
   const db = await connect();
   try {
     const { rows: following } = await db.query(SQL
-      `SELECT first_name, last_name, avatar, email
+      `SELECT following_users.following_user_id, first_name, last_name, avatar, email, current_playing, likes
        FROM following_users
        INNER JOIN users ON following_users.following_user_id = users.user_id
        WHERE following_users.user_id = ${user_id}`
@@ -198,7 +199,7 @@ async function getFollowers(user_id) {
   const db = await connect();
   try {
     const { rowCount } = await db.query(
-      SQL `SELECT first_name, last_name, avatar, email
+      SQL `SELECT following_users.following_user_id, first_name, last_name, avatar, email, current_playing, likes
        FROM following_users
        INNER JOIN profile ON following_users.following_user_id = profile.user_id
        WHERE following_users.following_user_id = ${user_id}`
