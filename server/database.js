@@ -144,7 +144,6 @@ async function findClose(user_id, close, medium, far) {
 }
 
 async function findNearbyUsers(user_id, small, big, lat, long, db) {
-  console.log("hi");
   return await db.query(SQL
     `SELECT first_name, last_name, avatar, likes, current_playing FROM profile
      WHERE sqrt(pow(${lat} - latitude, 2.0) + pow(${long} - longitude, 2.0)) <= ${big}
@@ -201,7 +200,7 @@ async function getFollowers(user_id) {
     const { rowCount } = await db.query(
       SQL `SELECT first_name, last_name, avatar, email
        FROM following_users
-       INNER JOIN users ON following_users.following_user_id = users.user_id
+       INNER JOIN profile ON following_users.following_user_id = profile.user_id
        WHERE following_users.following_user_id = ${user_id}`
     );
     return rowCount;
