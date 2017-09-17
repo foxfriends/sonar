@@ -261,7 +261,7 @@ async function likeSong(user_id, song_id, from_user){
        VALUES (${song_id}, ${user_id})`
      );
      const { rows: increaseLike } = await db.query(SQL
-       `UPDATE users SET likes = likes + 1
+       `UPDATE profile SET likes = likes + 1
      WHERE user_id = ${from_user}`
    );
     return likes;
