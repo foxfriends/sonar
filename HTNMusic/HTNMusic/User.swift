@@ -24,7 +24,8 @@ struct User: Decodable {
             let firstName: String = "first_name" <~~ json,
             let lastName: String = "last_name" <~~ json,
             let avatarURL: String = "avatar" <~~ json,
-            let email: String = "email" <~~ json
+            let email: String = "email" <~~ json,
+            let likes: Int = "likes" <~~ json
             else { return nil }
 
         self.id = id

@@ -11,11 +11,11 @@ import Alamofire
 import Gloss
 
 enum FollowingAPIRouter: URLRequestConvertible {
-    case add(Int)
-    case remove(Int)
-    case follows(Int)
+    case add(String)
+    case remove(String)
+    case follows(String)
     case myFollows()
-    case followers(Int)
+    case followers(String)
     case myFollowers()
 
     var method: HTTPMethod {

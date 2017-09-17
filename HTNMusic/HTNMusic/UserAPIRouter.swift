@@ -11,16 +11,17 @@ import Alamofire
 import Gloss
 
 enum UserAPIRouter: URLRequestConvertible {
-case create(String, String, String, String)
-case profile(Int)
-case getSelf()
-case suggest(Int, SongInfo)
+    case create(String, String, String, String)
+    case profile(String)
+    case getSelf()
+    case suggest(String, SongInfo)
+    case history(String)
 
     var method: HTTPMethod {
         switch self {
             case .create, .suggest:
                 return .post
-            case .profile, .getSelf:
+            case .profile, .getSelf, .history:
                 return .get
         }
     }
@@ -45,6 +46,12 @@ case suggest(Int, SongInfo)
 
     func asURLRequest() throws -> URLRequest {
         switch self {
+            case .history(let userId):
+                let url = URL(string: "\(Constants.loginBaseURL)user/\(userId)/history")!
+                var urlRequest = URLRequest(url: url)
+                urlRequest.httpMethod = method.rawValue
+
+                return try JSONEncoding.default.encode(urlRequest, withJSONObject: params)
             case .create:
                 let url = URL(string: "\(Constants.loginBaseURL)user/new")!
                 var urlRequest = URLRequest(url: url)

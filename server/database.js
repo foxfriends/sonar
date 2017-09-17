@@ -90,10 +90,21 @@ async function getUser(user_id) {
   }
 }
 
+async function getHistory(user_id) {
+  const db = await connect();
+  try {
+    const { rows: songs } = await db.query(SQL `SELECT song_name FROM history_songs WHERE user_id = ${user_id} ORDER BY played_at_time DESC LIMIT 5`);
+    return songs;
+  } catch(error) {
+    throw error;
+  } finally {
+    db.release();
+  }
+}
+
 async function playingStatus(user_id, song) {
   const db = await connect();
   try {
-    console.log(user_id, song);
     const { rows: users } = await db.query(SQL `UPDATE profile SET current_playing = ${song} WHERE user_id = ${user_id}` );
     if (song !== null){
         const { rows: history } = await db.query(SQL `INSERT INTO history_songs (user_id, song_name) VALUES (${user_id}, ${song})`);
@@ -108,7 +119,7 @@ async function playingStatus(user_id, song) {
 async function setLocation(user_id, lat, long) {
   const db = await connect();
   try {
-    const { rows: users } = await db.query(SQL `UPDATE users SET latitude = ${lat}, longitude = ${long} WHERE user_id = ${user_id}` );
+    const { rows: users } = await db.query(SQL `UPDATE profile SET latitude = ${lat}, longitude = ${long} WHERE user_id = ${user_id}` );
   } catch(error) {
     throw error;
   } finally {
@@ -121,7 +132,7 @@ async function findClose(user_id, close, medium, far) {
   try {
     // user_id's longitude & latitude
     const { rows: [self] } = await db.query(SQL
-      `SELECT longitude, latitude FROM users WHERE user_id = ${user_id}`
+      `SELECT longitude, latitude FROM profile WHERE user_id = ${user_id}`
     );
     if (self.longitude !== null && self.latitude !== null) {
       // close
@@ -146,10 +157,11 @@ async function findClose(user_id, close, medium, far) {
 
 async function findNearbyUsers(user_id, small, big, lat, long, db) {
   return await db.query(SQL
-    `SELECT first_name, last_name, avatar, likes, current_playing FROM users
-     WHERE sqrt(pow(${lat} - latitude, 2.0) + pow(${long} - users.longitude, 2.0)) <= ${big}
-     AND sqrt(pow(${lat} - latitude, 2.0) + pow(${long} - users.longitude, 2.0)) > ${small}
-     AND users.user_id <> ${user_id} AND current_playing IS NOT NULL`
+    `SELECT p.user_id, first_name, last_name, avatar, likes, current_playing, email FROM profile as p
+     INNER JOIN users as u on u.user_id = p.user_id
+     WHERE sqrt(pow(${lat} - latitude, 2.0) + pow(${long} - longitude, 2.0)) <= ${big}
+     AND sqrt(pow(${lat} - latitude, 2.0) + pow(${long} - longitude, 2.0)) > ${small}
+     AND p.user_id <> ${user_id} AND current_playing IS NOT NULL`
   );
 }
 
@@ -183,9 +195,10 @@ async function getMyFollowingList(user_id){
   const db = await connect();
   try {
     const { rows: following } = await db.query(SQL
-      `SELECT first_name, last_name, avatar, email
+      `SELECT following_users.following_user_id, first_name, last_name, avatar, email, current_playing, likes
        FROM following_users
        INNER JOIN users ON following_users.following_user_id = users.user_id
+       INNER JOIN profile ON profile.user_id = users.user_id
        WHERE following_users.user_id = ${user_id}`
      );
     return following;
@@ -198,13 +211,14 @@ async function getMyFollowingList(user_id){
 async function getFollowers(user_id) {
   const db = await connect();
   try {
-    const { rowCount } = await db.query(
-      SQL `SELECT first_name, last_name, avatar, email
+    const { rows: followers } = await db.query(
+      SQL `SELECT following_users.user_id, first_name, last_name, avatar, email, current_playing, likes
        FROM following_users
-       INNER JOIN users ON following_users.following_user_id = users.user_id
+       INNER JOIN profile ON following_users.user_id = profile.user_id
+       INNER JOIN users as u ON u.user_id = profile.user_id
        WHERE following_users.following_user_id = ${user_id}`
     );
-    return rowCount;
+    return followers;
   } catch(error) {
     throw error;
   } finally {
@@ -247,7 +261,7 @@ async function likeSong(user_id, song_id, from_user){
        VALUES (${song_id}, ${user_id})`
      );
      const { rows: increaseLike } = await db.query(SQL
-       `UPDATE users SET likes = likes + 1
+       `UPDATE profile SET likes = likes + 1
      WHERE user_id = ${from_user}`
    );
     return likes;
@@ -275,6 +289,7 @@ module.exports = {
   createAccount,
   getSecureUser,
   getUser,
+  getHistory,
   playingStatus,
   setLocation,
   findClose,
