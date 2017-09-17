@@ -40,6 +40,8 @@ class DiscoverViewController: UIViewController {
         nearbyTableView.delegate = self
         nearbyTableView.dataSource = self
         
+        radarDetailView.isHidden = true
+        userImageView.image = UIImage(named: "black_hair_guy")!
         
         bindViewModel()
 
@@ -130,6 +132,16 @@ extension DiscoverViewController {
         guard let spotifyURI = viewModel.radarPlayId else { return }
 
         UIApplication.shared.open(URL(string: "spotify://\(spotifyURI)")!, options: [:], completionHandler: nil)
+    }
+    
+    @IBAction func didTapRadarUserButton(_ sender: AnyObject?) {
+        guard let selectedUser = viewModel.radarSelectedUser else { return }
+        
+        if let userProfileViewController = UIStoryboard(name: "UserProfile", bundle: nil).instantiateInitialViewController() as? UserProfileViewController {
+            userProfileViewController.inject(user: selectedUser, isSelf: true)
+            
+            present(userProfileViewController, animated: true)
+        }
     }
 }
 

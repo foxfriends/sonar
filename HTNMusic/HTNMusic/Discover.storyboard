@@ -98,7 +98,7 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circles" translatesAutoresizingMaskIntoConstraints="NO" id="gUg-fU-KCV">
                                         <rect key="frame" x="-0.5" y="99.5" width="375.5" height="200"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cMd-LW-4gV" userLabel="CurrentUserImageView">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cMd-LW-4gV" userLabel="CurrentUserImageView">
                                         <rect key="frame" x="162" y="175" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="EAe-8Y-d9S"/>
@@ -129,7 +129,7 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A Whole New World" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F2L-qn-2BW">
-                                        <rect key="frame" x="72" y="33" width="153" height="21"/>
+                                        <rect key="frame" x="72" y="33" width="152.5" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -173,6 +173,7 @@
                                     <constraint firstItem="gup-pg-ybk" firstAttribute="centerY" secondItem="SuY-1A-LFY" secondAttribute="centerY" constant="5" id="hcX-CD-NVb"/>
                                     <constraint firstItem="F2L-qn-2BW" firstAttribute="leading" secondItem="gup-pg-ybk" secondAttribute="trailing" constant="10" id="mGP-ii-FJx"/>
                                     <constraint firstItem="EU9-av-pdx" firstAttribute="top" secondItem="F2L-qn-2BW" secondAttribute="bottom" id="opB-mf-wBp"/>
+                                    <constraint firstItem="CKX-Xf-FLN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="F2L-qn-2BW" secondAttribute="trailing" constant="5" id="pDq-o0-dFV"/>
                                 </constraints>
                             </view>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" momentary="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cqj-sB-cPW">
@@ -245,6 +246,11 @@
                         <outlet property="listView" destination="AqM-Pf-KMG" id="nhF-1H-3fK"/>
                         <outlet property="mapView" destination="dQs-pb-LVD" id="3wb-J3-wKk"/>
                         <outlet property="nearbyTableView" destination="Fkv-HV-db6" id="cSF-NG-gRG"/>
+                        <outlet property="radarArtistLabel" destination="EU9-av-pdx" id="Okz-V4-Chq"/>
+                        <outlet property="radarDetailView" destination="SuY-1A-LFY" id="bVS-WQ-cEw"/>
+                        <outlet property="radarPlayButton" destination="CKX-Xf-FLN" id="bKT-CM-a8x"/>
+                        <outlet property="radarProfileButton" destination="gup-pg-ybk" id="v7H-sK-oTR"/>
+                        <outlet property="radarTitleLabel" destination="F2L-qn-2BW" id="BkG-fD-jZp"/>
                         <outlet property="segmentedControl" destination="Cqj-sB-cPW" id="oVO-j3-hPv"/>
                         <outlet property="userImageView" destination="cMd-LW-4gV" id="t38-vI-sZ3"/>
                     </connections>
