@@ -164,14 +164,17 @@ async function findCloseUsers(user_id, distClose, distMedium, distFar){
     let user;
     if(i < close.length) {
       user = close[i];
+      user.likes = +user.likes;
       const { first_name, last_name, avatar, likes, user_id, email } = user;
       final.close.push({ first_name, last_name, avatar, likes: +likes, song, user_id, email, history: histories[i] });
     } else if(i < close.length + medium.length) {
       user = medium[i - close.length];
+      user.likes = +user.likes;
       const { first_name, last_name, avatar, likes, user_id, email } = user;
       final.medium.push({ first_name, last_name, avatar, likes: +likes, song, user_id, email, history: histories[i] });
     } else {
       user = far[i - close.length - medium.length];
+      user.likes = +user.likes;
       const { first_name, last_name, avatar, likes, user_id, email } = user;
       final.far.push({ first_name, last_name, avatar, likes: +likes, song, user_id, email, history: histories[i] });
     }
