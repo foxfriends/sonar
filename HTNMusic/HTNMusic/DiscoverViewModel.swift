@@ -15,16 +15,18 @@ import CoreLocation
 class DiscoverViewModel {
     var user: User?
     var locationCoordinates: Coordinate2D? = nil
-    let isMapViewHidden = Observable<Bool>(true)
+    let isMapViewHidden = Observable<Bool>(false)
     var smallProximityUsers = Array<User>()
     var mediumProximityUsers = Array<User>()
     var largeProximityUsers = Array<User>()
     var userMapCoordinates = Dictionary<String, User>()
+    
+    let sessionManager = SessionManager()
 }
 
 extension DiscoverViewModel {
     func getNearbyUsers() {
-        Alamofire.request(NearbyAPIRouter.nearby())
+        sessionManager.request(NearbyAPIRouter.nearby())
             .responseJSON { response in
                 if let result = response.result.value as? JSON {
                     self.deserialize(result: result)
@@ -34,11 +36,12 @@ extension DiscoverViewModel {
 }
 
 extension DiscoverViewModel {
-    func updateLocation(coords: Coordinate2D, completion: (Bool) -> Void) {
-        Alamofire.request(LocationAPIRouter.location(Float(coords.longitude), Float(coords.latitude)))
+    func updateLocation(coords: Coordinate2D, completion: @escaping (Bool) -> Void) {
+        sessionManager.request(LocationAPIRouter.location(Float(coords.longitude), Float(coords.latitude)))
             .responseJSON { response in
                 if let result = response.result.value as? JSON {
                     self.deserialize(result: result)
+                    completion(true)
                 }
             }
     }

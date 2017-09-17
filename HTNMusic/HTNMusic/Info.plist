@@ -51,5 +51,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+    <key>NSAppleMusicUsageDescription</key>
+    <string>Sharing Music is Caring :)</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>Sharing Location is Caring :)</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Sharing When In Use is Caring</string>
 </dict>
 </plist>

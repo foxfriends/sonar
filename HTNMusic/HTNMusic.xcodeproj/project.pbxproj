@@ -36,6 +36,7 @@
 		321627121F6DD936008C390C /* ProximityInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321627111F6DD936008C390C /* ProximityInfo.swift */; };
 		32BE72BE1F6E01730065F6D6 /* RecentlyPlayedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BE72BD1F6E01730065F6D6 /* RecentlyPlayedTableViewCell.swift */; };
 		32BE72C01F6E16C10065F6D6 /* LikeAPIRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BE72BF1F6E16C10065F6D6 /* LikeAPIRouter.swift */; };
+		32BE72C21F6E2B930065F6D6 /* AuthRequestAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BE72C11F6E2B930065F6D6 /* AuthRequestAdapter.swift */; };
 		72C3DCB44261BE8AA6779D8E /* Pods_HTNMusic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20074BE002CB37F9727F6F55 /* Pods_HTNMusic.framework */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +75,7 @@
 		321627111F6DD936008C390C /* ProximityInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProximityInfo.swift; sourceTree = "<group>"; };
 		32BE72BD1F6E01730065F6D6 /* RecentlyPlayedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentlyPlayedTableViewCell.swift; sourceTree = "<group>"; };
 		32BE72BF1F6E16C10065F6D6 /* LikeAPIRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeAPIRouter.swift; sourceTree = "<group>"; };
+		32BE72C11F6E2B930065F6D6 /* AuthRequestAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthRequestAdapter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +185,7 @@
 				321627031F6DC120008C390C /* FollowingAPIRouter.swift */,
 				321627041F6DC120008C390C /* LocationAPIRouter.swift */,
 				321627051F6DC120008C390C /* NearbyAPIRouter.swift */,
+				32BE72C11F6E2B930065F6D6 /* AuthRequestAdapter.swift */,
 				32BE72BF1F6E16C10065F6D6 /* LikeAPIRouter.swift */,
 				321627061F6DC120008C390C /* StatusAPIRouter.swift */,
 				321627071F6DC120008C390C /* UserAPIRouter.swift */,
@@ -354,6 +357,7 @@
 				321626F21F6D23AD008C390C /* SongInfo.swift in Sources */,
 				321627121F6DD936008C390C /* ProximityInfo.swift in Sources */,
 				321626CB1F6CE4EF008C390C /* AppDelegate.swift in Sources */,
+				32BE72C21F6E2B930065F6D6 /* AuthRequestAdapter.swift in Sources */,
 				32BE72C01F6E16C10065F6D6 /* LikeAPIRouter.swift in Sources */,
 				321626FE1F6D92BF008C390C /* Constants.swift in Sources */,
 				321626FC1F6D773E008C390C /* ScreenCoords.swift in Sources */,

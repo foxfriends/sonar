@@ -8,6 +8,9 @@
 
 import UIKit
 import Darwin
+import MapKit
+import Bond
+import ReactiveKit
 import CoreLocation
 
 class DiscoverViewController: UIViewController {
@@ -16,7 +19,7 @@ class DiscoverViewController: UIViewController {
     @IBOutlet fileprivate weak var userImageView: UIImageView!
     @IBOutlet fileprivate weak var listView: UIView!
     @IBOutlet fileprivate weak var nearbyTableView: UITableView!
-
+    
 //    fileprivate let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.tapUserOnMap))
 
     lazy var locationManager: CLLocationManager = {
@@ -31,11 +34,22 @@ class DiscoverViewController: UIViewController {
         nearbyTableView.delegate = self
         nearbyTableView.dataSource = self
         
+        
         bindViewModel()
 
+        self.locationManager.delegate = self
+        
+        // Ask for Authorisation from the User.
         self.locationManager.requestAlwaysAuthorization()
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        self.locationManager.startUpdatingLocation()
+        
+        // For use in foreground
+        self.locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
 
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -44,6 +58,7 @@ class DiscoverViewController: UIViewController {
 extension DiscoverViewController {
     func inject(user: User) {
         viewModel.user = user
+        viewModel.sessionManager.adapter = AuthRequestAdapter(authToken: user.authToken!)
     }
 }
 
@@ -53,6 +68,7 @@ fileprivate extension DiscoverViewController {
         viewModel.isMapViewHidden
             .map { !$0 }
             .bind(to: listView.reactive.isHidden)
+        
     }
 }
 
@@ -62,9 +78,11 @@ extension DiscoverViewController {
     @IBAction func indexChanged(sender: UISegmentedControl) {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
+            viewModel.isMapViewHidden.value = false
             mapView.isHidden = false
             listView.isHidden = true
         case 1:
+            viewModel.isMapViewHidden.value = true
             mapView.isHidden = true
             listView.isHidden = false
         default:
@@ -130,10 +148,10 @@ extension DiscoverViewController: UITableViewDataSource {
 extension DiscoverViewController {
     func getNearbyUsers(coords: Coordinate2D) {
         viewModel.updateLocation(coords: coords, completion: { _ in
-            if viewModel.isMapViewHidden.value {
-                nearbyTableView.reloadData()
+            if self.viewModel.isMapViewHidden.value {
+                self.nearbyTableView.reloadData()
             } else {
-                redrawUsersOnMap()
+                self.redrawUsersOnMap()
             }
         })
     }
@@ -142,18 +160,68 @@ extension DiscoverViewController {
         let origin = CGPoint(x: UIScreen.main.bounds.size.width*0.5,y: UIScreen.main.bounds.size.height*0.5)
         var counter = 1
         for user in viewModel.smallProximityUsers {
-            let radius = 25.0
+            let radius = 53.0
             let smallCount = Double(viewModel.smallProximityUsers.count)
             let x = Int(floor(Double(origin.x) + radius*cos(Double(counter*2)*Double.pi/smallCount)))
             let y = Int(floor(Double(origin.y) + radius*sin(Double(counter*2)*Double.pi/smallCount)))
 
-            let circlePath = UIBezierPath(arcCenter: CGPoint(x: x,y: y), radius: CGFloat(radius), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
+            let circlePath = UIBezierPath(arcCenter: CGPoint(x: x,y: y), radius: CGFloat(3.0), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
 
             let shapeLayer = CAShapeLayer()
             shapeLayer.path = circlePath.cgPath
 
             //change the fill color
-            shapeLayer.fillColor = UIColor.clear.cgColor
+            shapeLayer.fillColor = UIColor.black.cgColor
+            //you can change the stroke color
+            shapeLayer.strokeColor = UIColor.black.cgColor
+            //you can change the line width
+            shapeLayer.lineWidth = 3.0
+
+            view.layer.addSublayer(shapeLayer)
+
+            counter += 1
+            print("close")
+            viewModel.userMapCoordinates["\(x) \(y)"] = user
+        }
+
+        for user in viewModel.mediumProximityUsers {
+            let radius = 102.0
+            let mediumCount = Double(viewModel.mediumProximityUsers.count)
+            let x = floor(Double(origin.x) + radius*cos(Double(Double(counter)*2.0+Double.pi/2.0)*Double.pi/mediumCount))
+            let y = floor(Double(origin.y) + radius*sin(Double(Double(counter)*2.0+Double.pi/2.0)*Double.pi/mediumCount))
+
+            let circlePath = UIBezierPath(arcCenter: CGPoint(x: x,y: y), radius: CGFloat(3.0), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
+
+            let shapeLayer = CAShapeLayer()
+            shapeLayer.path = circlePath.cgPath
+
+            //change the fill color
+            shapeLayer.fillColor = UIColor.purple.cgColor
+            //you can change the stroke color
+            shapeLayer.strokeColor = UIColor.purple.cgColor
+            //you can change the line width
+            shapeLayer.lineWidth = 3.0
+
+            view.layer.addSublayer(shapeLayer)
+
+            counter += 1
+            print("medium")
+            viewModel.userMapCoordinates["\(x) \(y)"] = user
+        }
+
+        for user in viewModel.largeProximityUsers {
+            let radius = 155.0
+            let largeCount = Double(viewModel.largeProximityUsers.count)
+            let x = floor(Double(origin.x) + radius*cos(Double(Double(counter)*2.0)*Double.pi/largeCount))
+            let y = floor(Double(origin.y) + radius*sin(Double(Double(counter)*2.0)*Double.pi/largeCount))
+
+            let circlePath = UIBezierPath(arcCenter: CGPoint(x: x,y: y), radius: CGFloat(3.0), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
+
+            let shapeLayer = CAShapeLayer()
+            shapeLayer.path = circlePath.cgPath
+
+            //change the fill color
+            shapeLayer.fillColor = UIColor.red.cgColor
             //you can change the stroke color
             shapeLayer.strokeColor = UIColor.red.cgColor
             //you can change the line width
@@ -162,55 +230,13 @@ extension DiscoverViewController {
             view.layer.addSublayer(shapeLayer)
 
             counter += 1
+            print("far")
             viewModel.userMapCoordinates["\(x) \(y)"] = user
         }
-
-        for user in viewModel.mediumProximityUsers {
-            let radius = 45.0
-            let mediumCount = Double(viewModel.mediumProximityUsers.count)
-            let x = floor(Double(origin.x) + radius*cos(Double(Double(counter)*2.0+Double.pi/2.0)*Double.pi/mediumCount))
-            let y = floor(Double(origin.y) + radius*sin(Double(Double(counter)*2.0+Double.pi/2.0)*Double.pi/mediumCount))
-
-            let circlePath = UIBezierPath(arcCenter: CGPoint(x: x,y: y), radius: CGFloat(radius), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
-
-            let shapeLayer = CAShapeLayer()
-            shapeLayer.path = circlePath.cgPath
-
-            //change the fill color
-            shapeLayer.fillColor = UIColor.purple.cgColor
-            //you can change the stroke color
-            shapeLayer.strokeColor = UIColor.purple.cgColor
-            //you can change the line width
-            shapeLayer.lineWidth = 3.0
-
-            view.layer.addSublayer(shapeLayer)
-
-            counter += 1
-            viewModel.userMapCoordinates["\(x) \(y)"] = user
-        }
-
-        for user in viewModel.largeProximityUsers {
-            let radius = 65.0
-            let largeCount = Double(viewModel.largeProximityUsers.count)
-            let x = floor(Double(origin.x) + radius*cos(Double(Double(counter)*2.0)*Double.pi/largeCount))
-            let y = floor(Double(origin.y) + radius*sin(Double(Double(counter)*2.0)*Double.pi/largeCount))
-
-            let circlePath = UIBezierPath(arcCenter: CGPoint(x: x,y: y), radius: CGFloat(radius), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
-
-            let shapeLayer = CAShapeLayer()
-            shapeLayer.path = circlePath.cgPath
-
-            //change the fill color
-            shapeLayer.fillColor = UIColor.purple.cgColor
-            //you can change the stroke color
-            shapeLayer.strokeColor = UIColor.purple.cgColor
-            //you can change the line width
-            shapeLayer.lineWidth = 3.0
-
-            view.layer.addSublayer(shapeLayer)
-
-            counter += 1
-            viewModel.userMapCoordinates["\(x) \(y)"] = user
-        }
+        print("done")
+    }
+    
+    func didTapSomething() {
+        
     }
 }
