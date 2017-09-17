@@ -27,6 +27,7 @@ class DiscoverViewController: UIViewController {
         super.viewDidLoad()
         
         nearbyTableView.delegate = self
+        nearbyTableView.dataSource = self
         
         bindViewModel()
         

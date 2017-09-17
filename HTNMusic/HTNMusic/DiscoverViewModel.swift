@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import Bond
+import Gloss
 import CoreLocation
 
 class DiscoverViewModel {
@@ -26,7 +27,7 @@ extension DiscoverViewModel {
         Alamofire.request(NearbyAPIRouter.nearby())
             .responseJSON { response in
                 if let result = response.result.value as? JSON {
-                    self.deserialize(result)
+                    self.deserialize(result: result)
                 }
             }
     }
@@ -34,10 +35,10 @@ extension DiscoverViewModel {
 
 extension DiscoverViewModel {
     func updateLocation(coords: Coordinate2D, completion: (Bool) -> Void) {
-        Alamofire.request(LocationAPIRouter.location(coord.longitude, coords.latitude))
+        Alamofire.request(LocationAPIRouter.location(Float(coords.longitude), Float(coords.latitude)))
             .responseJSON { response in
                 if let result = response.result.value as? JSON {
-                    self.deserialize(result)
+                    self.deserialize(result: result)
                 }
             }
     }

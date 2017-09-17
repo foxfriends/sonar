@@ -37,7 +37,7 @@ extension LoginViewModel {
 
                     self.user = user
                     self.hasRequestInProgress.value = false
-
+                    print("did this work what")
                     success?(true)
                 } else {
                     self.hasRequestInProgress.value = false

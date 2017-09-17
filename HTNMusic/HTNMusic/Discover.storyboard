@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="76Y-oG-2vs">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Discover View Controller-->
         <scene sceneID="rDO-pH-3bM">
             <objects>
-                <viewController id="76Y-oG-2vs" sceneMemberID="viewController">
+                <viewController id="76Y-oG-2vs" customClass="DiscoverViewController" customModule="HTNMusic" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cSs-Xj-7sh"/>
                         <viewControllerLayoutGuide type="bottom" id="a4h-8V-h62"/>
@@ -60,7 +60,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="359" height="70"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e0T-8U-2wy" id="d7n-F7-cFC">
-                                                    <rect key="frame" x="0.0" y="0.0" width="359" height="69.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="359" height="70"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mup-Jj-ziG">
@@ -139,14 +139,14 @@
                                     <constraint firstAttribute="width" constant="359" id="OgC-gi-OMb"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty_notif_icon" translatesAutoresizingMaskIntoConstraints="NO" id="aT7-bQ-qhx">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty_notif_icon" translatesAutoresizingMaskIntoConstraints="NO" id="aT7-bQ-qhx">
                                 <rect key="frame" x="267" y="27.5" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="KGC-cJ-6es"/>
                                     <constraint firstAttribute="width" constant="35" id="tQP-gs-HHN"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_icon" translatesAutoresizingMaskIntoConstraints="NO" id="t1W-dr-mFv">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_icon" translatesAutoresizingMaskIntoConstraints="NO" id="t1W-dr-mFv">
                                 <rect key="frame" x="309" y="27.5" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="35" id="HEZ-Yo-uAX"/>
@@ -176,6 +176,13 @@
                             <constraint firstItem="Cqj-sB-cPW" firstAttribute="top" secondItem="lhc-TM-B3h" secondAttribute="bottom" constant="15" id="ul9-eX-rEO"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="listView" destination="AqM-Pf-KMG" id="nhF-1H-3fK"/>
+                        <outlet property="mapView" destination="dQs-pb-LVD" id="3wb-J3-wKk"/>
+                        <outlet property="nearbyTableView" destination="Fkv-HV-db6" id="cSF-NG-gRG"/>
+                        <outlet property="segmentedControl" destination="Cqj-sB-cPW" id="oVO-j3-hPv"/>
+                        <outlet property="userImageView" destination="cMd-LW-4gV" id="t38-vI-sZ3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fKA-4S-Ul1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

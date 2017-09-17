@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HTNMusic/UserProfileViewController.swift"
-            timestampString = "527290019.766771"
+            timestampString = "527305547.18035"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
             landmarkName = "inject(user:isSelf:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,12 +42,92 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HTNMusic/LoginViewController.swift"
-            timestampString = "527290068.973533"
+            timestampString = "527305997.300694"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "31"
             endingLineNumber = "31"
             landmarkName = "bindViewModel()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HTNMusic/User.swift"
+            timestampString = "527305792.338409"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "init(json:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HTNMusic/APIResult.swift"
+            timestampString = "527305849.825594"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "init(json:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "HTNMusic.APIResult.init (json : Swift.Dictionary&lt;Swift.String, Any&gt;) -&gt; Swift.Optional&lt;HTNMusic.APIResult&lt;A&gt;&gt;"
+                  moduleName = "HTNMusic"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cam/Desktop/hackthenorth/HTNMusic/HTNMusic/APIResult.swift"
+                  timestampString = "527305998.409381"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "180">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "HTNMusic.APIResult.(init (json : Swift.Dictionary&lt;Swift.String, Any&gt;) -&gt; Swift.Optional&lt;HTNMusic.APIResult&lt;A&gt;&gt;).(implicit closure #1)"
+                  moduleName = "HTNMusic"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cam/Desktop/hackthenorth/HTNMusic/HTNMusic/APIResult.swift"
+                  timestampString = "527305998.411672"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HTNMusic/LoginViewModel.swift"
+            timestampString = "527305930.110528"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "login(success:failure:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

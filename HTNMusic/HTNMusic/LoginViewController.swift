@@ -21,13 +21,13 @@ class LoginViewController: UIViewController {
         
         emailTextField.delegate = self
         passwordTextField.delegate = self
+        bindViewModel()
         // Do any additional setup after loading the view, typically from a nib.
     }
 }
 
 extension LoginViewController {
     func bindViewModel() {
-        // TODO: FIX THIS LATER
         viewModel.email.bidirectionalBind(to: emailTextField.reactive.text)
         viewModel.password.bidirectionalBind(to: passwordTextField.reactive.text)
         
@@ -39,18 +39,28 @@ extension LoginViewController: UITextFieldDelegate {
         if emailTextField.isFirstResponder {
             passwordTextField.becomeFirstResponder()
         } else {
-            viewModel.login(success: { _ in
-                if let discoverViewController = UIStoryboard(name: "Discover", bundle: nil).instantiateInitialViewController() as? DiscoverViewController {
-                    discoverViewController.inject(user: self.viewModel.user!)
-                    self.present(discoverViewController, animated: true)
-                }
-            }, failure: { errorMessage in
-                let errorAlertController = UIAlertController(title: "Oops!", message: errorMessage, preferredStyle: UIAlertControllerStyle.alert)
-                self.present(errorAlertController, animated: true, completion: nil)
-            })
+            login(nil)
         }
         
         return true
+    }
+}
+
+// MARK: - IBActions
+
+extension LoginViewController {
+    @IBAction func login(_ sender: AnyObject?) {
+        viewModel.login(success: { _ in
+            print("logged in successfully")
+            if let discoverViewController = UIStoryboard(name: "Discover", bundle: nil).instantiateInitialViewController() as? DiscoverViewController {
+                discoverViewController.inject(user: self.viewModel.user!)
+                self.present(discoverViewController, animated: true)
+            }
+        }, failure: { errorMessage in
+            let errorAlertController = UIAlertController(title: "Oops!", message: errorMessage, preferredStyle: UIAlertControllerStyle.alert)
+            self.present(errorAlertController, animated: true, completion: nil)
+        })
+
     }
 }
 
