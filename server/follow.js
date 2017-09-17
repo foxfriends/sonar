@@ -15,7 +15,7 @@ const db = require('./database');
 app.get('/followers/:user_id', auth.check, headers, async (req, res) => {
   const { user_id } = req.params;
   try {
-    res.send(result.success(await db.getNumFollowers(user_id)));
+    res.send(result.success(await db.getFollowers(user_id)));
   } catch(error) {
     res.send(result.failure(error.message));
   }
