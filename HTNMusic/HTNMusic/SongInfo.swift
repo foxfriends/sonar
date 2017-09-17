@@ -9,18 +9,20 @@
 import Foundation
 import Gloss
 
+let noTitle = "Unknown Title"
+let noArtist = "Unknown Artist"
+let noAlbum = "Unknown Album"
+
 struct SongInfo: Decodable {
-    var title: String = "Unknown Title"
-    var artist: String = "Unknown Artist"
-    var album: String = "Unknown Album"
+    var title: String = noTitle
+    var artist: String = noArtist
+    var album: String = noAlbum
     var spotifyId: String?
 
     init(title: String?, artist: String?, album: String?) {
-        self.init()
-        
-        self.title = title;
-        self.artist = artist;
-        self.album = album;
+        self.title = title ?? noTitle
+        self.artist = artist ?? noArtist
+        self.album = album ?? noAlbum
     }
 
     init?(json: JSON) {
@@ -38,9 +40,9 @@ struct SongInfo: Decodable {
 
     func toJson() -> JSON {
         return [
-            "title": self.title === "Unknown Title" ? nil : self.title,
-            "artist": self.artist === "Unknown Artist" ? nil : self.artist,
-            "album": self.album === "Unknown Album" ? nil : self.album,
+            "title": self.title == noTitle ? nil : self.title,
+            "artist": self.artist == noArtist ? nil : self.artist,
+            "album": self.album == noAlbum ? nil : self.album,
             "id": self.spotifyId as Any
         ]
     }

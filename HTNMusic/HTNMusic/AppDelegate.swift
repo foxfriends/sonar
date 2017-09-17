@@ -8,6 +8,8 @@
 
 import UIKit
 import Alamofire
+import MediaPlayer
+import Gloss
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,30 +20,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         musicPlayer.beginGeneratingPlaybackNotifications()
-        NotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
-            selector: "nowPlayingItemDidChange",
-            name: MPMusicPlayerControllerNowPlayingItemDidChangeNotification,
+            selector: Selector("nowPlayingItemDidChange"),
+            name:    NSNotification.Name.MPMusicPlayerControllerNowPlayingItemDidChange,
             object: nil
         )
-        NotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
-            selector: "nowPlayingItemDidChange",
-            name: MPMusicPlayerControllerPlaybackStateDidChange,
+            selector: Selector("nowPlayingItemDidChange"),
+            name:  NSNotification.Name.MPMusicPlayerControllerPlaybackStateDidChange,
             object: nil
         )
         func nowPlayingItemDidChange(notification: NSNotification) {
-            var request = StatusAPIRouter = StatusAPIRouter.stop()
+            var request = StatusAPIRouter.stop()
             if let item = musicPlayer.nowPlayingItem {
                 let artist = item.artist
                 let album = item.albumTitle
-                let song = item.title
-                request = StatusAPIRouter.play(song, artist, album)
+                let title = item.title
+                request = StatusAPIRouter.play(SongInfo(title: title, artist: artist, album: album))
             }
             Alamofire.request(request)
                 .responseJSON { response in
                     if let result = response.result.value as? JSON {
-                        switch APIResult<Void>(result) {
+                        switch APIResult<Void>(json: result)! {
                         case .success: break
                         case .failure(let reason):
                             print("oo we fucked up: \(reason)")

@@ -41,6 +41,8 @@ enum UserAPIRouter: URLRequestConvertible {
                 ]
             case .profile, .getSelf:
                 return [:]
+            default:
+                return [:]
         }
     }
 
