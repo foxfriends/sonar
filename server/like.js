@@ -19,7 +19,7 @@ app.get('/', auth.check, headers, async (req, res) => {
   try {
     const songList = await db.getMyLikes(uid);
     const spotlift = await spotify.lookupSongs(songList.map(_ => _.song_id));
-    res.send(result.success(spotlift.map(_ => ({ title: _.name, album: _.album.name, artist: _.artists.map(_ => _.name).join(', '), id: _.id }))));
+    res.send(result.success(spotlift.map(_ => ({ title: _.name, album: _.album.name, artist: _.artists.map(_ => _.name).join(', '), id: _.id, url: _.external_urls.spotify }))));
   } catch(error) {
     res.send(result.failure(error.message));
   }

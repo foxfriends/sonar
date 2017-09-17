@@ -22,12 +22,14 @@ extension RecommendationsViewModel {
         Alamofire.request(UserAPIRouter.suggestions(id))
             .responseJSON { response in
                 if let result = response.result.value as? JSON {
-//                    guard case APIResult<[User]>.success(let recs) = APIResult<[User]>(json: result)! else {
-//                        print("Could not de-serialize recommendations list")
-//                        return
-//                    }
-//                    self.recommendations = recs;
+                    if let status: String = "status" <~~ result {
+                        if status == "SUCCESS" {
+                            if let users: [User] = "data" <~~ result {
+                                self.recommendations = users
+                            }
+                        }
+                    }
                 }
-        }
+            }
     }
 }

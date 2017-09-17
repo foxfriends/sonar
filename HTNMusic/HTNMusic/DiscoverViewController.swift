@@ -128,8 +128,8 @@ extension DiscoverViewController {
     
     @IBAction func didTapRadarPlayButton(_ sender: AnyObject?) {
         guard let spotifyURI = viewModel.radarPlayId else { return }
-        
-        UIApplication.shared.open(URL("spotify://\(spotifyURI)"))
+
+        UIApplication.shared.open(URL(string: "spotify://\(spotifyURI)")!, options: [:], completionHandler: nil)
     }
 }
 
