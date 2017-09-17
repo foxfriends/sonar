@@ -283,7 +283,31 @@ async function unlikeSong(user_id, song_id){
   }
 }
 
-async function saveSuggestion(from, to, song_id) {}
+async function saveSuggestion(from, to, song_id) {
+  const db = await connect();
+  try {
+    await db.query(SQL
+      `INSERT INTO recommendations (to_user_id, from_user_id, song_id) VALUES
+      (${to}, ${from},${song_id})`
+    );
+  } catch(error) {
+    throw error;
+  } finally {
+    db.release();
+  }
+}
+async function getRecommendations(to){
+  const db = await connect();
+  try{
+    const {rows:list} = await db.query(SQL
+    `SELECT to_user_id, song_id FROM recommendations WHERE to_user_id = ${to}`);
+    return list;
+  } catch(error){
+    throw error;
+  }finally{
+    db.release();
+  }
+}
 
 module.exports = {
   createAccount,
@@ -302,4 +326,5 @@ module.exports = {
   unlikeSong,
   likeSong,
   saveSuggestion,
+  getRecommendations
 };

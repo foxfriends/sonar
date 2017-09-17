@@ -125,4 +125,20 @@ app.post('/:user_id/suggest', auth.check, headers, async (req, res) => {
   }
 });
 
+/**
+ * Suggest a song to someone else
+ * @requires Authorization
+ */
+app.get('/:user_id/suggest', auth.check, headers, async (req, res) => {
+  const { uid } = req.user;
+  const { user_id } = req.params;
+  try {
+    const recommendations = await db.getRecommendations(uid);
+    const spotlift = await spotify.lookupSongs(recommendations.map(_ => _.song_id));
+    res.send(result.success(spotlift.map(_ => ({ title: _.name, album: _.album.name, artist: _.artists.map(_ => _.name).join(', '), id: _.id }))));
+  } catch(error) {
+    res.send(result.failure(error.message));
+  }
+});
+
 module.exports = app;
