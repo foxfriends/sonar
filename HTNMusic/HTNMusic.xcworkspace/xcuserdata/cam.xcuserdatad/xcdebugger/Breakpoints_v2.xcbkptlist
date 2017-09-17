@@ -26,27 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HTNMusic/DiscoverViewController.swift"
-            timestampString = "527317270.45934"
+            timestampString = "527321862.8459"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
-            landmarkName = "locationManager(_:didUpdateLocations:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "HTNMusic/DiscoverViewController.swift"
-            timestampString = "527317270.45934"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "150"
-            endingLineNumber = "150"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
             landmarkName = "getNearbyUsers(coords:)"
             landmarkType = "7">
             <Locations>
@@ -58,11 +42,11 @@
                   moduleName = "HTNMusic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/cam/Desktop/hackthenorth/HTNMusic/HTNMusic/DiscoverViewController.swift"
-                  timestampString = "527316633.417763"
+                  timestampString = "527322023.009971"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "146"
-                  endingLineNumber = "146"
+                  startingLineNumber = "165"
+                  endingLineNumber = "165"
                   offsetFromSymbolStart = "32">
                </Location>
                <Location
@@ -73,11 +57,11 @@
                   moduleName = "HTNMusic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/cam/Desktop/hackthenorth/HTNMusic/HTNMusic/DiscoverViewController.swift"
-                  timestampString = "527316633.419829"
+                  timestampString = "527322023.013131"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "147"
-                  endingLineNumber = "147"
+                  startingLineNumber = "166"
+                  endingLineNumber = "166"
                   offsetFromSymbolStart = "32">
                </Location>
             </Locations>
@@ -90,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HTNMusic/DiscoverViewController.swift"
-            timestampString = "527317270.45934"
+            timestampString = "527321862.8459"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
             landmarkName = "redrawUsersOnMap()"
             landmarkType = "7">
          </BreakpointContent>
@@ -106,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HTNMusic/DiscoverViewController.swift"
-            timestampString = "527317270.45934"
+            timestampString = "527321862.8459"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
             landmarkName = "indexChanged(sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -122,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HTNMusic/DiscoverViewController.swift"
-            timestampString = "527317270.45934"
+            timestampString = "527318780.379139"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HTNMusic/DiscoverViewController.swift"
-            timestampString = "527317270.45934"
+            timestampString = "527318780.379139"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -154,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HTNMusic/DiscoverViewController.swift"
-            timestampString = "527317270.45934"
+            timestampString = "527318780.379139"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -170,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HTNMusic/DiscoverViewController.swift"
-            timestampString = "527317270.45934"
+            timestampString = "527321862.8459"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
             landmarkName = "getNearbyUsers(coords:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -186,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HTNMusic/DiscoverViewController.swift"
-            timestampString = "527317270.45934"
+            timestampString = "527321862.8459"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "154"
-            endingLineNumber = "154"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
             landmarkName = "getNearbyUsers(coords:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -250,7 +234,7 @@
                   moduleName = "HTNMusic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/cam/Desktop/hackthenorth/HTNMusic/HTNMusic/APIResult.swift"
-                  timestampString = "527316633.461386"
+                  timestampString = "527322023.056703"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "23"
@@ -265,7 +249,7 @@
                   moduleName = "HTNMusic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/cam/Desktop/hackthenorth/HTNMusic/HTNMusic/APIResult.swift"
-                  timestampString = "527316633.463737"
+                  timestampString = "527322023.058757"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "23"
@@ -282,12 +266,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HTNMusic/DiscoverViewController.swift"
-            timestampString = "527317270.45934"
+            timestampString = "527321862.8459"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
             landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HTNMusic/User.swift"
+            timestampString = "527322020.986483"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "init(json:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HTNMusic/AppDelegate.swift"
+            timestampString = "527322240.099151"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "nowPlayingItemDidChange(notification:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

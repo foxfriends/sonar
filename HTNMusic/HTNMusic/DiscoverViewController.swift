@@ -12,6 +12,7 @@ import MapKit
 import Bond
 import ReactiveKit
 import CoreLocation
+import Alamofire
 
 class DiscoverViewController: UIViewController {
     @IBOutlet fileprivate weak var segmentedControl: UISegmentedControl!
@@ -68,6 +69,20 @@ fileprivate extension DiscoverViewController {
         viewModel.isMapViewHidden
             .map { !$0 }
             .bind(to: listView.reactive.isHidden)
+        
+    }
+}
+
+// MARK: - IBActions
+
+extension DiscoverViewController {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first!
+        let location = touch.location(in: self.view)
+
+        if let user = viewModel.getUserNearLocation(x: Float(location.x), y: Float(location.y)) {
+            print("user is listening to: \(String(describing: user.currentListening?.title)))")
+        }
         
     }
 }
@@ -165,7 +180,7 @@ extension DiscoverViewController {
             let x = Int(floor(Double(origin.x) + radius*cos(Double(counter*2)*Double.pi/smallCount)))
             let y = Int(floor(Double(origin.y) + radius*sin(Double(counter*2)*Double.pi/smallCount)))
 
-            let circlePath = UIBezierPath(arcCenter: CGPoint(x: x,y: y), radius: CGFloat(3.0), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
+            let circlePath = UIBezierPath(arcCenter: CGPoint(x: x,y: y), radius: CGFloat(4.0), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
 
             let shapeLayer = CAShapeLayer()
             shapeLayer.path = circlePath.cgPath
@@ -181,16 +196,16 @@ extension DiscoverViewController {
 
             counter += 1
             print("close")
-            viewModel.userMapCoordinates["\(x) \(y)"] = user
+            viewModel.userMapCoordinates.append(ScreenCoords(x: x, y: y, user: user))
         }
 
         for user in viewModel.mediumProximityUsers {
-            let radius = 102.0
+            let radius = 107.0
             let mediumCount = Double(viewModel.mediumProximityUsers.count)
             let x = floor(Double(origin.x) + radius*cos(Double(Double(counter)*2.0+Double.pi/2.0)*Double.pi/mediumCount))
             let y = floor(Double(origin.y) + radius*sin(Double(Double(counter)*2.0+Double.pi/2.0)*Double.pi/mediumCount))
 
-            let circlePath = UIBezierPath(arcCenter: CGPoint(x: x,y: y), radius: CGFloat(3.0), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
+            let circlePath = UIBezierPath(arcCenter: CGPoint(x: x,y: y), radius: CGFloat(4.0), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
 
             let shapeLayer = CAShapeLayer()
             shapeLayer.path = circlePath.cgPath
@@ -206,16 +221,16 @@ extension DiscoverViewController {
 
             counter += 1
             print("medium")
-            viewModel.userMapCoordinates["\(x) \(y)"] = user
+            viewModel.userMapCoordinates.append(ScreenCoords(x: Int(x), y: Int(y), user: user))
         }
 
         for user in viewModel.largeProximityUsers {
-            let radius = 155.0
+            let radius = 160.0
             let largeCount = Double(viewModel.largeProximityUsers.count)
             let x = floor(Double(origin.x) + radius*cos(Double(Double(counter)*2.0)*Double.pi/largeCount))
             let y = floor(Double(origin.y) + radius*sin(Double(Double(counter)*2.0)*Double.pi/largeCount))
 
-            let circlePath = UIBezierPath(arcCenter: CGPoint(x: x,y: y), radius: CGFloat(3.0), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
+            let circlePath = UIBezierPath(arcCenter: CGPoint(x: x,y: y), radius: CGFloat(4.0), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
 
             let shapeLayer = CAShapeLayer()
             shapeLayer.path = circlePath.cgPath
@@ -231,7 +246,7 @@ extension DiscoverViewController {
 
             counter += 1
             print("far")
-            viewModel.userMapCoordinates["\(x) \(y)"] = user
+            viewModel.userMapCoordinates.append(ScreenCoords(x: Int(x), y: Int(y), user: user))
         }
         print("done")
     }

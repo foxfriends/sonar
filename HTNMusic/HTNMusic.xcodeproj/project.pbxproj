@@ -36,7 +36,9 @@
 		321627121F6DD936008C390C /* ProximityInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321627111F6DD936008C390C /* ProximityInfo.swift */; };
 		32BE72BE1F6E01730065F6D6 /* RecentlyPlayedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BE72BD1F6E01730065F6D6 /* RecentlyPlayedTableViewCell.swift */; };
 		32BE72C01F6E16C10065F6D6 /* LikeAPIRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BE72BF1F6E16C10065F6D6 /* LikeAPIRouter.swift */; };
-		32BE72C21F6E2B930065F6D6 /* AuthRequestAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BE72C11F6E2B930065F6D6 /* AuthRequestAdapter.swift */; };
+		32BE72C41F6E3EB60065F6D6 /* AuthRequestAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BE72C31F6E3EB60065F6D6 /* AuthRequestAdapter.swift */; };
+		5FB3C1E91F6E267900684712 /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FB3C1E81F6E267900684712 /* Notifications.storyboard */; };
+		5FB3C1EB1F6E283900684712 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FB3C1EA1F6E283900684712 /* Settings.storyboard */; };
 		72C3DCB44261BE8AA6779D8E /* Pods_HTNMusic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20074BE002CB37F9727F6F55 /* Pods_HTNMusic.framework */; };
 /* End PBXBuildFile section */
 
@@ -75,7 +77,9 @@
 		321627111F6DD936008C390C /* ProximityInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProximityInfo.swift; sourceTree = "<group>"; };
 		32BE72BD1F6E01730065F6D6 /* RecentlyPlayedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentlyPlayedTableViewCell.swift; sourceTree = "<group>"; };
 		32BE72BF1F6E16C10065F6D6 /* LikeAPIRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeAPIRouter.swift; sourceTree = "<group>"; };
-		32BE72C11F6E2B930065F6D6 /* AuthRequestAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthRequestAdapter.swift; sourceTree = "<group>"; };
+		32BE72C31F6E3EB60065F6D6 /* AuthRequestAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthRequestAdapter.swift; sourceTree = "<group>"; };
+		5FB3C1E81F6E267900684712 /* Notifications.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Notifications.storyboard; sourceTree = "<group>"; };
+		5FB3C1EA1F6E283900684712 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +165,8 @@
 			children = (
 				321626E61F6CE5FA008C390C /* Login.storyboard */,
 				321626E81F6CE8FB008C390C /* Discover.storyboard */,
+				5FB3C1EA1F6E283900684712 /* Settings.storyboard */,
+				5FB3C1E81F6E267900684712 /* Notifications.storyboard */,
 				321626FF1F6D9F11008C390C /* UserProfile.storyboard */,
 			);
 			name = Views;
@@ -185,8 +191,8 @@
 				321627031F6DC120008C390C /* FollowingAPIRouter.swift */,
 				321627041F6DC120008C390C /* LocationAPIRouter.swift */,
 				321627051F6DC120008C390C /* NearbyAPIRouter.swift */,
-				32BE72C11F6E2B930065F6D6 /* AuthRequestAdapter.swift */,
 				32BE72BF1F6E16C10065F6D6 /* LikeAPIRouter.swift */,
+				32BE72C31F6E3EB60065F6D6 /* AuthRequestAdapter.swift */,
 				321627061F6DC120008C390C /* StatusAPIRouter.swift */,
 				321627071F6DC120008C390C /* UserAPIRouter.swift */,
 				321626EF1F6D155A008C390C /* LoginAPIRouter.swift */,
@@ -269,8 +275,10 @@
 				321626E71F6CE5FA008C390C /* Login.storyboard in Resources */,
 				321626D71F6CE4EF008C390C /* LaunchScreen.storyboard in Resources */,
 				321626E91F6CE8FB008C390C /* Discover.storyboard in Resources */,
+				5FB3C1E91F6E267900684712 /* Notifications.storyboard in Resources */,
 				321627001F6D9F11008C390C /* UserProfile.storyboard in Resources */,
 				321626D41F6CE4EF008C390C /* Assets.xcassets in Resources */,
+				5FB3C1EB1F6E283900684712 /* Settings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,7 +365,7 @@
 				321626F21F6D23AD008C390C /* SongInfo.swift in Sources */,
 				321627121F6DD936008C390C /* ProximityInfo.swift in Sources */,
 				321626CB1F6CE4EF008C390C /* AppDelegate.swift in Sources */,
-				32BE72C21F6E2B930065F6D6 /* AuthRequestAdapter.swift in Sources */,
+				32BE72C41F6E3EB60065F6D6 /* AuthRequestAdapter.swift in Sources */,
 				32BE72C01F6E16C10065F6D6 /* LikeAPIRouter.swift in Sources */,
 				321626FE1F6D92BF008C390C /* Constants.swift in Sources */,
 				321626FC1F6D773E008C390C /* ScreenCoords.swift in Sources */,

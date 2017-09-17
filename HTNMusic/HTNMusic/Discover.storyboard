@@ -22,32 +22,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dQs-pb-LVD" userLabel="MapView">
-                                <rect key="frame" x="0.0" y="134" width="375" height="400"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circles" translatesAutoresizingMaskIntoConstraints="NO" id="gUg-fU-KCV">
-                                        <rect key="frame" x="-0.5" y="99.5" width="375.5" height="200"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cMd-LW-4gV" userLabel="CurrentUserImageView">
-                                        <rect key="frame" x="162" y="175" width="50" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="EAe-8Y-d9S"/>
-                                            <constraint firstAttribute="height" constant="50" id="Ivd-Vh-Ie5"/>
-                                        </constraints>
-                                    </imageView>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="gUg-fU-KCV" firstAttribute="leading" secondItem="dQs-pb-LVD" secondAttribute="leading" id="0Xb-qy-yTc"/>
-                                    <constraint firstItem="gUg-fU-KCV" firstAttribute="centerX" secondItem="dQs-pb-LVD" secondAttribute="centerX" id="BgF-D4-WsQ"/>
-                                    <constraint firstItem="gUg-fU-KCV" firstAttribute="top" secondItem="dQs-pb-LVD" secondAttribute="top" constant="100" id="Bmq-xN-CRa"/>
-                                    <constraint firstAttribute="height" constant="400" id="CQr-Vq-zHc"/>
-                                    <constraint firstItem="cMd-LW-4gV" firstAttribute="centerX" secondItem="dQs-pb-LVD" secondAttribute="centerX" id="OjS-I6-jsW"/>
-                                    <constraint firstAttribute="trailing" secondItem="gUg-fU-KCV" secondAttribute="trailing" id="cG6-nd-HXM"/>
-                                    <constraint firstItem="gUg-fU-KCV" firstAttribute="centerY" secondItem="dQs-pb-LVD" secondAttribute="centerY" id="mMk-CL-ML3"/>
-                                    <constraint firstItem="cMd-LW-4gV" firstAttribute="centerY" secondItem="dQs-pb-LVD" secondAttribute="centerY" id="sdw-c4-GLA"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AqM-Pf-KMG" userLabel="ListView">
                                 <rect key="frame" x="0.0" y="127" width="375" height="540"/>
                                 <subviews>
@@ -111,6 +85,32 @@
                                     <constraint firstAttribute="bottom" secondItem="Fkv-HV-db6" secondAttribute="bottom" constant="5" id="gMH-ZG-HGn"/>
                                     <constraint firstAttribute="trailing" secondItem="Fkv-HV-db6" secondAttribute="trailing" constant="8" id="ktw-9V-9Gc"/>
                                     <constraint firstItem="Fkv-HV-db6" firstAttribute="leading" secondItem="AqM-Pf-KMG" secondAttribute="leading" constant="8" id="nz8-qd-rP6"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dQs-pb-LVD" userLabel="MapView">
+                                <rect key="frame" x="0.0" y="134" width="375" height="400"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circles" translatesAutoresizingMaskIntoConstraints="NO" id="gUg-fU-KCV">
+                                        <rect key="frame" x="-0.5" y="99.5" width="375.5" height="200"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cMd-LW-4gV" userLabel="CurrentUserImageView">
+                                        <rect key="frame" x="162" y="175" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="EAe-8Y-d9S"/>
+                                            <constraint firstAttribute="height" constant="50" id="Ivd-Vh-Ie5"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstItem="gUg-fU-KCV" firstAttribute="leading" secondItem="dQs-pb-LVD" secondAttribute="leading" id="0Xb-qy-yTc"/>
+                                    <constraint firstItem="gUg-fU-KCV" firstAttribute="centerX" secondItem="dQs-pb-LVD" secondAttribute="centerX" id="BgF-D4-WsQ"/>
+                                    <constraint firstAttribute="height" constant="400" id="CQr-Vq-zHc"/>
+                                    <constraint firstItem="cMd-LW-4gV" firstAttribute="centerX" secondItem="dQs-pb-LVD" secondAttribute="centerX" id="OjS-I6-jsW"/>
+                                    <constraint firstAttribute="trailing" secondItem="gUg-fU-KCV" secondAttribute="trailing" id="cG6-nd-HXM"/>
+                                    <constraint firstItem="gUg-fU-KCV" firstAttribute="centerY" secondItem="dQs-pb-LVD" secondAttribute="centerY" id="mMk-CL-ML3"/>
+                                    <constraint firstItem="cMd-LW-4gV" firstAttribute="centerY" secondItem="dQs-pb-LVD" secondAttribute="centerY" id="sdw-c4-GLA"/>
                                 </constraints>
                             </view>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Cqj-sB-cPW">

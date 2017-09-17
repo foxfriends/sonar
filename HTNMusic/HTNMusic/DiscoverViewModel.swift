@@ -19,7 +19,7 @@ class DiscoverViewModel {
     var smallProximityUsers = Array<User>()
     var mediumProximityUsers = Array<User>()
     var largeProximityUsers = Array<User>()
-    var userMapCoordinates = Dictionary<String, User>()
+    var userMapCoordinates = Array<ScreenCoords>()
     
     let sessionManager = SessionManager()
 }
@@ -48,6 +48,16 @@ extension DiscoverViewModel {
 }
 
 extension DiscoverViewModel {
+    func getUserNearLocation(x: Float, y: Float) -> User? {
+        for coord in userMapCoordinates { // Have tolerance of 3px when tapping
+            if abs(Float(coord.x) - x) <= 3 && abs(Float(coord.y) - y) <= 3 {
+                return coord.user
+            }
+        }
+        
+        return nil
+    }
+    
     func deserialize(result: JSON) {
         guard case APIResult<ProximityInfo>.success(let proximityInfo) = APIResult<ProximityInfo>(json: result)! else {
             print("Cannot de-serialize ProximityInfo")

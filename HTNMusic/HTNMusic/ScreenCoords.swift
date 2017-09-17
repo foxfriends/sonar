@@ -11,9 +11,11 @@ import Foundation
 struct ScreenCoords {
     var x: Int
     var y: Int
+    var user: User
     
-    init(x: Int, y: Int) {
+    init(x: Int, y: Int, user: User) {
         self.x = x
         self.y = y
+        self.user = user
     }
 }
