@@ -202,6 +202,7 @@ async function getFollowers(user_id) {
       SQL `SELECT following_users.following_user_id, first_name, last_name, avatar, email, current_playing, likes
        FROM following_users
        INNER JOIN profile ON following_users.following_user_id = profile.user_id
+       INNER JOIN users as u ON u.user_id = profile.user_id
        WHERE following_users.following_user_id = ${user_id}`
     );
     return rowCount;
