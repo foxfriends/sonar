@@ -81,7 +81,13 @@ app.get('/:user_id/history', auth.check, headers, async (req, res) => {
 
 async function getUserProfile(req, res, user_id) {
   try {
-    const user = await db.getUser(user_id);
+    const [user, history] = await Promise.all([
+      db.getUser(user_id),
+      db.getHistory(user_id)
+    ]) ;
+    const spotlift = await spotify.lookupSongs(history.map(_ => _.song_id));
+    const history2 = spotlift.map(_ => ({ title: _.name, album: _.album.name, artist: _.artists.map(_ => _.name).join(', '), id: _.id, url: _.external_urls.spotify }));
+
     const [track] = user.current_playing ? await spotify.lookupSongs([user.current_playing]) : [null];
     if (track !== null){
       user.song = {
@@ -89,6 +95,7 @@ async function getUserProfile(req, res, user_id) {
         album: track.album.name,
         artist: track.artists.map(_ => _.name).join(', '),
         id: track.id,
+        url: track.external_urls.spotify
       };
     } else {
       user.song = null;
@@ -96,6 +103,7 @@ async function getUserProfile(req, res, user_id) {
 
     delete user.current_playing;
     user.likes = +user.likes;
+    user.history = history2;
     res.send(result.success(user));
   } catch(error) {
     res.send(result.failure(error.message));

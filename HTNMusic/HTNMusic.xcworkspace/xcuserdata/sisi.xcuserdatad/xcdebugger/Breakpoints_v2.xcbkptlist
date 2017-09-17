@@ -6,112 +6,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HTNMusic/AppDelegate.swift"
-            timestampString = "527326091.589228"
+            filePath = "HTNMusic/RecommendationsViewModel.swift"
+            timestampString = "527328667.800808"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
-            landmarkName = "nowPlayingItemDidChange(notification:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HTNMusic.AppDelegate.nowPlayingItemDidChange (notification : __ObjC.NSNotification) -&gt; ()"
-                  moduleName = "HTNMusic"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/sisi/Code/hackthenorth/HTNMusic/HTNMusic/AppDelegate.swift"
-                  timestampString = "527326092.373221"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "30"
-                  endingLineNumber = "30"
-                  offsetFromSymbolStart = "1296">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HTNMusic.AppDelegate.nowPlayingItemDidChange (notification : __ObjC.NSNotification) -&gt; ()"
-                  moduleName = "HTNMusic"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/sisi/Code/hackthenorth/HTNMusic/HTNMusic/AppDelegate.swift"
-                  timestampString = "527326092.391515"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "30"
-                  endingLineNumber = "30"
-                  offsetFromSymbolStart = "1424">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "HTNMusic/AppDelegate.swift"
-            timestampString = "527324197.948255"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "nowPlayingItemDidChange(notification:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HTNMusic.AppDelegate.(nowPlayingItemDidChange (notification : __ObjC.NSNotification) -&gt; ()).(closure #1)"
-                  moduleName = "HTNMusic"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/sisi/Code/hackthenorth/HTNMusic/HTNMusic/AppDelegate.swift"
-                  timestampString = "527326092.40025"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "35"
-                  endingLineNumber = "35"
-                  offsetFromSymbolStart = "20">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "HTNMusic.AppDelegate.(nowPlayingItemDidChange (notification : __ObjC.NSNotification) -&gt; ()).(closure #1)"
-                  moduleName = "HTNMusic"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/sisi/Code/hackthenorth/HTNMusic/HTNMusic/AppDelegate.swift"
-                  timestampString = "527326092.404956"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "35"
-                  endingLineNumber = "35"
-                  offsetFromSymbolStart = "400">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "HTNMusic/AppDelegate.swift"
-            timestampString = "527324384.712805"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "nowPlayingItemDidChange(notification:)"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "recommend()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

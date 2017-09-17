@@ -138,9 +138,18 @@ app.get('/nearby', auth.check, headers, async (req, res) => {
   }
 });
 
+async function recentlyPlayed(user_id) {
+    const history = await db.getHistory(user_id);
+    if(history.length === 0) { return []; }
+    const spotlift = await spotify.lookupSongs(history.map(_ => _.song_id));
+    return spotlift.map(_ => ({ title: _.name, album: _.album.name, artist: _.artists.map(_ => _.name).join(', '), id: _.id, url: _.external_urls.spotify }));
+}
+
 async function findCloseUsers(user_id, distClose, distMedium, distFar){
   const { close, medium, far } = await db.findClose(user_id, distClose, distMedium, distFar);
   const rows = [].concat(close, medium, far);
+
+  const histories = await Promise.all(rows.map(_ => recentlyPlayed(_.user_id)));
   const songs = await spotify.lookupSongs(rows.map(_ => _.current_playing));
   const final = { close: [], medium: [], far: [] };
   songs.forEach((row, i) => {
@@ -149,20 +158,22 @@ async function findCloseUsers(user_id, distClose, distMedium, distFar){
       album: row.album.name,
       artist: row.artists.map(_ => _.name).join(', '),
       id: row.id,
+      url: row.external_urls.spotify,
     };
+
     let user;
     if(i < close.length) {
       user = close[i];
       const { first_name, last_name, avatar, likes, user_id, email } = user;
-      final.close.push({ first_name, last_name, avatar, likes: +likes, song, user_id, email });
+      final.close.push({ first_name, last_name, avatar, likes: +likes, song, user_id, email, history: histories[i] });
     } else if(i < close.length + medium.length) {
       user = medium[i - close.length];
       const { first_name, last_name, avatar, likes, user_id, email } = user;
-      final.medium.push({ first_name, last_name, avatar, likes: +likes, song, user_id, email });
+      final.medium.push({ first_name, last_name, avatar, likes: +likes, song, user_id, email, history: histories[i] });
     } else {
       user = far[i - close.length - medium.length];
       const { first_name, last_name, avatar, likes, user_id, email } = user;
-      final.far.push({ first_name, last_name, avatar, likes: +likes, song, user_id, email });
+      final.far.push({ first_name, last_name, avatar, likes: +likes, song, user_id, email, history: histories[i] });
     }
   });
   return final;

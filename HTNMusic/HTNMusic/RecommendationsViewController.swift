@@ -20,6 +20,16 @@ class RecommendationsViewController : UIViewController {
 }
 
 extension RecommendationsViewController {
+    @IBAction func mystery() {
+        recommend()
+    }
+    
+    func recommend() {
+        self.viewModel.recommend()
+    }
+}
+
+extension RecommendationsViewController {
     func inject(user: User) {
         viewModel.user = user
     }
