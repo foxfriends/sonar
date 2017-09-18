@@ -1,10 +1,10 @@
-# Song Sonar
+# Sonar
 
 Ever seen someone on the street and wondered what music they were listening to
 but didn't want to go talk to them because social interaction is just so not
-cool anymore? Wonder no more with Song Sonar!
+cool anymore? Wonder no more with Sonar!
 
-Song Sonar tells you what songs people are listening to nearby without giving
+Sonar tells you what songs people are listening to nearby without giving
 away your location! This way you can stay anonymous, but still interact with
 other people around you. It's antisocial interaction, and this is an antisocial
 network.
