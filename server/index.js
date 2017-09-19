@@ -183,3 +183,5 @@ async function findCloseUsers(user_id, distClose, distMedium, distFar){
 };
 
 app.use('/debug', express.static('../web-console'));
+
+module.exports = app;
