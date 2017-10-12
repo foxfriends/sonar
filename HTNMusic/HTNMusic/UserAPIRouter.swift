@@ -2,7 +2,7 @@
 //  UserAPIRouter.swift
 //  HTNMusic
 //
-//  Created by Cameron Eldridge on 2017-09-16.
+//  Created by Yeva Yu on 2017-09-16.
 //  Copyright © 2017 Yeva Yu. All rights reserved.
 //
 
@@ -37,54 +37,36 @@ enum UserAPIRouter: URLRequestConvertible {
                     "email" : email
                 ]
             case .suggest(_, let song):
-                return [
-                    "song": song.toJson()
-                ]
+                return ["song": song.toJson()]
             case .profile, .getSelf:
                 return [:]
             default:
                 return [:]
         }
     }
-
-    func asURLRequest() throws -> URLRequest {
+    
+    var urlString: String {
+        let baseURL = Constants.sonarBaseURL
         switch self {
             case .history(let userId):
-                let url = URL(string: "\(Constants.loginBaseURL)user/\(userId)/history")!
-                var urlRequest = URLRequest(url: url)
-                urlRequest.httpMethod = method.rawValue
-
-                return try JSONEncoding.default.encode(urlRequest, withJSONObject: params)
+                return "\(baseURL)user/\(userId)/history"
             case .create:
-                let url = URL(string: "\(Constants.loginBaseURL)user/new")!
-                var urlRequest = URLRequest(url: url)
-                urlRequest.httpMethod = method.rawValue
-
-                return try JSONEncoding.default.encode(urlRequest, withJSONObject: params)
+                return "\(baseURL)user/new"
             case .suggest(let userId, _):
-                let url = URL(string: "\(Constants.loginBaseURL)user/\(userId)/suggest")!
-                var urlRequest = URLRequest(url: url)
-                urlRequest.httpMethod = method.rawValue
-
-                return try JSONEncoding.default.encode(urlRequest, withJSONObject: params)
+                return "\(baseURL)user/\(userId)/suggest"
             case .profile(let userId):
-                let url = URL(string: "\(Constants.loginBaseURL)user/\(userId)")!
-                var urlRequest = URLRequest(url: url)
-                urlRequest.httpMethod = method.rawValue
-
-                return try JSONEncoding.default.encode(urlRequest, withJSONObject: params)
+                return "\(baseURL)user/\(userId)"
             case .getSelf:
-                let url = URL(string: "\(Constants.loginBaseURL)user")!
-                var urlRequest = URLRequest(url: url)
-                urlRequest.httpMethod = method.rawValue
-
-                return try JSONEncoding.default.encode(urlRequest, withJSONObject: params)
+                return "\(baseURL)user"
             case .suggestions(let userId):
-                let url = URL(string: "\(Constants.loginBaseURL)user/\(userId)/suggest")!
-                var urlRequest = URLRequest(url: url)
-                urlRequest.httpMethod = method.rawValue
-                
-                return try URLEncoding.default.encode(urlRequest, with: params)
+                return "\(baseURL)user/\(userId)/suggest"
         }
+    }
+
+    func asURLRequest() throws -> URLRequest {
+        var urlRequest = URLRequest(url: URL(string: urlString)!)
+        urlRequest.httpMethod = method.rawValue
+        
+        return try URLEncoding.default.encode(urlRequest, with: params)
     }
 }

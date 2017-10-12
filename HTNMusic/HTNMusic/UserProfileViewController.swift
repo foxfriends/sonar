@@ -2,7 +2,7 @@
 //  UserProfileViewController.swift
 //  HTNMusic
 //
-//  Created by Cameron Eldridge on 2017-09-16.
+//  Created by Yeva Yu on 2017-09-16.
 //  Copyright © 2017 Yeva Yu. All rights reserved.
 //
 
@@ -26,6 +26,8 @@ class UserProfileViewController: UIViewController {
         if let user = viewModel.user {
             userNameLabel.text = "\(user.firstName) \(user.lastName[user.lastName.startIndex])."
             heartsCountLabel.text = "\(user.likes ?? 0)"
+            
+            // TODO: update to load profiles from a url
             if user.avatarURL == "avatar1" {
                 userImageView.image = UIImage(named: "blond_hair_guy")!
             } else if user.avatarURL == "avatar2" {
@@ -38,7 +40,10 @@ class UserProfileViewController: UIViewController {
             
             recentlyPlayedTableView.dataSource = self
         } else {
-            print("error: no user data")
+            let alert = UIAlertController(title: "Oops!", message: "No user data found!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+            
+            present(alert, animated: true, completion: nil)
         }
     }
 }
@@ -80,8 +85,10 @@ extension UserProfileViewController {
     }
 }
 
+// MARK: - RecentlyPlayedTableViewCell Delegate
+
 extension UserProfileViewController: RecentlyPlayedTableViewCellDelegate {
-    func recentlyPlayedCell(_: RecentlyPlayedTableViewCell, didTapPlayButtonWithURL: String) {
-        UIApplication.shared.open(URL(string: didTapPlayButtonWithURL)!, options: [:], completionHandler: nil)
+    func recentlyPlayedCell(_: RecentlyPlayedTableViewCell, playButtonTappedWith id: String) {
+        UIApplication.shared.open(URL(string: id)!, options: [:], completionHandler: nil)
     }
 }

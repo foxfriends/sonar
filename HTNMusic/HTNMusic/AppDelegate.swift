@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  HTNMusic
 //
-//  Created by Cameron Eldridge on 2017-09-16.
+//  Created by Yeva Yu on 2017-09-16.
 //  Copyright © 2017 Yeva Yu. All rights reserved.
 //
 
@@ -36,8 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             sessionManager.request(request)
                 .responseJSON { response in
                     if let result = response.result.value as? JSON {
-                        if String(describing: result["status"]) == "SUCCESS" {
-                            print("k we're ok")
+                        if String(describing: result["status"]) == "FAILURE" {
+                            print("ERROR: Could not broadcast media change")
                         }
                     }
             }
@@ -68,8 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        // TODO: Let this application run in the background?
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {

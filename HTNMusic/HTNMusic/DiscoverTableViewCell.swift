@@ -2,7 +2,7 @@
 //  DiscoverTableViewCell.swift
 //  HTNMusic
 //
-//  Created by Cameron Eldridge on 2017-09-16.
+//  Created by Yeva Yu on 2017-09-16.
 //  Copyright © 2017 Yeva Yu. All rights reserved.
 //
 
@@ -21,7 +21,7 @@ class DiscoverTableViewCell: UITableViewCell {
     var spotifyId: String? = nil
     
     @IBAction func playButtonTapped(_ sender: AnyObject?) {
-        guard let id = spotifyId else { return }
+        guard let id = spotifyId else { print("Error: No song ID"); return }
         
         delegate?.discoverTableViewCell(self, playButtonTappedWith: id)
     }

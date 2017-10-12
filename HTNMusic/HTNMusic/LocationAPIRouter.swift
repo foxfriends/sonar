@@ -2,7 +2,7 @@
 //  LocationAPIRouter.swift
 //  HTNMusic
 //
-//  Created by Cameron Eldridge on 2017-09-16.
+//  Created by Yeva Yu on 2017-09-16.
 //  Copyright © 2017 Yeva Yu. All rights reserved.
 //
 
@@ -28,7 +28,7 @@ enum LocationAPIRouter: URLRequestConvertible {
     }
 
     func asURLRequest() throws -> URLRequest {
-        let url = URL(string: "\(Constants.loginBaseURL)location")!
+        let url = URL(string: "\(Constants.sonarBaseURL)location")!
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = method.rawValue
 

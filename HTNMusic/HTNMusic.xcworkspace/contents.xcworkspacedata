@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:RecommendationTableViewCell.swift">
-   </FileRef>
-   <FileRef
       location = "group:HTNMusic.xcodeproj">
    </FileRef>
    <FileRef

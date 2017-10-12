@@ -2,27 +2,30 @@
 //  RecommendationTableViewCell.swift
 //  HTNMusic
 //
-//  Created by Cameron Eldridge on 2017-09-16.
+//  Created by Yeva Yu on 2017-09-16.
 //  Copyright © 2017 Yeva Yu. All rights reserved.
 //
 
 import UIKit
 
-protocol WhatTableViewCellDelegate {
-    func whatTableViewCell(_: WhatTableViewCell, playButtonTappedWith id: String)
+protocol RecommendationTableViewCellDelegate {
+    func recommendationTableViewCell(_: RecommendationTableViewCell, playButtonTappedWith id: String)
 }
 
-class WhatTableViewCell: UITableViewCell {
+class RecommendationTableViewCell: UITableViewCell {
     @IBOutlet weak var mediaTitleLabel: UILabel!
     @IBOutlet weak var mediaArtistLabel: UILabel!
     @IBOutlet weak var userImageView: UIImageView!
     
-    var delegate: WhatTableViewCellDelegate?
+    var delegate: RecommendationTableViewCellDelegate?
     var spotifyId: String? = nil
     
     @IBAction func playButtonTapped(_ sender: AnyObject?) {
-        guard let id = spotifyId else { return }
+        guard let id = spotifyId else {
+            print("Error: No spotify id")
+            return
+        }
         
-        delegate?.whatTableViewCell(self, playButtonTappedWith: id)
+        delegate?.recommendationTableViewCell(self, playButtonTappedWith: id)
     }
 }

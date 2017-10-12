@@ -2,7 +2,7 @@
 //  DiscoverViewModel.swift
 //  HTNMusic
 //
-//  Created by Cameron Eldridge on 2017-09-16.
+//  Created by Yeva Yu on 2017-09-16.
 //  Copyright © 2017 Yeva Yu. All rights reserved.
 //
 
@@ -52,7 +52,7 @@ extension DiscoverViewModel {
 
 extension DiscoverViewModel {
     func getUserNearLocation(x: Float, y: Float) -> User? {
-        for coord in userMapCoordinates { // Have tolerance of 3px when tapping
+        for coord in userMapCoordinates { // Have tolerance of 8px when tapping on a dot
             if abs(Float(coord.x) - x) <= 8 && abs(Float(coord.y) - y) <= 8 {
                 return coord.user
             }

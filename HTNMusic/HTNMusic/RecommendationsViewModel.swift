@@ -25,7 +25,7 @@ extension RecommendationsViewModel {
                 if let result = response.result.value as? JSON {
                     if let status: String = "status" <~~ result {
                         if status != "SUCCESS" {
-                            print("pp[S")
+                            print("Could not recommend music")
                         }
                     }
                 }
@@ -34,25 +34,24 @@ extension RecommendationsViewModel {
 }
 
 extension RecommendationsViewModel {
-    func getRecommendations(completion: @escaping (Bool) -> Void) {
+    func getRecommendations(success: ((Bool) -> Void)?, failure: @escaping (String) -> Void) {
         sessionManager.adapter = AuthRequestAdapter(authToken: (Session.sharedInstance.user?.authToken)!)
         guard let id = user?.id else { print("no id"); return }
         sessionManager.request(UserAPIRouter.suggestions(id))
             .responseJSON { response in
                 if let result = response.result.value as? JSON {
-                    print("gotresult")
-                    if let status: String = "status" <~~ result {
-                        print("gotstatus")
-                        if status == "SUCCESS" {
-                            print("got success")
-                            if let users: [User] = "data" <~~ result {
-                                self.recommendations = users
-                                completion(true)
-                            }
+                    if let status: String = "status" <~~ result, status == "SUCCESS" {
+                        if let users: [User] = "data" <~~ result {
+                            self.recommendations = users
+                            success?(true)
+                        } else {
+                            let errorMessage = result["reason"] as! String
+                            failure(errorMessage)
+                            return
                         }
                     }
                 } else {
-                    print("nope")
+                    failure("Could not get recommendations")
                 }
             }
     }

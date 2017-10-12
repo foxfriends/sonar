@@ -2,7 +2,7 @@
 //  LoginViewModel.swift
 //  HTNMusic
 //
-//  Created by Cameron Eldridge on 2017-09-16.
+//  Created by Yeva Yu on 2017-09-16.
 //  Copyright © 2017 Yeva Yu. All rights reserved.
 //
 
@@ -30,8 +30,10 @@ extension LoginViewModel {
         Alamofire.request(LoginAPIRouter.email(email, password))
             .responseJSON { response in
                 if let result = response.result.value as? JSON {
+                    // Ideally, we would just use the .validate() function and status codes to convey failure/success
                     guard case APIResult<User>.success(let user) = APIResult<User>(json: result)! else {
-                        print("Cannot de-serialize User")
+                        self.hasRequestInProgress.value = false
+                        failure("Could not verify user, please try again!")
                         return
                     }
 
@@ -43,11 +45,10 @@ extension LoginViewModel {
                     sessionManager.adapter = AuthRequestAdapter(authToken: user.authToken!)
                     
                     self.hasRequestInProgress.value = false
-                    print("did this work what")
                     success?(true)
                 } else {
                     self.hasRequestInProgress.value = false
-                    failure("Could not log in!")
+                    failure("Something went wrong, please try again!")
                 }
             }
         

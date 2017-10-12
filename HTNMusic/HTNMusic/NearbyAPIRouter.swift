@@ -2,7 +2,7 @@
 //  NearbyAPIRouter.swift
 //  HTNMusic
 //
-//  Created by Cameron Eldridge on 2017-09-16.
+//  Created by Yeva Yu on 2017-09-16.
 //  Copyright © 2017 Yeva Yu. All rights reserved.
 //
 
@@ -25,7 +25,7 @@ enum NearbyAPIRouter: URLRequestConvertible {
     }
 
     func asURLRequest() throws -> URLRequest {
-        let url = URL(string: "\(Constants.loginBaseURL)nearby")!
+        let url = URL(string: "\(Constants.sonarBaseURL)nearby")!
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = method.rawValue
 

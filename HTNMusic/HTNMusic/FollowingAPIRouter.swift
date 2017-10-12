@@ -2,7 +2,7 @@
 //  FollowingAPIRouter.swift
 //  HTNMusic
 //
-//  Created by Cameron Eldridge on 2017-09-16.
+//  Created by Yeva Yu on 2017-09-16.
 //  Copyright © 2017 Yeva Yu. All rights reserved.
 //
 
@@ -17,7 +17,7 @@ enum FollowingAPIRouter: URLRequestConvertible {
     case myFollows()
     case followers(String)
     case myFollowers()
-
+    
     var method: HTTPMethod {
       switch self {
           case .add:
@@ -28,35 +28,27 @@ enum FollowingAPIRouter: URLRequestConvertible {
               return .get
       }
     }
-
+    
+    var urlString: String {
+        let baseURL = Constants.sonarBaseURL
+        switch self {
+            case .add(let userId), .remove(let userId), .follows(let userId):
+                return "\(baseURL)follow/\(userId)"
+            case .myFollows:
+                return "\(baseURL)follow"
+            case .myFollowers:
+                return "\(baseURL)follow/followers"
+            case .followers(let userId):
+                return "\(baseURL)follow/followers/\(userId)"
+        }
+    }
+    
     var params: JSON { return [:] }
 
     func asURLRequest() throws -> URLRequest {
-        switch self {
-            case .add(let userId), .remove(let userId), .follows(let userId):
-                let url = URL(string: "\(Constants.loginBaseURL)follow/\(userId)")!
-                var urlRequest = URLRequest(url: url)
-                urlRequest.httpMethod = method.rawValue
+        var urlRequest = URLRequest(url: URL(string: urlString)!)
+        urlRequest.httpMethod = method.rawValue
 
-                return try JSONEncoding.default.encode(urlRequest, withJSONObject: params)
-            case .myFollows():
-                let url = URL(string: "\(Constants.loginBaseURL)follow")!
-                var urlRequest = URLRequest(url: url)
-                urlRequest.httpMethod = method.rawValue
-
-                return try JSONEncoding.default.encode(urlRequest, withJSONObject: params)
-            case .myFollowers():
-                let url = URL(string: "\(Constants.loginBaseURL)follow/followers")!
-                var urlRequest = URLRequest(url: url)
-                urlRequest.httpMethod = method.rawValue
-
-                return try JSONEncoding.default.encode(urlRequest, withJSONObject: params)
-            case .followers(let userId):
-                let url = URL(string: "\(Constants.loginBaseURL)follow/followers/\(userId)")!
-                var urlRequest = URLRequest(url: url)
-                urlRequest.httpMethod = method.rawValue
-
-                return try JSONEncoding.default.encode(urlRequest, withJSONObject: params)
-        }
+        return try JSONEncoding.default.encode(urlRequest, withJSONObject: params)
     }
 }

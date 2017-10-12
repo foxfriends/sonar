@@ -2,14 +2,14 @@
 //  RecentlyPlayedTableViewCell.swift
 //  HTNMusic
 //
-//  Created by Cameron Eldridge on 2017-09-16.
+//  Created by Yeva Yu on 2017-09-16.
 //  Copyright © 2017 Yeva Yu. All rights reserved.
 //
 
 import UIKit
 
 protocol RecentlyPlayedTableViewCellDelegate {
-    func recentlyPlayedCell(_: RecentlyPlayedTableViewCell, didTapPlayButtonWithURL: String)
+    func recentlyPlayedCell(_: RecentlyPlayedTableViewCell, playButtonTappedWith id: String)
 }
 
 class RecentlyPlayedTableViewCell: UITableViewCell {
@@ -19,11 +19,12 @@ class RecentlyPlayedTableViewCell: UITableViewCell {
     var spotifyID: String?
     var delegate: RecentlyPlayedTableViewCellDelegate?
     
-    @IBAction func didTapPlayButton(_ sender: Any) {
-        if self.spotifyID != nil {
-            delegate?.recentlyPlayedCell(self, didTapPlayButtonWithURL: self.spotifyID!)
-        } else {
-            print("ERROR: No spotify ID. cri")
+    @IBAction func playButtonTapped(_ sender: Any) {
+        guard let id = self.spotifyID else {
+            print("ERROR: No spotify ID")
+            return
         }
+        
+        delegate?.recentlyPlayedCell(self, playButtonTappedWith: id)
     }
 }

@@ -2,7 +2,7 @@
 //  SecondViewController.swift
 //  HTNMusic
 //
-//  Created by Cameron Eldridge on 2017-09-16.
+//  Created by Yeva Yu on 2017-09-16.
 //  Copyright © 2017 Yeva Yu. All rights reserved.
 //
 
@@ -41,6 +41,8 @@ class DiscoverViewController: UIViewController {
         nearbyTableView.dataSource = self
         
         radarDetailView.isHidden = true
+        
+        // TODO: Add support for loading an avatar from url
         userImageView.image = UIImage(named: "black_hair_guy")!
         viewModel.sessionManager.adapter = AuthRequestAdapter(authToken: (Session.sharedInstance.authToken)!)
         
@@ -56,11 +58,9 @@ class DiscoverViewController: UIViewController {
         
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
         }
-
-        // Do any additional setup after loading the view, typically from a nib.
     }
 }
 
@@ -87,7 +87,6 @@ extension DiscoverViewController {
         let location = touch.location(in: self.view)
 
         if let user = viewModel.getUserNearLocation(x: Float(location.x), y: Float(location.y)) {
-            print("user is listening to: \(String(describing: user.currentListening?.title)))")
             radarDetailView.isHidden = false
             if user.avatarURL == "avatar1" {
                 radarProfileButton.imageView?.image = UIImage(named: "blond_hair_guy")!
@@ -112,6 +111,7 @@ extension DiscoverViewController {
 // MARK: - UISegmentedControl
 
 extension DiscoverViewController {
+    // TODO: Add a list view of nearby users, instead of the round map
     @IBAction func indexChanged(sender: UISegmentedControl) {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
@@ -155,7 +155,10 @@ extension DiscoverViewController {
 
 extension DiscoverViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let locationValue = manager.location?.coordinate else { print("No location value"); return }
+        guard let locationValue = manager.location?.coordinate else {
+            print("No location value")
+            return
+        }
 
         let locationCoordinates = Coordinate2D(longitude: Double(locationValue.longitude), latitude: Double(locationValue.latitude))
         getNearbyUsers(coords: locationCoordinates)
@@ -181,6 +184,7 @@ extension DiscoverViewController: UITableViewDelegate {
 }
 
 extension DiscoverViewController: UITableViewDataSource {
+    // TODO: Actually add in the component for this :)
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "nearbyCell") as! DiscoverTableViewCell
         let nearbyInfo: User
@@ -188,7 +192,7 @@ extension DiscoverViewController: UITableViewDataSource {
         if indexPath.row < viewModel.smallProximityUsers.count {
             nearbyInfo = viewModel.smallProximityUsers[indexPath.row]
         } else if indexPath.row < viewModel.mediumProximityUsers.count + viewModel.smallProximityUsers.count {
-            nearbyInfo = viewModel.mediumProximityUsers[indexPath.row - viewModel.smallProximityUsers.count] // super bad way to do this don't do this
+            nearbyInfo = viewModel.mediumProximityUsers[indexPath.row - viewModel.smallProximityUsers.count]
         } else {
             nearbyInfo = viewModel.largeProximityUsers[indexPath.row - viewModel.smallProximityUsers.count - viewModel.mediumProximityUsers.count]
         }
@@ -213,6 +217,7 @@ extension DiscoverViewController {
             if self.viewModel.isMapViewHidden.value {
                 self.nearbyTableView.reloadData()
             } else {
+                self.viewModel.userMapCoordinates.removeAll()
                 self.redrawUsersOnMap()
             }
         })
@@ -220,6 +225,12 @@ extension DiscoverViewController {
 
     func redrawUsersOnMap() {
         let origin = CGPoint(x: UIScreen.main.bounds.size.width*0.5,y: UIScreen.main.bounds.size.height*0.5)
+        
+        for layer in view.layer.sublayers! {
+            if let name = layer.name, name == "dot" {
+                layer.removeFromSuperlayer()
+            }
+        }
         var counter = 1
         for user in viewModel.smallProximityUsers {
             let radius = 53.0
@@ -230,19 +241,16 @@ extension DiscoverViewController {
             let circlePath = UIBezierPath(arcCenter: CGPoint(x: x,y: y), radius: CGFloat(4.0), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
 
             let shapeLayer = CAShapeLayer()
+            shapeLayer.name = "dot"
             shapeLayer.path = circlePath.cgPath
 
-            //change the fill color
             shapeLayer.fillColor = UIColor.black.cgColor
-            //you can change the stroke color
             shapeLayer.strokeColor = UIColor.black.cgColor
-            //you can change the line width
             shapeLayer.lineWidth = 3.0
 
             view.layer.addSublayer(shapeLayer)
 
             counter += 1
-            print("close")
             viewModel.userMapCoordinates.append(ScreenCoords(x: x, y: y, user: user))
         }
 
@@ -255,19 +263,17 @@ extension DiscoverViewController {
             let circlePath = UIBezierPath(arcCenter: CGPoint(x: x,y: y), radius: CGFloat(4.0), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
 
             let shapeLayer = CAShapeLayer()
+            shapeLayer.name = "dot"
+
             shapeLayer.path = circlePath.cgPath
 
-            //change the fill color
             shapeLayer.fillColor = UIColor.purple.cgColor
-            //you can change the stroke color
             shapeLayer.strokeColor = UIColor.purple.cgColor
-            //you can change the line width
             shapeLayer.lineWidth = 3.0
 
             view.layer.addSublayer(shapeLayer)
 
             counter += 1
-            print("medium")
             viewModel.userMapCoordinates.append(ScreenCoords(x: Int(x), y: Int(y), user: user))
         }
 
@@ -280,22 +286,19 @@ extension DiscoverViewController {
             let circlePath = UIBezierPath(arcCenter: CGPoint(x: x,y: y), radius: CGFloat(4.0), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
 
             let shapeLayer = CAShapeLayer()
+            shapeLayer.name = "dot"
+
             shapeLayer.path = circlePath.cgPath
 
-            //change the fill color
             shapeLayer.fillColor = UIColor.red.cgColor
-            //you can change the stroke color
             shapeLayer.strokeColor = UIColor.red.cgColor
-            //you can change the line width
             shapeLayer.lineWidth = 3.0
 
             view.layer.addSublayer(shapeLayer)
 
             counter += 1
-            print("far")
             viewModel.userMapCoordinates.append(ScreenCoords(x: Int(x), y: Int(y), user: user))
         }
-        print("done")
     }
     
     func didTapSomething() {

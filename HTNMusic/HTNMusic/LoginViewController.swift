@@ -2,7 +2,7 @@
 //  FirstViewController.swift
 //  HTNMusic
 //
-//  Created by Cameron Eldridge on 2017-09-16.
+//  Created by Yeva Yu on 2017-09-16.
 //  Copyright © 2017 Yeva Yu. All rights reserved.
 //
 
@@ -23,9 +23,10 @@ class LoginViewController: UIViewController {
         passwordTextField.delegate = self
 
         bindViewModel()
-        // Do any additional setup after loading the view, typically from a nib.
     }
 }
+
+// MARK: - View Binding
 
 extension LoginViewController {
     func bindViewModel() {
@@ -35,15 +36,18 @@ extension LoginViewController {
     }
 }
 
+// MARK: - TextField Delegate
+
 extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if emailTextField.isFirstResponder {
             passwordTextField.becomeFirstResponder()
-        } else {
+        } else if passwordTextField.isFirstResponder {
+            passwordTextField.resignFirstResponder()
             login(nil)
         }
         
-        return true
+        return false
     }
 }
 
@@ -52,13 +56,14 @@ extension LoginViewController: UITextFieldDelegate {
 extension LoginViewController {
     @IBAction func login(_ sender: AnyObject?) {
         viewModel.login(success: { _ in
-            print("logged in successfully")
             if let discoverViewController = UIStoryboard(name: "Discover", bundle: nil).instantiateInitialViewController() as? DiscoverViewController {
                 discoverViewController.inject(user: self.viewModel.user!)
                 self.present(discoverViewController, animated: true)
             }
         }, failure: { errorMessage in
             let errorAlertController = UIAlertController(title: "Oops!", message: errorMessage, preferredStyle: UIAlertControllerStyle.alert)
+            errorAlertController.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+            
             self.present(errorAlertController, animated: true, completion: nil)
         })
 

@@ -2,7 +2,7 @@
 //  UserProfileViewModel.swift
 //  HTNMusic
 //
-//  Created by Cameron Eldridge on 2017-09-16.
+//  Created by Yeva Yu on 2017-09-16.
 //  Copyright © 2017 Yeva Yu. All rights reserved.
 //
 
@@ -14,6 +14,7 @@ import Gloss
 class UserProfileViewModel {
     var user: User?
     var isSelf: Bool?
+    
     lazy var recentlyPlayed: [SongInfo] = {
         if let recent = self.user?.recentlyPlayed {
             return recent

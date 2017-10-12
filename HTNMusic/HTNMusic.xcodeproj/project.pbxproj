@@ -20,7 +20,6 @@
 		321626F01F6D155A008C390C /* LoginAPIRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321626EF1F6D155A008C390C /* LoginAPIRouter.swift */; };
 		321626F21F6D23AD008C390C /* SongInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321626F11F6D23AD008C390C /* SongInfo.swift */; };
 		321626F61F6D3560008C390C /* Coordinate2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321626F51F6D3560008C390C /* Coordinate2D.swift */; };
-		321626F81F6D4F6A008C390C /* RoundedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321626F71F6D4F6A008C390C /* RoundedImageView.swift */; };
 		321626FA1F6D6BBC008C390C /* DiscoverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321626F91F6D6BBC008C390C /* DiscoverTableViewCell.swift */; };
 		321626FC1F6D773E008C390C /* ScreenCoords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321626FB1F6D773E008C390C /* ScreenCoords.swift */; };
 		321626FE1F6D92BF008C390C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321626FD1F6D92BF008C390C /* Constants.swift */; };
@@ -64,7 +63,6 @@
 		321626EF1F6D155A008C390C /* LoginAPIRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginAPIRouter.swift; sourceTree = "<group>"; };
 		321626F11F6D23AD008C390C /* SongInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongInfo.swift; sourceTree = "<group>"; };
 		321626F51F6D3560008C390C /* Coordinate2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinate2D.swift; sourceTree = "<group>"; };
-		321626F71F6D4F6A008C390C /* RoundedImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedImageView.swift; sourceTree = "<group>"; };
 		321626F91F6D6BBC008C390C /* DiscoverTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverTableViewCell.swift; sourceTree = "<group>"; };
 		321626FB1F6D773E008C390C /* ScreenCoords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenCoords.swift; sourceTree = "<group>"; };
 		321626FD1F6D92BF008C390C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -135,9 +133,7 @@
 				321626E01F6CE515008C390C /* Views */,
 				321626DF1F6CE508008C390C /* View Models */,
 				321626DE1F6CE501008C390C /* Controllers */,
-				321626F71F6D4F6A008C390C /* RoundedImageView.swift */,
-				321626FD1F6D92BF008C390C /* Constants.swift */,
-				5FB3C1F21F6E51FF00684712 /* Session.swift */,
+				3288F44C1F8C0EC700A8AA3B /* Helpers */,
 				321626D31F6CE4EF008C390C /* Assets.xcassets */,
 				321626D51F6CE4EF008C390C /* LaunchScreen.storyboard */,
 				321626D81F6CE4EF008C390C /* Info.plist */,
@@ -151,10 +147,10 @@
 				321626CC1F6CE4EF008C390C /* LoginViewController.swift */,
 				5FB3C1EC1F6E389D00684712 /* RecommendationsViewController.swift */,
 				3216270D1F6DC787008C390C /* UserProfileViewController.swift */,
+				321626CE1F6CE4EF008C390C /* DiscoverViewController.swift */,
 				32BE72BD1F6E01730065F6D6 /* RecentlyPlayedTableViewCell.swift */,
 				32BE72C71F6E99FD0065F6D6 /* RecommendationTableViewCell.swift */,
 				321626F91F6D6BBC008C390C /* DiscoverTableViewCell.swift */,
-				321626CE1F6CE4EF008C390C /* DiscoverViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -186,7 +182,6 @@
 			isa = PBXGroup;
 			children = (
 				321627111F6DD936008C390C /* ProximityInfo.swift */,
-				321627011F6DC10B008C390C /* APIResult.swift */,
 				321626EC1F6D05E2008C390C /* User.swift */,
 				321626F51F6D3560008C390C /* Coordinate2D.swift */,
 				321626FB1F6D773E008C390C /* ScreenCoords.swift */,
@@ -198,15 +193,25 @@
 		321626EE1F6D154B008C390C /* API */ = {
 			isa = PBXGroup;
 			children = (
+				32BE72C31F6E3EB60065F6D6 /* AuthRequestAdapter.swift */,
 				321627031F6DC120008C390C /* FollowingAPIRouter.swift */,
 				321627041F6DC120008C390C /* LocationAPIRouter.swift */,
 				321627051F6DC120008C390C /* NearbyAPIRouter.swift */,
-				32BE72C31F6E3EB60065F6D6 /* AuthRequestAdapter.swift */,
 				321627061F6DC120008C390C /* StatusAPIRouter.swift */,
 				321627071F6DC120008C390C /* UserAPIRouter.swift */,
 				321626EF1F6D155A008C390C /* LoginAPIRouter.swift */,
 			);
 			name = API;
+			sourceTree = "<group>";
+		};
+		3288F44C1F8C0EC700A8AA3B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				321626FD1F6D92BF008C390C /* Constants.swift */,
+				321627011F6DC10B008C390C /* APIResult.swift */,
+				5FB3C1F21F6E51FF00684712 /* Session.swift */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 		73988D61BD3F88EEB5CB4565 /* Pods */ = {
@@ -382,7 +387,6 @@
 				321626FC1F6D773E008C390C /* ScreenCoords.swift in Sources */,
 				321626CD1F6CE4EF008C390C /* LoginViewController.swift in Sources */,
 				321626FA1F6D6BBC008C390C /* DiscoverTableViewCell.swift in Sources */,
-				321626F81F6D4F6A008C390C /* RoundedImageView.swift in Sources */,
 				321627101F6DCCF9008C390C /* UserProfileViewModel.swift in Sources */,
 				5FB3C1ED1F6E389D00684712 /* RecommendationsViewController.swift in Sources */,
 				321627081F6DC120008C390C /* FollowingAPIRouter.swift in Sources */,
@@ -505,12 +509,14 @@
 			baseConfigurationReference = 2D2A5993D5EF0E9F9723C68A /* Pods-HTNMusic.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 6FM8U5PMK8;
 				INFOPLIST_FILE = HTNMusic/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = yevayu.SongSonar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -520,12 +526,14 @@
 			baseConfigurationReference = 26DE95EC301B9EED592E38AD /* Pods-HTNMusic.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 6FM8U5PMK8;
 				INFOPLIST_FILE = HTNMusic/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = yevayu.SongSonar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
